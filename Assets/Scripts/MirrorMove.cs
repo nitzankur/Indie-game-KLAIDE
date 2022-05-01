@@ -5,40 +5,35 @@ using UnityEngine;
 public class MirrorMove : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rightUp, rightDown, leftUp, leftDown;
-    [SerializeField] private int speed;
+
+
+    [SerializeField] private float speed;
+    // Start is called before the first frame update
+
 
 
     // Update is called once per frame
     void Update()
     {
-        bool move = true; 
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow)&&!GameManager.CollLeft)
         {
            MoveHorizontal(false);
-           move = false;
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow)&&!GameManager.CollRight)
         {
             MoveHorizontal(true);
-            move = false;
         }
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow)&&!GameManager.collDown)
         {
             MoveVertical(false);
-            move = false;
         }
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow)&&!GameManager.CollUp)
         {
             MoveVertical(true);
-            move = true;
         }
-        else if (move||GameManager.Trigger)
-        {
-            NoMove();
-            print("no move");
-        }
+
         
     }
 
@@ -48,17 +43,17 @@ public class MirrorMove : MonoBehaviour
     {
         if (right)
         {
-            rightUp.AddForce(Vector2.right *speed);
-            rightDown.AddForce(Vector2.right*speed);
-            leftDown.AddForce(Vector2.left*speed);
-            leftUp.AddForce(Vector2.left*speed);
+            rightUp.position += Vector2.right *speed;
+            rightDown.position += Vector2.right*speed;
+            leftDown.position += Vector2.left*speed;
+            leftUp.position += Vector2.left*speed;
         }
         else
         {
-            rightUp.AddForce(Vector2.left *speed);
-            rightDown.AddForce(Vector2.left*speed);
-            leftDown.AddForce(Vector2.right*speed);
-            leftUp.AddForce(Vector2.right*speed);
+            rightUp.position += Vector2.left *speed;
+            rightDown.position += Vector2.left*speed;
+            leftDown.position += Vector2.right*speed;
+            leftUp.position += Vector2.right*speed;
         }
     }
 
@@ -66,17 +61,17 @@ public class MirrorMove : MonoBehaviour
     {
         if (up)
         {
-            rightUp.AddForce(Vector2.up*speed);
-            leftUp.AddForce(Vector2.up*speed);
-            rightDown.AddForce(Vector2.down*speed);
-            leftDown.AddForce(Vector2.down*speed);
+            rightUp.position += Vector2.up*speed;
+            leftUp.position += Vector2.up*speed;
+            rightDown.position += Vector2.down*speed;
+            leftDown.position += Vector2.down*speed;
         }
         else
         {
-            rightDown.AddForce(Vector2.up*speed);
-            leftDown.AddForce(Vector2.up*speed);
-            rightUp.AddForce(Vector2.down*speed);
-            leftUp.AddForce(Vector2.down*speed);
+            rightDown.position += Vector2.up*speed;
+            leftDown.position += Vector2.up*speed;
+            rightUp.position += Vector2.down*speed;
+            leftUp.position += Vector2.down*speed;
         }
     }
 
