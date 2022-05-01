@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class CharacterMove : MonoBehaviour
 {
-  private void OnCollisionEnter2D(Collision2D collision)
+    public static bool collisionEnter;
+
+    private void OnCollisionEnter2D(Collision2D collision)
   {
       Collider2D collider = collision.collider;
       if (collider.CompareTag("Obstacle"))
       {
+          /*GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+          GetComponent<Rigidbody2D>().angularVelocity = 0;*/
+          
           Vector3 contactPoint = collision.contacts[0].point;
           Vector3 center = collider.bounds.center;
           GameManager.CollLeft = contactPoint.x > center.x;
@@ -17,6 +22,10 @@ public class CharacterMove : MonoBehaviour
           GameManager.collDown = center.y > contactPoint.y;
           print(GameManager.CollLeft);  
       }
+      
+      else if (collider.CompareTag("Price"))
+          GameManager.winGame = true;
+      
      
   }
 
