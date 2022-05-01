@@ -4,21 +4,27 @@ using UnityEngine;
 
 public class CharacterMove : MonoBehaviour
 {
-  private void OnTriggerStay2D(Collider2D other)
+  private void OnCollisionEnter2D(Collision2D collision)
   {
-    if (other.CompareTag("Obstacle"))
-    {
-      print("Obstacle");
-      GameManager.Trigger = true;
-    }
+      Collider2D collider = collision.collider;
+      if (collider.CompareTag("Obstacle"))
+      {
+          Vector3 contactPoint = collision.contacts[0].point;
+          Vector3 center = collider.bounds.center;
+          GameManager.CollLeft = contactPoint.x > center.x;
+          GameManager.CollRight = center.x > contactPoint.x;
+          GameManager.CollUp = contactPoint.y > center.y;
+          GameManager.collDown = center.y > contactPoint.y;
+          print(GameManager.CollLeft);  
+      }
+     
   }
 
-  private void OnTriggerExit2D(Collider2D other)
+  private void OnCollisionExit2D(Collision2D other)
   {
-    if (other.CompareTag("Obstacle"))
-    {
-      print("Obstacle exit");
-      GameManager.Trigger = false;
-    }
+      GameManager.CollRight = false;
+      GameManager.CollLeft = false;
+      GameManager.collDown = false;
+      GameManager.CollUp = false;
   }
 }
