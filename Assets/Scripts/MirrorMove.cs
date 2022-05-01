@@ -5,13 +5,8 @@ using UnityEngine;
 public class MirrorMove : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rightUp, rightDown, leftUp, leftDown;
-
     [SerializeField] private int speed;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()
@@ -42,9 +37,12 @@ public class MirrorMove : MonoBehaviour
         else if (move||GameManager.Trigger)
         {
             NoMove();
+            print("no move");
         }
         
     }
+
+    #region movement function
 
     void MoveHorizontal(bool right)
     {
@@ -89,4 +87,7 @@ public class MirrorMove : MonoBehaviour
         leftDown.velocity = Vector2.zero;
         leftUp.velocity = Vector2.zero; 
     }
+
+    #endregion
+   
 }

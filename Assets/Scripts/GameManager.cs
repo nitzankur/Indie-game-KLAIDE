@@ -12,10 +12,5 @@ public class GameManager : MonoBehaviour
     {
         _shared = this;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
