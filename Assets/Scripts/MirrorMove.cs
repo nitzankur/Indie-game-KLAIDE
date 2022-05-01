@@ -39,7 +39,7 @@ public class MirrorMove : MonoBehaviour
             MoveVertical(true);
             move = true;
         }
-        else if (move)
+        else if (move||GameManager.Trigger)
         {
             NoMove();
         }
