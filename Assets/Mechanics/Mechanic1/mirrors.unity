@@ -387,7 +387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6376517715732772248, guid: 5d97e491fa2a8544b888b198cc0a5653, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7578351131093460891, guid: 5d97e491fa2a8544b888b198cc0a5653, type: 3}
       propertyPath: m_BodyType
@@ -473,7 +473,7 @@ MonoBehaviour:
   rightDown: {fileID: 1072175933}
   leftUp: {fileID: 2002204722}
   leftDown: {fileID: 1988239889}
-  speed: 10
+  speed: 0.2
 --- !u!4 &1545002584
 Transform:
   m_ObjectHideFlags: 0
@@ -627,7 +627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6376517715732772248, guid: 5d97e491fa2a8544b888b198cc0a5653, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7578351131093460891, guid: 5d97e491fa2a8544b888b198cc0a5653, type: 3}
       propertyPath: m_BodyType
