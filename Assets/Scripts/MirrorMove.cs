@@ -15,9 +15,14 @@ public class MirrorMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*if (CharacterMove.collisionEnter)
+        {
+            CharacterMove.collisionEnter = false;
+            NoMove();
+        }*/
         if (Input.GetKey(KeyCode.LeftArrow)&&!GameManager.CollLeft)
         {
-           MoveHorizontal(false);
+            MoveHorizontal(false);
         }
         if (Input.GetKey(KeyCode.RightArrow)&&!GameManager.CollRight)
         {
@@ -34,7 +39,7 @@ public class MirrorMove : MonoBehaviour
             MoveVertical(true);
         }
 
-        
+
     }
 
     #region movement function
