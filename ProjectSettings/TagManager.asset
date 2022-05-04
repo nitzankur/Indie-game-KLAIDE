@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Obstacle
   - Price
+  - Node
+  - platform
   layers:
   - Default
   - TransparentFX
@@ -13,8 +15,8 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
-  - 
+  - Nodes
+  - Platform
   - 
   - 
   - 
