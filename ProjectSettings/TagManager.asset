@@ -43,3 +43,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: down
+    uniqueID: 647339353
+    locked: 0
+  - name: top
+    uniqueID: 4136583165
+    locked: 0
+  - name: right
+    uniqueID: 3770914005
+    locked: 0
+  - name: left
+    uniqueID: 1194178567
+    locked: 0
