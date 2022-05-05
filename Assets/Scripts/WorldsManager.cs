@@ -23,24 +23,20 @@ public class WorldsManager : MonoBehaviour
         {
             if (!ONBottom)
             {
-                print("bottom");
                 bottom.rotation =bottom.rotation * Quaternion.Euler(0, 0, -fastParameter * Time.deltaTime);
             }
 
             if (!onLeft)
             {
-                print("left");
                 left.rotation =left.rotation * Quaternion.Euler(0, 0, -fastParameter * Time.deltaTime);
             }
             if (!onRight)
             {
-                print("right rot");
                 right.rotation =right.rotation * Quaternion.Euler(0, 0, -fastParameter * Time.deltaTime);
             }
 
             if (!onTop)
             {
-                print("left top");
                 top.rotation =top.rotation * Quaternion.Euler(0, 0, -fastParameter * Time.deltaTime);
             }
         }

@@ -13,7 +13,7 @@ public class WorldsRotate : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        
+       print("on Begin Drag"); 
     }
 
     public void OnDrag(PointerEventData eventData)
