@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
 
 
@@ -44,5 +45,24 @@ public class WorldsManager : MonoBehaviour
                 top.rotation =top.rotation * Quaternion.Euler(0, 0, -fastParameter * Time.deltaTime);
             }
         }
+
+        foreach (var node in bottom.GetComponentsInChildren<Transform>())
+        {
+            var pos = node.position;
+            if (node.gameObject.CompareTag("Node") && (pos.y >= 0 || Mathf.Abs(pos.x) > Mathf.Abs(pos.y)))
+            {
+                node.gameObject.SetActive(false);
+            }
+        }
+        
+        foreach (var node in right.GetComponentsInChildren<Transform>())
+        {
+            var pos = node.position;
+            if (node.gameObject.CompareTag("Node") && (pos.x <= 0 || pos.x <= Mathf.Abs(pos.y)))
+            {
+                node.gameObject.SetActive(false);
+            }
+        }
     }
+    
 }

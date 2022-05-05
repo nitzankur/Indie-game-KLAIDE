@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Pathfinding;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,17 +18,18 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region PrivateProperties
-    
+
+    private AIPath _aiPath;
     private Seeker _seeker;
     private Path _path;
     private int _currentWaypoint = 0;
-
     #endregion
     
    
     public void Start () {
         _seeker = GetComponent<Seeker>();
         reachedEndOfPath = true;
+        
     }
     
     public void OnPathComplete (Path p) {
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
             _seeker.StartPath(transform.position, targetPosition, OnPathComplete);
         }
         
+        
         if (_path == null)
             return;
         
@@ -58,7 +61,6 @@ public class PlayerController : MonoBehaviour
         while (true) {
             distanceToWaypoint = Vector3.Distance(transform.position, _path.vectorPath[_currentWaypoint]);
             if (distanceToWaypoint < nextWaypointDistance) {
-               
                 if (_currentWaypoint + 1 < _path.vectorPath.Count) {
                     _currentWaypoint++;
                 } else {
