@@ -41,11 +41,12 @@ public class PlayerController : MonoBehaviour
         if (reachedEndOfPath)
             _path = null;
         
-        if (Input.GetMouseButtonDown(0) && reachedEndOfPath)
+        if (WorldsManager.CharacterMove && reachedEndOfPath)
         {
             reachedEndOfPath = false;
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _seeker.StartPath(transform.position, targetPosition, OnPathComplete);
+            WorldsManager.CharacterMove = false;
         }
         
         if (_path == null)

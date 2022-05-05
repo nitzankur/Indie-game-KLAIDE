@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class WorldsRotate : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler,IDragHandler
+public class WorldsRotate : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler,IDragHandler,IPointerClickHandler
 {
+    private bool drag;
 
 
     // Update is called once per frame
@@ -13,7 +14,7 @@ public class WorldsRotate : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-       print("on Begin Drag"); 
+        drag = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -27,11 +28,23 @@ public class WorldsRotate : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     {
         print("end dragging");
         WorldsManager.Drag = false;
+        drag = false;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        print("pointer down");
+        
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!drag)
+        {
+           print("character should move"); 
+           WorldsManager.CharacterMove = true;
+           drag = true;
+        }
+        
     }
 
     // private void OnMouseDown()

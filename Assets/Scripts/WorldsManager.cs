@@ -6,7 +6,7 @@ using UnityEngine;
 public class WorldsManager : MonoBehaviour
 {
     [SerializeField] private Transform right, left, top, bottom;
-    public static bool onRight, onLeft, onTop, ONBottom,Drag;
+    public static bool onRight, onLeft, onTop, ONBottom,Drag,CharacterMove;
     [Range(20, 150)] [SerializeField] private float fastParameter = 150;
 
     private static WorldsManager _shared;
