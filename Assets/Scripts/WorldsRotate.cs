@@ -1,34 +1,55 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class WorldsRotate : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler,IDragHandler,IPointerClickHandler
 {
-    private bool drag;
+    private bool _drag;
+    private Vector3 _mousePos;
 
 
-    // Update is called once per frame
+    private void Update()
+    {
+    }
 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        drag = true;
+        _drag = true;
+        _mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        print("dragging");
-        WorldsManager.Drag = true;
-
+        var tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if ((tmpPos.y >= _mousePos.y)&&(tmpPos.x<0 && Mathf.Abs(tmpPos.x) > Mathf.Abs(tmpPos.y)) 
+            || (tmpPos.x >= _mousePos.x)&& (tmpPos.y > 0 && tmpPos.y >= Mathf.Abs(tmpPos.x))||
+            (tmpPos.y <= _mousePos.y)&& (tmpPos.x > 0 && tmpPos.x > Mathf.Abs(tmpPos.y))|| (tmpPos.x<=_mousePos.x)&&
+            (tmpPos.y < 0 &&  Mathf.Abs(tmpPos.x) <= Mathf.Abs(tmpPos.y)) )
+        {
+            print("Right dragging");
+            WorldsManager.DragRight = true;
+        }
+        else if((tmpPos.y < _mousePos.y)&&(tmpPos.x<0 && Mathf.Abs(tmpPos.x) > Mathf.Abs(tmpPos.y))||
+                (tmpPos.x < _mousePos.x)&& (tmpPos.y > 0 && tmpPos.y >= Mathf.Abs(tmpPos.x))||
+                (tmpPos.y >= _mousePos.y)&& (tmpPos.x > 0 && tmpPos.x > Mathf.Abs(tmpPos.y))||
+                (tmpPos.x<=_mousePos.x)&& (tmpPos.y < 0 &&  Mathf.Abs(tmpPos.x) <= Mathf.Abs(tmpPos.y)))
+        {
+            print("left dragging");
+            WorldsManager.DragLeft = true;
+        }
+        
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        print("end dragging");
-        WorldsManager.Drag = false;
-        drag = false;
+        WorldsManager.DragRight = false;
+        WorldsManager.DragLeft = false;
+        _drag = false;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -38,22 +59,23 @@ public class WorldsRotate : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!drag)
+        if (!_drag)
         {
-           print("character should move"); 
-           WorldsManager.CharacterMove = true;
-           drag = true;
+            WorldsManager.CharacterMove = true;
+           _drag = true;
         }
         
     }
 
-    // private void OnMouseDown()
-    // {
-    //     print("mouse drag");
-    // }
-    //
-    // private void OnMouseDrag()
-    // {
-    //     print("mouse down");
-    // }
+    private void RightDragging(Vector3 tmpPos)
+    {
+        
+    }
+
+    private void LeftDragging()
+    {
+        
+    }
+
+
 }
