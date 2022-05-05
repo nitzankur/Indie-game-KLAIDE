@@ -6,28 +6,27 @@ using UnityEngine.EventSystems;
 
 public class WorldsRotate : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler,IDragHandler
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        print("start drag");
+        
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         print("dragging");
+        WorldsManager.Drag = true;
+
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         print("end dragging");
+        WorldsManager.Drag = false;
     }
 
     public void OnPointerDown(PointerEventData eventData)

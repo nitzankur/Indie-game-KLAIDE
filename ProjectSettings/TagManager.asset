@@ -55,3 +55,6 @@ TagManager:
   - name: left
     uniqueID: 1194178567
     locked: 0
+  - name: stam
+    uniqueID: 3882519271
+    locked: 0
