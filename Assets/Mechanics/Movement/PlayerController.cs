@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && reachedEndOfPath)
         {
             reachedEndOfPath = false;
+            AstarData.active.Scan();
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _seeker.StartPath(transform.position, targetPosition, OnPathComplete);
         }

@@ -7,10 +7,14 @@ using UnityEngine;
 public class WorldsManager : MonoBehaviour
 {
     [SerializeField] private Transform right, left, top, bottom;
+    [SerializeField] private Transform rightNodes, leftNodes, topNodes, bottomNodes;
     public static bool onRight, onLeft, onTop, ONBottom,Drag;
     [Range(20, 150)] [SerializeField] private float fastParameter = 150;
 
+    
     private static WorldsManager _shared;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -44,23 +48,36 @@ public class WorldsManager : MonoBehaviour
                 print("left top");
                 top.rotation =top.rotation * Quaternion.Euler(0, 0, -fastParameter * Time.deltaTime);
             }
+            AstarData.active.Scan();
         }
 
-        foreach (var node in bottom.GetComponentsInChildren<Transform>())
+        foreach (var node in bottomNodes.GetComponentsInChildren<Transform>())
         {
             var pos = node.position;
-            if (node.gameObject.CompareTag("Node") && (pos.y >= 0 || Mathf.Abs(pos.x) > Mathf.Abs(pos.y)))
+            if (node == bottomNodes){ continue; }
+            if (pos.y >= 0 || Mathf.Abs(pos.x) > Mathf.Abs(pos.y))
             {
-                node.gameObject.SetActive(false);
+                node.tag = "Untagged";
+            }
+            else
+            {
+                node.tag = "Node";
             }
         }
         
-        foreach (var node in right.GetComponentsInChildren<Transform>())
+        foreach (var node in rightNodes.GetComponentsInChildren<Transform>())
         {
+            if (node == rightNodes){ continue; }
+            print(node.name);
             var pos = node.position;
-            if (node.gameObject.CompareTag("Node") && (pos.x <= 0 || pos.x <= Mathf.Abs(pos.y)))
+            if (pos.x <= 0 || pos.x <= Mathf.Abs(pos.y))
             {
-                node.gameObject.SetActive(false);
+                //node.gameObject.SetActive(false);
+                node.tag = "Untagged";
+            }
+            else
+            {
+                node.tag = "Node";
             }
         }
     }
