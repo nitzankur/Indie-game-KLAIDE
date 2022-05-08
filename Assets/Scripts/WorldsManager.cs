@@ -6,7 +6,9 @@ using UnityEngine;
 public class WorldsManager : MonoBehaviour
 {
     [SerializeField] private Transform right, left, top, bottom;
+    [SerializeField] private Transform rightNodes, leftNodes, topNodes, bottomNodes;
     public static bool onRight, onLeft, onTop, ONBottom,DragRight,DragLeft,CharacterMove;
+    
     [Range(20, 150)] [SerializeField] private float fastParameter = 150;
 
     private static WorldsManager _shared;
@@ -32,6 +34,34 @@ public class WorldsManager : MonoBehaviour
             if (!onLeft) left.rotation =left.rotation * Quaternion.Euler(0, 0, -fastParameter * Time.deltaTime);
             if (!onRight) right.rotation =right.rotation * Quaternion.Euler(0, 0, -fastParameter * Time.deltaTime);
             if (!onTop)  top.rotation =top.rotation * Quaternion.Euler(0, 0, -fastParameter * Time.deltaTime);
+        }
+        
+        foreach (var node in bottomNodes.GetComponentsInChildren<Transform>())
+        {
+            var pos = node.position;
+            if (node == bottomNodes){ continue; }
+            if (pos.y >= 0 || Mathf.Abs(pos.x) > Mathf.Abs(pos.y))
+            {
+                node.tag = "Untagged";
+            }
+            else
+            {
+                node.tag = "Node";
+            }
+        }
+        
+        foreach (var node in rightNodes.GetComponentsInChildren<Transform>())
+        {
+            if (node == rightNodes){ continue; }
+            var pos = node.position;
+            if (pos.x <= 0 || pos.x <= Mathf.Abs(pos.y))
+            {
+                node.tag = "Untagged";
+            }
+            else
+            {
+                node.tag = "Node";
+            }
         }
     }
 }
