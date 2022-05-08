@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
             reachedEndOfPath = false;
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _seeker.StartPath(transform.position, targetPosition, OnPathComplete);
-            //WorldsManager.CharacterMove = false;
+            WorldsManager.CharacterMove = false;
         }
         
         if (_path == null)

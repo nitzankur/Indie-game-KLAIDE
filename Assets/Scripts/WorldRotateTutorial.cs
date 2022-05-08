@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class WorldRotateTutorial : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler,IDragHandler,IPointerClickHandler
 {
+    public static bool endDrag;
     private bool _drag;
     private Vector3 _mousePos;
     
@@ -36,6 +37,7 @@ public class WorldRotateTutorial : MonoBehaviour, IPointerDownHandler, IBeginDra
         WorldsManagerToturial.DragRight = false;
         WorldsManagerToturial.DragLeft = false;
         _drag = false;
+        endDrag = true;
     }
 
     public void OnPointerDown(PointerEventData eventData)
