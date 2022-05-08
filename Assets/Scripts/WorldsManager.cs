@@ -68,7 +68,6 @@ public class WorldsManager : MonoBehaviour
         foreach (var node in rightNodes.GetComponentsInChildren<Transform>())
         {
             if (node == rightNodes){ continue; }
-            print(node.name);
             var pos = node.position;
             if (pos.x <= 0 || pos.x <= Mathf.Abs(pos.y))
             {
