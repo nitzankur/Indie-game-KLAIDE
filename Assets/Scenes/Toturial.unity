@@ -1905,8 +1905,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
   reachedEndOfPath: 0
-  speed: 1
-  nextWaypointDistance: 0.5
+  speed: 3
+  nextWaypointDistance: 1
 --- !u!114 &359535970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1920,7 +1920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
-  radius: 1.07
+  radius: 0.5
   height: 2
   canMove: 1
   maxSpeed: 1
@@ -1940,10 +1940,10 @@ MonoBehaviour:
     maximumInterval: 2
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
-  maxAcceleration: 1000
+  maxAcceleration: 500
   rotationSpeed: 360
   slowdownDistance: 2
-  pickNextWaypointDist: 3.24
+  pickNextWaypointDist: 3
   endReachedDistance: 5
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
@@ -4682,7 +4682,7 @@ MonoBehaviour:
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
   logPathResults: 1
-  maxNearestNodeDistance: 400
+  maxNearestNodeDistance: 100
   scanOnStartup: 1
   fullGetNearestSearch: 0
   prioritizeGraphs: 0
