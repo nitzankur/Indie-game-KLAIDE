@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +10,19 @@ public class WorldRotateTutorial : MonoBehaviour, IPointerDownHandler, IBeginDra
     public static bool endDrag;
     private bool _drag;
     private Vector3 _mousePos;
-    
+
+
+    private void Update()
+    { 
+        WorldsManagerToturial.CharacterMove = false;
+
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         _drag = true;
         _mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        print("begin drag");
 
     }
 
@@ -38,6 +46,8 @@ public class WorldRotateTutorial : MonoBehaviour, IPointerDownHandler, IBeginDra
         WorldsManagerToturial.DragLeft = false;
         _drag = false;
         endDrag = true;
+        print("end drag");
+
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -49,8 +59,8 @@ public class WorldRotateTutorial : MonoBehaviour, IPointerDownHandler, IBeginDra
     {
         if (!_drag)
         {
-            WorldsManager.CharacterMove = true;
-           _drag = true;
+            print("pointerClick");
+            WorldsManagerToturial.CharacterMove = true;
         }
         
     }

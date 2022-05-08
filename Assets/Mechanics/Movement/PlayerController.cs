@@ -41,8 +41,9 @@ public class PlayerController : MonoBehaviour
     }
     public void Update () {
         
-        if (Input.GetMouseButtonDown(0) && reachedEndOfPath)
+        if (WorldsManagerToturial.CharacterMove && reachedEndOfPath)
         {
+            print("Click");
             reachedEndOfPath = false;
             AstarData.active.Scan();
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
