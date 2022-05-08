@@ -32,8 +32,6 @@ public class WorldsManagerToturial : MonoBehaviour
             UpdateRightNodes();
             WorldRotateTutorial.endDrag = false;
             AstarData.active.Scan();
-            /*AstarPath.active.FlushWorkItems();
-            platformingGraph.ConnectNodes();*/
         }
         if (DragLeft)
         {
@@ -46,17 +44,31 @@ public class WorldsManagerToturial : MonoBehaviour
             if (!onLeft) left.rotation =left.rotation * Quaternion.Euler(0, 0, -fastParameter * Time.deltaTime);
             if (!onRight) right.rotation =right.rotation * Quaternion.Euler(0, 0, -fastParameter * Time.deltaTime);
         }
+
+        if (DragLeft || DragRight)
+        {
+            foreach (var node in leftNodes.GetComponentsInChildren<Transform>())
+            {
+                var pos = node.position;
+                if (node == leftNodes) continue;
+                if (node.gameObject.layer == 8)
+                    node.rotation = Quaternion.LookRotation(rightNodes.position);
+            }
+        }
     }
 
    
     
     void UpdateRightNodes()
     {
-        foreach (var node in rightNodes.GetComponentsInChildren<Transform>())
+        foreach (var node in leftNodes.GetComponentsInChildren<Transform>())
         {
             var pos = node.position;
             if (node == rightNodes) continue;
-            node.tag = pos.x > 0f ? "Node" : "Untagged";
+            if (node.gameObject.layer == 8)
+            {
+                node.tag = pos.x > 0f ? "Node" : "Untagged";
+            }
         }
     }
     
@@ -66,7 +78,8 @@ public class WorldsManagerToturial : MonoBehaviour
         {
             var pos = node.position;
             if (node == leftNodes) continue; 
-            node.tag = pos.x <= 0f ? "Node" : "Untagged";
+            if (node.gameObject.layer == 6)
+                node.tag = pos.x <= 0f ? "Node" : "Untagged";
         }
     }
 }
