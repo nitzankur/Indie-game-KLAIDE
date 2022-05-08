@@ -12,10 +12,14 @@ public class WorldRotateTutorial : MonoBehaviour, IPointerDownHandler, IBeginDra
     private Vector3 _mousePos;
 
 
+    private void Start()
+    {
+        WorldsManagerToturial.CharacterMove = false;
+    }
+
     private void Update()
     { 
-        WorldsManagerToturial.CharacterMove = false;
-
+        //WorldsManagerToturial.CharacterMove = false;
     }
 
     public void OnBeginDrag(PointerEventData eventData)

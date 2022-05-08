@@ -45,8 +45,6 @@ public class WorldsManagerToturial : MonoBehaviour
         }
 
     }
-
-    
     
     
     void UpdateRightNodes()
@@ -69,13 +67,6 @@ public class WorldsManagerToturial : MonoBehaviour
         }
        
     } 
-    
-    /*foreach (var node in leftNodes.GetComponentsInChildren<Transform>())
-             {
-                 var pos = node.position;
-                 if (node == leftNodes) continue; 
-                 if (node.gameObject.layer == 6)
-                     node.tag = pos.x <= 0f ? "Node" : "Untagged";
-             }*/
+  
 }
 

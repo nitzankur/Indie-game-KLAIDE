@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Pathfinding;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
@@ -40,15 +41,16 @@ public class PlayerController : MonoBehaviour
         }
     }
     public void Update () {
-        
+
         if (WorldsManagerToturial.CharacterMove && reachedEndOfPath)
         {
-            print("Click");
             reachedEndOfPath = false;
             AstarData.active.Scan();
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _seeker.StartPath(transform.position, targetPosition, OnPathComplete);
+            WorldsManagerToturial.CharacterMove = false;
         }
+        
         if (reachedEndOfPath)
             _path = null;
         
@@ -86,7 +88,19 @@ public class PlayerController : MonoBehaviour
         transform.position += velocity * Time.deltaTime;
     }
 
-
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Door"))
+        {
+            print("collision");
+            if ((WorldsManagerToturial.onLeft && other.transform.position.x <= 0) 
+                || WorldsManagerToturial.onRight && other.transform.position.x > 0)
+            {
+                SceneManager.LoadScene("Level2");
+            }
+           
+        }
+    }
 }
 
 
