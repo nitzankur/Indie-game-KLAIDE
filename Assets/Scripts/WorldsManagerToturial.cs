@@ -26,13 +26,14 @@ public class WorldsManagerToturial : MonoBehaviour
     
     void Update()
     {
-        if (WorldRotateTutorial.endDrag)
+        /*if (WorldRotateTutorial.endDrag)
         {
-            UpdateLeftNodes();
-            UpdateRightNodes();
+            /*UpdateLeftNodes();
+            UpdateRightNodes();#1#
             WorldRotateTutorial.endDrag = false;
             AstarData.active.Scan();
-        }
+        }*/
+        
         if (DragLeft)
         {
             if (!onLeft) left.rotation =left.rotation * Quaternion.Euler(0, 0, fastParameter * Time.deltaTime);
@@ -44,24 +45,32 @@ public class WorldsManagerToturial : MonoBehaviour
             if (!onLeft) left.rotation =left.rotation * Quaternion.Euler(0, 0, -fastParameter * Time.deltaTime);
             if (!onRight) right.rotation =right.rotation * Quaternion.Euler(0, 0, -fastParameter * Time.deltaTime);
         }
-
-        if (DragLeft || DragRight)
-        {
-            foreach (var node in leftNodes.GetComponentsInChildren<Transform>())
-            {
-                var pos = node.position;
-                if (node == leftNodes) continue;
-                if (node.gameObject.layer == 8)
-                    node.rotation = Quaternion.LookRotation(rightNodes.position);
-            }
-        }
+        
+        UpdateLeftNodes();
+        UpdateRightNodes();
+       
     }
 
-   
+    
+    
     
     void UpdateRightNodes()
     {
-        foreach (var node in leftNodes.GetComponentsInChildren<Transform>())
+        
+        foreach (var node in rightNodes.GetComponentsInChildren<Transform>())
+        {
+            var pos = node.position;
+            if (node == rightNodes){ continue; }
+            if (pos.x <= 0)
+            {
+                node.tag = "Untagged";
+            }
+            else
+            {
+                node.tag = "Node";
+            }
+        }
+        /*foreach (var node in leftNodes.GetComponentsInChildren<Transform>())
         {
             var pos = node.position;
             if (node == rightNodes) continue;
@@ -69,7 +78,7 @@ public class WorldsManagerToturial : MonoBehaviour
             {
                 node.tag = pos.x > 0f ? "Node" : "Untagged";
             }
-        }
+        }*/
     }
     
     void UpdateLeftNodes()
@@ -77,10 +86,23 @@ public class WorldsManagerToturial : MonoBehaviour
         foreach (var node in leftNodes.GetComponentsInChildren<Transform>())
         {
             var pos = node.position;
+            if (node == leftNodes){ continue; }
+            if (pos.x > 0)
+            {
+                node.tag = "Untagged";
+            }
+            else
+            {
+                node.tag = "Node";
+            }
+        }
+        /*foreach (var node in leftNodes.GetComponentsInChildren<Transform>())
+        {
+            var pos = node.position;
             if (node == leftNodes) continue; 
             if (node.gameObject.layer == 6)
                 node.tag = pos.x <= 0f ? "Node" : "Untagged";
-        }
+        }*/
     }
 }
 
