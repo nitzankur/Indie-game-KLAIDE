@@ -11,9 +11,6 @@ public class WorldsRotate : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     private Vector3 _mousePos;
 
 
-    private void Update()
-    {
-    }
 
 
     public void OnBeginDrag(PointerEventData eventData)
