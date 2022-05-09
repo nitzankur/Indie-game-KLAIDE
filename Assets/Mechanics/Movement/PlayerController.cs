@@ -92,9 +92,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Door"))
         {
-            print("collision");
-            if ((WorldsManagerToturial.onLeft && other.transform.position.x <= 0) 
-                || WorldsManagerToturial.onRight && other.transform.position.x > 0)
+            print(WorldsManagerToturial.onLeft);
+            if (WorldsManagerToturial.onLeft && other.transform.position.x <= 0)
             {
                 SceneManager.LoadScene("Level2");
             }
