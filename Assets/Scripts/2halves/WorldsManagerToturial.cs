@@ -7,11 +7,12 @@ using Pathfinding;
 
 public class WorldsManagerToturial : MonoBehaviour
 {
-    [SerializeField] private Transform right, left;
     [SerializeField] private Transform rightNodes, leftNodes;
-    public static bool onRight, onLeft,DragRight,DragLeft,CharacterMove;
+    public static bool onRight, onLeft,CharacterMove;
     [Range(20, 150)] [SerializeField] private float fastParameter = 150;
     private static WorldsManagerToturial _shared;
+    [SerializeField] private GameObject right, left;
+    private static Transform leftTransform, rightTransform;
     
     
     void Start()
@@ -19,31 +20,30 @@ public class WorldsManagerToturial : MonoBehaviour
         _shared = this;
         UpdateLeftNodes();
         UpdateRightNodes();
+        leftTransform = left.transform;
+        rightTransform = right.transform;
     }
-
     
     void Update()
     {
         if (WorldRotateTutorial.endDrag)
         {
+            print("update graph");
             WorldRotateTutorial.endDrag = false;
             UpdateLeftNodes();
             UpdateRightNodes();
             AstarData.active.Scan();
         }
-        
-        if (DragLeft)
-        {
-            if (!onLeft) left.rotation =left.rotation * Quaternion.Euler(0, 0, fastParameter * Time.deltaTime);
-            if (!onRight) right.rotation =right.rotation * Quaternion.Euler(0, 0, fastParameter * Time.deltaTime);
-           
-        }
-        else if (DragRight)
-        {
-            if (!onLeft) left.rotation =left.rotation * Quaternion.Euler(0, 0, -fastParameter * Time.deltaTime);
-            if (!onRight) right.rotation =right.rotation * Quaternion.Euler(0, 0, -fastParameter * Time.deltaTime);
-        }
+    }
 
+    public static void RightRotate(float angle,float angleOffset)
+    {
+       rightTransform.eulerAngles = new Vector3(0, 0, angle + angleOffset);
+    }
+
+    public static void LeftRotate(float angle,float angleOffset)
+    {
+        leftTransform.eulerAngles = new Vector3(0, 0, angle + angleOffset);
     }
     
     
@@ -65,7 +65,6 @@ public class WorldsManagerToturial : MonoBehaviour
             if (node == leftNodes){ continue; }
             node.tag = pos.x > 0 ? "Untagged" : "Node";
         }
-       
     } 
   
 }

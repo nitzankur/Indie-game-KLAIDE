@@ -1646,11 +1646,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a047743f6fe06524ab687c99ed1b022d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  right: {fileID: 1371250788}
-  left: {fileID: 1589429089}
   rightNodes: {fileID: 1950142847}
   leftNodes: {fileID: 182924995}
-  fastParameter: 150
+  fastParameter: 80.9
+  right: {fileID: 1371250787}
+  left: {fileID: 1589429088}
 --- !u!4 &283215603
 Transform:
   m_ObjectHideFlags: 0
