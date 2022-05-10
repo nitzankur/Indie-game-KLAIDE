@@ -21,33 +21,31 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+
             var targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (targetPosition.y > transform.position.y)
+
+            float angle = Mathf.Atan2
+                (targetPosition.y - transform.position.y, targetPosition.x - transform.position.x) * 180 / Mathf.PI;
+            
+            print(angle);
+            
+            if (angle < 60 && angle > -60)
             {
-                //UP
-                
-                if (targetPosition.x - transform.position.x < maxUp)
-                {
-                    print("up");
-                }
-                else
-                {
-                    IndicateRightOrLeft(targetPosition);
-                }
+                print("moveRight");
             }
-            else if (targetPosition.y < transform.position.y)
+            else if (angle >= 60 && angle < 120)
             {
-                //DOWN
-                
-                if (transform.position.x - targetPosition.x < maxUp)
-                {
-                    print("down");
-                }
-                else
-                {
-                    IndicateRightOrLeft(targetPosition);
-                }
+                print("moveUp");
             }
+            else if (angle <= -60 && angle > -120)
+            {
+               print("moveDown");
+            }
+            else if ((angle <= -120) || (angle > 120))
+            {
+               print("moveLeft");
+            }
+           
         }
     }
 
