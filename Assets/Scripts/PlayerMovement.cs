@@ -48,9 +48,5 @@ public class PlayerMovement : MonoBehaviour
            
         }
     }
-
-    void IndicateRightOrLeft(Vector3 target)
-    {
-        print(target.x > transform.position.x ? "right" : "left");
-    }
+    
 }

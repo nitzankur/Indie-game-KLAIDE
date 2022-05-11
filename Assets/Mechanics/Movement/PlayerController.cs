@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool reachedEndOfPath;
     [SerializeField] private float speed = 2;
     [SerializeField] private float nextWaypointDistance;
+    [SerializeField] private int side = 0;
+    [SerializeField] private bool flip = true;
+    private Animator playerAnimator;
     
     #endregion
 
@@ -29,10 +32,10 @@ public class PlayerController : MonoBehaviour
    
     public void Start () {
         _seeker = GetComponent<Seeker>();
+        playerAnimator = GetComponent<Animator>();
         reachedEndOfPath = true;
-        
     }
-    
+
     public void OnPathComplete (Path p) {
         Debug.Log("A path was calculated. Did it fail with an error? " + p.error);
         if (!p.error) {
@@ -50,9 +53,13 @@ public class PlayerController : MonoBehaviour
             _seeker.StartPath(transform.position, targetPosition, OnPathComplete);
             WorldsManagerToturial.CharacterMove = false;
         }
-        
+
         if (reachedEndOfPath)
+        {
+            playerAnimator.SetInteger("side", side);
             _path = null;
+        }
+            
         
         if (_path == null)
             return;
@@ -86,8 +93,64 @@ public class PlayerController : MonoBehaviour
         Vector3 dir = (_path.vectorPath[_currentWaypoint] - transform.position).normalized;
         Vector3 velocity = dir * speed * speedFactor ;
         transform.position += velocity * Time.deltaTime;
+        IndicateDirection(_path.vectorPath[_currentWaypoint]);
     }
 
+
+    private void IndicateDirection(Vector3 target)
+    {
+        var pos = transform.position;
+        float angle = Mathf.Atan2
+            (target.y - pos.y, target.x - pos.x) * 180 / Mathf.PI;
+
+        
+        if (angle < 60 && angle > -60) //RIGHT
+        {
+            side = 0;
+            playerAnimator.SetInteger("side", 2);
+            playerAnimator.SetTrigger("walkFront");
+            print("right");
+            if (pos.y < 0)
+                flip = false;
+            else
+                flip = true;
+            GetComponent<SpriteRenderer>().flipX = flip;
+        }
+        else if (angle >= 60 && angle < 120) //UP
+        {
+            side = 1;
+            playerAnimator.SetInteger("side", side);
+        }
+        else if (angle <= -60 && angle > -120) //DOWN
+        {
+            side = 0;
+            playerAnimator.SetInteger("side", side);
+        }
+        else if ((angle <= -120) || (angle > 120)) //LEFT
+        {
+            side = 0;
+            playerAnimator.SetInteger("side", 2);
+            playerAnimator.SetTrigger("walkFront");
+            if (pos.y < 0)
+                flip = true;
+            else
+                flip = false;
+            GetComponent<SpriteRenderer>().flipX = flip;
+        }
+    }
+    
+    
+    private void FixedUpdate()
+    { 
+        Vector3 targ = Vector3.zero; 
+        Vector3 objectPos = transform.position; 
+        targ.x = targ.x - objectPos.x; 
+        targ.y = targ.y - objectPos.y; 
+        float angle = (Mathf.Atan2(targ.y, targ.x) - 80)* Mathf.Rad2Deg; 
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Door"))
