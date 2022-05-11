@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float nextWaypointDistance;
     [SerializeField] private int side = 0;
     [SerializeField] private bool flip = true;
+    [SerializeField] private bool findDoor;
     private Animator playerAnimator;
     
     #endregion
@@ -30,7 +31,9 @@ public class PlayerController : MonoBehaviour
     #endregion
     
    
-    public void Start () {
+    public void Start ()
+    {
+        findDoor = false;
         _seeker = GetComponent<Seeker>();
         playerAnimator = GetComponent<Animator>();
         reachedEndOfPath = true;
@@ -99,12 +102,13 @@ public class PlayerController : MonoBehaviour
 
     private void IndicateDirection(Vector3 target)
     {
+        if (findDoor) return;
         var pos = transform.position;
         float angle = Mathf.Atan2
             (target.y - pos.y, target.x - pos.x) * 180 / Mathf.PI;
 
         
-        if (angle < 60 && angle > -60) //RIGHT
+        if (angle < 60 && angle > -90) //RIGHT
         {
             side = 0;
             playerAnimator.SetInteger("side", 2);
@@ -121,12 +125,12 @@ public class PlayerController : MonoBehaviour
             side = 1;
             playerAnimator.SetInteger("side", side);
         }
-        else if (angle <= -60 && angle > -120) //DOWN
+        if (angle <= -60 && angle > -120) //DOWN
         {
             side = 0;
             playerAnimator.SetInteger("side", side);
         }
-        else if ((angle <= -120) || (angle > 120)) //LEFT
+        else if ((angle <= -90) || (angle > 120)) //LEFT
         {
             side = 0;
             playerAnimator.SetInteger("side", 2);
@@ -158,10 +162,18 @@ public class PlayerController : MonoBehaviour
             print(WorldsManagerToturial.onLeft);
             if (WorldsManagerToturial.onLeft && other.transform.position.x <= 0)
             {
-                SceneManager.LoadScene("Level2");
+                side = 1;
+                playerAnimator.SetInteger("side", side);
+                findDoor = true;
+                StartCoroutine(waitAndLoad("Level2"));
             }
-           
         }
+    }
+    
+    IEnumerator waitAndLoad(string sceneName)
+    {   
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(sceneName);
     }
 }
 
