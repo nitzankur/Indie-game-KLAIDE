@@ -1,15 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Pathfinding;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Random = UnityEngine.Random;
+using Pathfinding;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerThird : MonoBehaviour
 {
-    #region InspectorProperties
+   #region InspectorProperties
     
     [SerializeField] private Vector3 targetPosition;
     [SerializeField] private bool reachedEndOfPath;
@@ -48,13 +45,13 @@ public class PlayerController : MonoBehaviour
     }
     public void Update () {
 
-        if (WorldsManagerToturial.CharacterMove && reachedEndOfPath)
+        if (WorldManagerThird.CharacterMove && reachedEndOfPath)
         {
             reachedEndOfPath = false;
             AstarData.active.Scan();
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _seeker.StartPath(transform.position, targetPosition, OnPathComplete);
-            WorldsManagerToturial.CharacterMove = false;
+            WorldManagerThird.CharacterMove = false;
         }
 
         if (reachedEndOfPath)
@@ -159,7 +156,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Door"))
         {
-            if (WorldsManagerToturial.onLeft && other.transform.position.x <= 0)
+            if (WorldManagerThird.onLeft && other.transform.position.x <= 0)
             {
                 side = 1;
                 playerAnimator.SetInteger("side", side);
@@ -175,5 +172,3 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 }
-
-

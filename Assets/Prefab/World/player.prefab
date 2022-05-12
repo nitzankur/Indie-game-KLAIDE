@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1836323175003308691}
   - component: {fileID: 1836323175003308684}
   - component: {fileID: 1836323175003308685}
+  - component: {fileID: 10731193885635715}
   - component: {fileID: 8456255530156679421}
   m_Layer: 0
   m_Name: player
@@ -177,6 +178,7 @@ MonoBehaviour:
   nextWaypointDistance: 0.5
   side: 0
   flip: 1
+  findDoor: 0
 --- !u!61 &1836323175003308691
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -234,6 +236,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f87e87d081b14846bb37b7e280108ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &10731193885635715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836323175003308686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c51c531f1937be46b084905210c94e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!95 &8456255530156679421
