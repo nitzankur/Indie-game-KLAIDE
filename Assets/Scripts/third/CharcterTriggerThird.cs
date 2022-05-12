@@ -5,33 +5,32 @@ using UnityEngine;
 public class CharcterTriggerThird : MonoBehaviour
 {
     // [SerializeField] private Transform _transform;
+    private bool _key;
 
     private void Update()
     {
        
         
         var pos = transform.position;
-        if (pos.y<0 && ((pos.x<0 && (pos.x >pos.y))|| pos.x>0 && (pos.x<Mathf.Abs(pos.y))))
+        if (pos.x <= 0f &&(pos.y >0 || pos.y <0 &&pos.x<pos.y) ) 
         {
-            print("buttom");
+            WorldManagerThird.onLeft = true;
+            WorldManagerThird.onRight = false;
+            WorldManagerThird.onButtom = false;
+        }
+        else if(pos.y<0 && ((pos.x<0 && (pos.x >pos.y-1f))|| pos.x>0 && (pos.x<Mathf.Abs(pos.y)+1f)))
+        {
             WorldManagerThird.onButtom = true;
             WorldManagerThird.onLeft = false;
             WorldManagerThird.onRight = false;
         }
         else if (pos.x > 0f && (pos.y >0 || pos.y <0 &&pos.x>Mathf.Abs(pos.y)))
         {
-            print("right");
             WorldManagerThird.onRight = true;
             WorldManagerThird.onLeft = false;
             WorldManagerThird.onButtom = false;
         }
-        else if (pos.x <= 0f &&(pos.y >0 || pos.y <0 &&pos.x<pos.y) )
-        {
-            print("left");
-            WorldManagerThird.onLeft = true;
-            WorldManagerThird.onRight = false;
-            WorldManagerThird.onButtom = false;
-        }
+      
         
     }
 
@@ -39,13 +38,22 @@ public class CharcterTriggerThird : MonoBehaviour
     {
         if (other.CompareTag("Door"))
         {
-            if (other.transform.position.x > 0 && WorldManagerThird.onRight)
+            var pos = other.transform.position;
+            if (pos.x <= 0f &&(pos.y >0 || pos.y <0 &&pos.x<pos.y) && WorldManagerThird.onLeft && _key)
             {
                 print("win");
+                _key = false;
             }
-            else if (other.transform.position.x <= 0 && WorldManagerThird.onLeft)
+        }
+
+        if (other.CompareTag("Key"))
+        {
+            print("key0");
+            var pos = other.transform.position;
+            if (pos.x > 0f && (pos.y >0 || pos.y <0 &&pos.x>Mathf.Abs(pos.y)) && WorldManagerThird.onRight)
             {
-                print("win");
+                print("key") ;
+                _key = true;
             }
         }
     }

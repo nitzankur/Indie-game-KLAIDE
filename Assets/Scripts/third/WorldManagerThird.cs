@@ -58,7 +58,7 @@ public class WorldManagerThird : MonoBehaviour
         {
             var pos = node.position;
             if (node == rightNodes){ continue; }
-            node.tag = pos.x <= 0 ? "Untagged" : "Node";
+            node.tag = (pos.x > 0f && (pos.y >0 || pos.y <0 &&pos.x>Mathf.Abs(pos.y))) ? "Node": "Untagged";
         }
     }
     
@@ -68,17 +68,19 @@ public class WorldManagerThird : MonoBehaviour
         {
             var pos = node.position;
             if (node == leftNodes){ continue; }
-            node.tag = pos.x > 0 ? "Untagged" : "Node";
+            node.tag = (pos.x <= 0f &&(pos.y >0 || pos.y <0 &&pos.x<pos.y) ) ? "Node":"Untagged" ;
         }
     }
 
     void UpdateButtomNodes()
     {
+        int count = 0;
         foreach (var node in buttomNodes.GetComponentsInChildren<Transform>())
         {
+            count++;
             var pos = node.position;
-            if (node == leftNodes){ continue; }
-            node.tag = pos.x > 0 ? "Untagged" : "Node";
+            if (node == buttomNodes){ continue; }
+            node.tag = (pos.y<0 && ((pos.x<0 && (pos.x >pos.y-1f))|| pos.x>0 && (pos.x<Mathf.Abs(pos.y)+1f))) ? "Node":"Untagged";
         }
     }
   

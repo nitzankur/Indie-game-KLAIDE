@@ -9,6 +9,7 @@ TagManager:
   - Node
   - platform
   - Door
+  - Key
   layers:
   - Default
   - TransparentFX
