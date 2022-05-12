@@ -36,6 +36,7 @@ public class CharcterTriggerThird : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        print("triggerEnter");
         if (other.CompareTag("Door"))
         {
             var pos = other.transform.position;

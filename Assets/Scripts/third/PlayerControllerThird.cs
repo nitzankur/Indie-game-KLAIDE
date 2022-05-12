@@ -21,7 +21,8 @@ public class PlayerControllerThird : MonoBehaviour
 
     #region PrivateProperties
 
-    private bool firstPoint = true; 
+    private bool firstPoint = true;
+    private bool _key;
     private Seeker _seeker;
     private Path _path;
     private int _currentWaypoint = 0;
@@ -154,14 +155,26 @@ public class PlayerControllerThird : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
+        var pos = other.transform.position;
         if (other.CompareTag("Door"))
         {
-            if (WorldManagerThird.onLeft && other.transform.position.x <= 0)
+            if (pos.x <= 0f && (pos.y > 0 || pos.y < 0 && pos.x < pos.y) && WorldManagerThird.onLeft && _key)
             {
                 side = 1;
                 playerAnimator.SetInteger("side", side);
                 findDoor = true;
                 StartCoroutine(waitAndLoad("Level2"));
+                _key = false;
+            }
+        }
+
+        else if (other.CompareTag("Key"))
+        {
+            print("key0");
+            if (pos.x > 0f && (pos.y >0 || pos.y <0 &&pos.x>Mathf.Abs(pos.y)) && WorldManagerThird.onRight)
+            {
+                print("key") ;
+                _key = true;
             }
         }
     }
