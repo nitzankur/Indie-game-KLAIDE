@@ -189,7 +189,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Door"))
         {
-            print(WorldsManagerToturial.onLeft);
             if (WorldsManagerToturial.onLeft && other.transform.position.x <= 0)
             {
                 front = false;

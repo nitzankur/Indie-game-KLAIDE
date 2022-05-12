@@ -111,7 +111,6 @@ public class PlayerControllerThird : MonoBehaviour
             side = 0;
             playerAnimator.SetInteger("side", 2);
             playerAnimator.SetTrigger("walkFront");
-            print("right");
             if (pos.y < 0)
                 flip = false;
             else
@@ -170,11 +169,12 @@ public class PlayerControllerThird : MonoBehaviour
 
         else if (other.CompareTag("Key"))
         {
-            print("key0");
+            print("key0" + WorldManagerThird.onRight);
             if (pos.x > 0f && (pos.y >0 || pos.y <0 &&pos.x>Mathf.Abs(pos.y)) && WorldManagerThird.onRight)
             {
                 print("key") ;
                 _key = true;
+               other.gameObject.SetActive(false);
             }
         }
     }
