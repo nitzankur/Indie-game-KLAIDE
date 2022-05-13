@@ -13,6 +13,8 @@ public class PlayerControllerThird : MonoBehaviour
     [SerializeField] private float speed = 2;
     [SerializeField] private float nextWaypointDistance;
     [SerializeField] private int side = 0;
+    [SerializeField] private bool move;
+    [SerializeField] private bool front;
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
     private Animator playerAnimator;
@@ -57,7 +59,9 @@ public class PlayerControllerThird : MonoBehaviour
 
         if (reachedEndOfPath)
         {
-            playerAnimator.SetInteger("side", side);
+            move = false;
+            playerAnimator.SetBool("Move", move);
+            playerAnimator.SetInteger("Side", side);
             _path = null;
         }
             
@@ -100,6 +104,9 @@ public class PlayerControllerThird : MonoBehaviour
 
     private void IndicateDirection(Vector3 target)
     {
+        move = true;
+        playerAnimator.SetBool("Move", move);
+        
         if (findDoor) return;
         var pos = transform.position;
         float angle = Mathf.Atan2
@@ -108,36 +115,59 @@ public class PlayerControllerThird : MonoBehaviour
         
         if (angle < 60 && angle > -90) //RIGHT
         {
-            side = 0;
-            playerAnimator.SetInteger("side", 2);
-            playerAnimator.SetTrigger("walkFront");
+            side = 2;
             if (pos.y < 0)
+            {
+                front = (angle > -10);
                 flip = false;
+            }
             else
+            {
+                front = !(angle > -10);
                 flip = true;
+            }
             GetComponent<SpriteRenderer>().flipX = flip;
         }
+        
+        
         else if (angle >= 60 && angle < 120) //UP
         {
-            side = 1;
-            playerAnimator.SetInteger("side", side);
+            front = pos.y < 0;
+            side = pos.y < 0 ? 0 : 1;
         }
         if (angle <= -60 && angle > -120) //DOWN
         {
-            side = 0;
-            playerAnimator.SetInteger("side", side);
+            front = !(pos.y < 0);
+            side = pos.y < 0 ? 1 : 0;
         }
-        else if ((angle <= -90) || (angle > 120)) //LEFT
+        else if (angle <= -90 || angle > 120) //LEFT
         {
-            side = 0;
-            playerAnimator.SetInteger("side", 2);
-            playerAnimator.SetTrigger("walkFront");
-            if (pos.y < 0)
+            side = 2;
+            if (pos.y < 0){
+                if (angle > 120 && angle < 180)
+                    front = true;
+                else
+                    front = false;
                 flip = true;
+            }
             else
+            {
+                if (angle > 120 && angle < 180)
+                    front = false;
+                else
+                    front = true;
                 flip = false;
+            }
             GetComponent<SpriteRenderer>().flipX = flip;
+
+            if (angle > 120 && angle < 180)
+                front = false;
+            else
+                front = true;
+
         }
+        playerAnimator.SetInteger("Side", side);
+        playerAnimator.SetBool("Front", front);
     }
     
     
@@ -159,10 +189,11 @@ public class PlayerControllerThird : MonoBehaviour
         {
             if (pos.x <= 0f && (pos.y > 0 || pos.y < 0 && pos.x < pos.y) && WorldManagerThird.onLeft && _key)
             {
+                front = false;
                 side = 1;
-                playerAnimator.SetInteger("side", side);
-                findDoor = true;
-                StartCoroutine(waitAndLoad("Level2"));
+                playerAnimator.SetInteger("Side", side);
+                playerAnimator.SetBool("Front", front);
+                StartCoroutine(waitAndLoad("StartLevel3"));
                 _key = false;
             }
         }
@@ -182,6 +213,7 @@ public class PlayerControllerThird : MonoBehaviour
     IEnumerator waitAndLoad(string sceneName)
     {   
         yield return new WaitForSeconds(2f);
+        LevelManager.unlockedLevel++;
         SceneManager.LoadScene(sceneName);
     }
 }

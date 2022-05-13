@@ -15,10 +15,12 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
      private float curTime;
      private Collider2D col;
      private bool _drag;
+     public static bool rotateOnce;
     
 
     private void Start()
     {
+        rotateOnce = false;
         WorldsManagerToturial.CharacterMove = false;
         myCam = Camera.main;
         print(Camera.main);
@@ -52,6 +54,7 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
                 float angle = Mathf.Atan2(vec3.y, vec3.x) * Mathf.Rad2Deg;
                 if ((Time.time - curTime) > 0.2f)
                 {
+                    rotateOnce = true;
                     if (!WorldsManagerToturial.onLeft) WorldsManagerToturial.LeftRotate(angle, angleOffset); 
                     if (!WorldsManagerToturial.onRight) WorldsManagerToturial.RightRotate(angle, angleOffset); 
                 }

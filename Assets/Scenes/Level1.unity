@@ -23861,6 +23861,8 @@ MonoBehaviour:
   speed: 2
   nextWaypointDistance: 0.5
   side: 0
+  move: 0
+  front: 0
   flip: 1
   findDoor: 0
 --- !u!1001 &2030558809

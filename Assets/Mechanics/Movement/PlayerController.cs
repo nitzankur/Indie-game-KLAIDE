@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool reachedEndOfPath;
     [SerializeField] private float speed = 2;
     [SerializeField] private float nextWaypointDistance;
-    
+    [SerializeField] private string nextScene;
     [SerializeField] private int side = 0;
     [SerializeField] private bool move;
     [SerializeField] private bool front;
@@ -23,6 +23,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
     private Animator playerAnimator;
+    
+    //TUTORIAL ADDITION
+    [SerializeField] private bool tutorial;
+    [SerializeField] private GameObject dot;
+    [SerializeField] private GameObject tutorialMove;
+    [SerializeField] private GameObject tutorialRotate;
+    [SerializeField] private Vector3[] tutorialRotatePos;
+
     
     #endregion
 
@@ -41,16 +49,22 @@ public class PlayerController : MonoBehaviour
         _seeker = GetComponent<Seeker>();
         playerAnimator = GetComponent<Animator>();
         reachedEndOfPath = true;
+        side = 0;
+        move = false;
+        front = true;
     }
 
-    public void OnPathComplete (Path p) {
+    private void OnPathComplete (Path p) {
         Debug.Log("A path was calculated. Did it fail with an error? " + p.error);
         if (!p.error) {
             _path = p;
             _currentWaypoint = 0;
         }
     }
+    
     public void Update () {
+        if (tutorial && WorldRotateTutorial.rotateOnce)
+            tutorialRotate.SetActive(false);
 
         if (WorldsManagerToturial.CharacterMove && reachedEndOfPath)
         {
@@ -63,6 +77,8 @@ public class PlayerController : MonoBehaviour
 
         if (reachedEndOfPath)
         {
+            if (tutorial && move)
+                RotateTutorial();
             move = false;
             playerAnimator.SetBool("Move", move);
             _path = null;
@@ -107,6 +123,12 @@ public class PlayerController : MonoBehaviour
 
     private void IndicateDirection(Vector3 target)
     {
+        if (tutorial)
+        {
+            dot.SetActive(false);
+            tutorialMove.SetActive(false);
+        }
+        
         move = true;
         playerAnimator.SetBool("Move", move);
         
@@ -173,6 +195,20 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("Front", front);
     }
     
+    private void RotateTutorial()
+    {
+        if (!WorldRotateTutorial.rotateOnce)
+        {
+            if (WorldsManagerToturial.onRight)
+                tutorialRotate.transform.position = tutorialRotatePos[1];
+            else
+                tutorialRotate.transform.position = tutorialRotatePos[0];
+            tutorialRotate.SetActive(true);
+        }
+        else
+            tutorialRotate.SetActive(false);
+    }
+    
     
     private void FixedUpdate()
     { 
@@ -196,15 +232,16 @@ public class PlayerController : MonoBehaviour
                 playerAnimator.SetInteger("Side", side);
                 playerAnimator.SetBool("Front", front);
                 findDoor = true;
-                StartCoroutine(waitAndLoad("Level2"));
+                StartCoroutine(WaitAndLoad());
             }
         }
     }
     
-    IEnumerator waitAndLoad(string sceneName)
+    IEnumerator WaitAndLoad()
     {   
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(sceneName);
+        LevelManager.unlockedLevel++;
+        SceneManager.LoadScene(nextScene);
     }
 }
 

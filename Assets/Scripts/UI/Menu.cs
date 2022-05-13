@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    [SerializeField] private string nextLevel;
     public void PlayGame()
     {
-        SceneManager.LoadScene("Level0");
+        SceneManager.LoadScene(nextLevel);
     }
 }
