@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     
     public void Update () {
         if (tutorial && WorldRotateTutorial.rotateOnce)
-            tutorialRotate.SetActive(false);
+            tutorialRotate.GetComponent<Animator>().SetBool("Rotate", true);
 
         if (WorldsManagerToturial.CharacterMove && reachedEndOfPath)
         {
@@ -126,7 +126,8 @@ public class PlayerController : MonoBehaviour
         if (tutorial)
         {
             dot.SetActive(false);
-            tutorialMove.SetActive(false);
+            tutorialMove.GetComponent<Animator>().SetBool("Click",true);
+          //  tutorialMove.SetActive(false);
         }
         
         move = true;
@@ -199,14 +200,15 @@ public class PlayerController : MonoBehaviour
     {
         if (!WorldRotateTutorial.rotateOnce)
         {
-            if (WorldsManagerToturial.onRight)
-                tutorialRotate.transform.position = tutorialRotatePos[1];
-            else
-                tutorialRotate.transform.position = tutorialRotatePos[0];
+            tutorialRotate.transform.position = WorldsManagerToturial.onRight ? tutorialRotatePos[1] : tutorialRotatePos[0];
             tutorialRotate.SetActive(true);
         }
         else
-            tutorialRotate.SetActive(false);
+        {
+            tutorialRotate.GetComponent<Animator>().SetBool("Rotate", true);
+           // tutorialRotate.SetActive(false);
+        }
+           
     }
     
     

@@ -171,7 +171,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalLevel: 4
-  unlockedLevel: 0
 --- !u!1 &361171470
 GameObject:
   m_ObjectHideFlags: 0
