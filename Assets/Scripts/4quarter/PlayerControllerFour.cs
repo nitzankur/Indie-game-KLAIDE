@@ -220,7 +220,7 @@ public class PlayerControllerFour : MonoBehaviour
         else if (other.CompareTag("Key"))
         {
             print("key0" + WorldsManager.onRight);
-            if (pos.x > 0f && (pos.y >0 || pos.y <0 &&pos.x>Mathf.Abs(pos.y)) && WorldsManager.onRight)
+            if ((pos.y > 0 && pos.y >= Mathf.Abs(pos.x)) && WorldsManager.onTop)
             {
                 print("key") ;
                 _key = true;

@@ -67,7 +67,7 @@ public class WorldManagerThird : MonoBehaviour
         {
             var pos = node.position;
             if (node == leftNodes){ continue; }
-            node.tag = (pos.x <= 0f &&(pos.y >0 || pos.y <0 &&pos.x<pos.y-1) ) ? "Node":"Untagged" ;
+            node.tag = (pos.x <= 0f &&(pos.y >0 || pos.y <0 &&pos.x<pos.y-1f) ) ? "Node":"Untagged" ;
         }
     }
 

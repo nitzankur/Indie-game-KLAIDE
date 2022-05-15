@@ -12,6 +12,7 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
      private Camera myCam;
      private Vector3 screenPos;
      public static float angleOffset;
+     private float startTime;
      private Collider2D col;
      private bool _drag;
      public static bool rotateOnce;
@@ -33,7 +34,9 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
         
         Vector3 mousePos = myCam.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0))
-        { if (col == Physics2D.OverlapPoint(mousePos))
+        {
+            startTime = Time.time;
+            if (col == Physics2D.OverlapPoint(mousePos))
             { screenPos = myCam.WorldToScreenPoint(transform.position);
                 var vec3 = Input.mousePosition - screenPos;
                 angleOffset = (Mathf.Atan2(transform.right.y, transform.right.x) - Mathf.Atan2(vec3.y, vec3.x)) *
@@ -46,7 +49,7 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
             {
                 Vector3 vec3 = Input.mousePosition - screenPos;
                 float angle = Mathf.Atan2(vec3.y, vec3.x) * Mathf.Rad2Deg;
-                if (PlayerController.EndOfPath)
+                if (PlayerController.EndOfPath && Time.time - startTime > 0.2f)
                 {
                     rotateOnce = true;
                     if (!WorldsManagerToturial.onLeft) WorldsManagerToturial.LeftRotate(angle, angleOffset); 
