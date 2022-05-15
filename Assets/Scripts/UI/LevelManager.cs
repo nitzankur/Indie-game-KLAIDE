@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
         Refresh();
     }
 
+    
     private void OnEnable()
     {
         levelButtons = GetComponentsInChildren<ButtonLevel>();
@@ -33,6 +34,5 @@ public class LevelManager : MonoBehaviour
                 levelButtons[i].gameObject.SetActive(false);
         }
     }
-    
-    
+
 }
