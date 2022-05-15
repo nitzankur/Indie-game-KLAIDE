@@ -206,7 +206,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             tutorialRotate.GetComponent<Animator>().SetBool("Rotate", true);
-           // tutorialRotate.SetActive(false);
         }
            
     }
@@ -223,12 +222,16 @@ public class PlayerController : MonoBehaviour
         
     }
     
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Door"))
         {
+            print("door collision");
+            print("player:" + WorldsManagerToturial.onLeft);
+            print("door:" + (other.transform.position.x <= 0));
             if (WorldsManagerToturial.onLeft && other.transform.position.x <= 0)
             {
+                print("not left");
                 front = false;
                 side = 1;
                 playerAnimator.SetInteger("Side", side);
@@ -238,6 +241,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    
     
     IEnumerator WaitAndLoad()
     {   

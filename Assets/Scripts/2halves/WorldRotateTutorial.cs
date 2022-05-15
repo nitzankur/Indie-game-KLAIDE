@@ -47,9 +47,6 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
         {   
             if (col == Physics2D.OverlapPoint(mousePos))
             {
-              
-                print(gameObject.name + "down"); 
-                
                 Vector3 vec3 = Input.mousePosition - screenPos;
                 float angle = Mathf.Atan2(vec3.y, vec3.x) * Mathf.Rad2Deg;
                 if ((Time.time - curTime) > 0.2f)
