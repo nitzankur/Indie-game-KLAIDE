@@ -10,6 +10,7 @@ TagManager:
   - platform
   - Door
   - Key
+  - Portal
   layers:
   - Default
   - TransparentFX
