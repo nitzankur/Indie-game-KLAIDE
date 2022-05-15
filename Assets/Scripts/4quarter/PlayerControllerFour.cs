@@ -25,7 +25,7 @@ public class PlayerControllerFour : MonoBehaviour
     #region PrivateProperties
 
     private bool firstPoint = true;
-    private bool _key;
+    private bool _key,PortalON;
     private Seeker _seeker;
     private Path _path;
     private int _currentWaypoint = 0;
@@ -48,6 +48,8 @@ public class PlayerControllerFour : MonoBehaviour
             _currentWaypoint = 0;
         }
     }
+
+    #region Calculate Path
     public void Update ()
     {
         EndOfPath = reachedEndOfPath;
@@ -103,19 +105,24 @@ public class PlayerControllerFour : MonoBehaviour
         transform.position += velocity * Time.deltaTime;
         IndicateDirection(_path.vectorPath[_currentWaypoint]);
     }
+    
 
+    #endregion
+  
+
+    #region IndicateDirection
 
     private void IndicateDirection(Vector3 target)
     {
         move = true;
         playerAnimator.SetBool("Move", move);
-        
+
         if (findDoor) return;
         var pos = transform.position;
         float angle = Mathf.Atan2
             (target.y - pos.y, target.x - pos.x) * 180 / Mathf.PI;
 
-        
+
         if (angle < 60 && angle > -90) //RIGHT
         {
             side = 2;
@@ -129,15 +136,17 @@ public class PlayerControllerFour : MonoBehaviour
                 front = !(angle > -10);
                 flip = true;
             }
+
             GetComponent<SpriteRenderer>().flipX = flip;
         }
-        
-        
+
+
         else if (angle >= 60 && angle < 120) //UP
         {
             front = pos.y < 0;
             side = pos.y < 0 ? 0 : 1;
         }
+
         if (angle <= -60 && angle > -120) //DOWN
         {
             front = !(pos.y < 0);
@@ -146,7 +155,8 @@ public class PlayerControllerFour : MonoBehaviour
         else if (angle <= -90 || angle > 120) //LEFT
         {
             side = 2;
-            if (pos.y < 0){
+            if (pos.y < 0)
+            {
                 if (angle > 120 && angle < 180)
                     front = true;
                 else
@@ -161,6 +171,7 @@ public class PlayerControllerFour : MonoBehaviour
                     front = true;
                 flip = false;
             }
+
             GetComponent<SpriteRenderer>().flipX = flip;
 
             if (angle > 120 && angle < 180)
@@ -169,11 +180,12 @@ public class PlayerControllerFour : MonoBehaviour
                 front = true;
 
         }
+
         playerAnimator.SetInteger("Side", side);
         playerAnimator.SetBool("Front", front);
     }
-    
-    
+
+
     private void FixedUpdate()
     { 
         Vector3 targ = Vector3.zero; 
@@ -185,6 +197,10 @@ public class PlayerControllerFour : MonoBehaviour
         
     }
     
+
+    #endregion
+
+    #region Trigger
     private void OnTriggerStay2D(Collider2D other)
     {
         var pos = other.transform.position;
@@ -208,19 +224,39 @@ public class PlayerControllerFour : MonoBehaviour
             {
                 print("key") ;
                 _key = true;
-               other.gameObject.SetActive(false);
+                other.gameObject.SetActive(false);
             }
         }
         
         else if (other.CompareTag("Portal"))
         {
             print("Portal");
+            if (other.transform == PortalLeft && WorldsManager.onLeft&& !PortalON)
+            {
+                AstarData.active.Scan();
+                WorldsManager.CharacterMove = false;
+                transform.position =PortalRight.position+Vector3.right*1.5f;
+                PortalON = true;
+                
+            }
+
+            else if (other.transform == PortalRight && WorldsManager.onRight&& !PortalON)
+            {
+                PortalON = true;
+                WorldsManager.CharacterMove = false;
+                transform.position = PortalLeft.position+Vector3.forward*1.5f;
+                
+            }
         }
     }
     
+
+    #endregion   
+   
+    
     IEnumerator waitAndLoad(string sceneName)
     {   
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         LevelManager.unlockedLevel++;
         SceneManager.LoadScene(sceneName);
     }

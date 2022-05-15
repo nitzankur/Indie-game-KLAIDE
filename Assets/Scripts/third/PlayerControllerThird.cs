@@ -184,7 +184,7 @@ public class PlayerControllerThird : MonoBehaviour
         
     }
     
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         var pos = other.transform.position;
         if (other.CompareTag("Door"))
@@ -214,7 +214,7 @@ public class PlayerControllerThird : MonoBehaviour
     
     IEnumerator waitAndLoad(string sceneName)
     {   
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         LevelManager.unlockedLevel++;
         SceneManager.LoadScene(sceneName);
     }

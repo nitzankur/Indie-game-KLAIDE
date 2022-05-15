@@ -12,6 +12,7 @@ public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandl
      public static float angleOffset;
      private Collider2D col;
      private bool _drag;
+     private float startTime;
      private void Start()
     {
         WorldManagerThird.CharacterMove = false;
@@ -26,7 +27,8 @@ public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandl
         
         Vector3 mousePos = myCam.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0))
-        { 
+        {
+            startTime = Time.time;
             if (col == Physics2D.OverlapPoint(mousePos))
             {   screenPos = myCam.WorldToScreenPoint(transform.position);
                 var vec3 = Input.mousePosition - screenPos;
@@ -40,7 +42,7 @@ public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandl
             {
                 Vector3 vec3 = Input.mousePosition - screenPos;
                 float angle = Mathf.Atan2(vec3.y, vec3.x) * Mathf.Rad2Deg;
-                if(PlayerControllerThird.EndOfPath)
+                if(PlayerControllerThird.EndOfPath && (Time.time - startTime) > 0.2f)
                 {
                     if (!WorldManagerThird.onLeft) WorldManagerThird.LeftRotate(angle, angleOffset); 
                     if (!WorldManagerThird.onRight) WorldManagerThird.RightRotate(angle, angleOffset);
