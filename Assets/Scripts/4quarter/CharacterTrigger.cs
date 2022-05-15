@@ -20,7 +20,7 @@ public class CharacterTrigger : MonoBehaviour
       
        else if (pos.y < 0 &&  Mathf.Abs(pos.x) <= Mathf.Abs(pos.y))
        {
-           WorldsManager.ONBottom = true;
+           WorldsManager.onButtom = true;
            WorldsManager.onLeft = false;
            WorldsManager.onRight = false;
            print("down");
@@ -30,14 +30,14 @@ public class CharacterTrigger : MonoBehaviour
        {
            WorldsManager.onRight = true;
            WorldsManager.onTop = false;
-           WorldsManager.ONBottom = false;
+           WorldsManager.onButtom = false;
            print("right");   
        }
        else if(pos.x<0 && Mathf.Abs(pos.x) > Mathf.Abs(pos.y))
        {
            WorldsManager.onLeft = true;
            WorldsManager.onTop = false;
-           WorldsManager.ONBottom = false;
+           WorldsManager.onButtom = false;
            print("LEFt"); 
        }
        

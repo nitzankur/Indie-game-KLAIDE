@@ -1,88 +1,69 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Pathfinding;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Random = UnityEngine.Random;
+using Pathfinding;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerFour : MonoBehaviour
 {
-    #region InspectorProperties
+   #region InspectorProperties
     
     [SerializeField] private Vector3 targetPosition;
     [SerializeField] private bool reachedEndOfPath;
     [SerializeField] private float speed = 2;
     [SerializeField] private float nextWaypointDistance;
-    [SerializeField] private string nextScene;
     [SerializeField] private int side = 0;
     [SerializeField] private bool move;
     [SerializeField] private bool front;
-    
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
     private Animator playerAnimator;
-    
-    //TUTORIAL ADDITION
-    [SerializeField] private bool tutorial;
-    [SerializeField] private GameObject dot;
-    [SerializeField] private GameObject tutorialMove;
-    [SerializeField] private GameObject tutorialRotate;
-    [SerializeField] private Vector3[] tutorialRotatePos;
 
-    
     #endregion
 
     #region PrivateProperties
 
-    private bool firstPoint = true; 
+    private bool firstPoint = true;
+    private bool _key;
     private Seeker _seeker;
     private Path _path;
     private int _currentWaypoint = 0;
     #endregion
 
     public static bool EndOfPath;
+   
     public void Start ()
     {
         findDoor = false;
         _seeker = GetComponent<Seeker>();
         playerAnimator = GetComponent<Animator>();
         reachedEndOfPath = true;
-        side = 0;
-        move = false;
-        front = true;
     }
 
-    private void OnPathComplete (Path p) {
+    public void OnPathComplete (Path p) {
         Debug.Log("A path was calculated. Did it fail with an error? " + p.error);
         if (!p.error) {
             _path = p;
             _currentWaypoint = 0;
         }
     }
-    
     public void Update ()
     {
         EndOfPath = reachedEndOfPath;
-        if (tutorial && WorldRotateTutorial.rotateOnce)
-            tutorialRotate.GetComponent<Animator>().SetBool("Rotate", true);
-
-        if (WorldsManagerToturial.CharacterMove && reachedEndOfPath)
+        if (WorldsManager.CharacterMove && reachedEndOfPath)
         {
             reachedEndOfPath = false;
             AstarData.active.Scan();
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _seeker.StartPath(transform.position, targetPosition, OnPathComplete);
-            WorldsManagerToturial.CharacterMove = false;
+            WorldsManager.CharacterMove = false;
         }
 
         if (reachedEndOfPath)
         {
-            if (tutorial && move)
-                RotateTutorial();
             move = false;
             playerAnimator.SetBool("Move", move);
+            playerAnimator.SetInteger("Side", side);
             _path = null;
         }
             
@@ -125,13 +106,6 @@ public class PlayerController : MonoBehaviour
 
     private void IndicateDirection(Vector3 target)
     {
-        if (tutorial)
-        {
-            dot.SetActive(false);
-            tutorialMove.GetComponent<Animator>().SetBool("Click",true);
-          //  tutorialMove.SetActive(false);
-        }
-        
         move = true;
         playerAnimator.SetBool("Move", move);
         
@@ -152,7 +126,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 front = !(angle > -10);
-                 flip = true;
+                flip = true;
             }
             GetComponent<SpriteRenderer>().flipX = flip;
         }
@@ -198,21 +172,6 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("Front", front);
     }
     
-    private void RotateTutorial()
-    {
-        if (!WorldRotateTutorial.rotateOnce)
-        {
-            tutorialRotate.transform.position = WorldsManagerToturial.onRight ? tutorialRotatePos[1] : tutorialRotatePos[0];
-            tutorialRotate.SetActive(true);
-        }
-        else
-        {
-            tutorialRotate.GetComponent<Animator>().SetBool("Rotate", true);
-           // tutorialRotate.SetActive(false);
-        }
-           
-    }
-    
     
     private void FixedUpdate()
     { 
@@ -227,26 +186,36 @@ public class PlayerController : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
+        var pos = other.transform.position;
         if (other.CompareTag("Door"))
         {
-            if (WorldsManagerToturial.onLeft && other.transform.position.x <= 0)
+            if (pos.x <= 0f && (pos.y > 0 || pos.y < 0 && pos.x < pos.y) && WorldsManager.onLeft && _key)
             {
                 front = false;
                 side = 1;
                 playerAnimator.SetInteger("Side", side);
                 playerAnimator.SetBool("Front", front);
-                findDoor = true;
-                StartCoroutine(WaitAndLoad());
+                StartCoroutine(waitAndLoad("StartLevel3"));
+                _key = false;
+            }
+        }
+
+        else if (other.CompareTag("Key"))
+        {
+            print("key0" + WorldsManager.onRight);
+            if (pos.x > 0f && (pos.y >0 || pos.y <0 &&pos.x>Mathf.Abs(pos.y)) && WorldsManager.onRight)
+            {
+                print("key") ;
+                _key = true;
+               other.gameObject.SetActive(false);
             }
         }
     }
     
-    IEnumerator WaitAndLoad()
+    IEnumerator waitAndLoad(string sceneName)
     {   
         yield return new WaitForSeconds(2f);
         LevelManager.unlockedLevel++;
-        SceneManager.LoadScene(nextScene);
+        SceneManager.LoadScene(sceneName);
     }
 }
-
-

@@ -9,7 +9,6 @@ public class WorldsManagerToturial : MonoBehaviour
 {
     [SerializeField] private Transform rightNodes, leftNodes;
     public static bool onRight, onLeft,CharacterMove;
-    [Range(20, 150)] [SerializeField] private float fastParameter = 150;
     private static WorldsManagerToturial _shared;
     [SerializeField] private GameObject right, left;
     private static Transform leftTransform, rightTransform;

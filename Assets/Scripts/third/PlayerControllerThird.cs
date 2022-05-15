@@ -18,7 +18,7 @@ public class PlayerControllerThird : MonoBehaviour
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
     private Animator playerAnimator;
-    
+
     #endregion
 
     #region PrivateProperties
@@ -29,7 +29,8 @@ public class PlayerControllerThird : MonoBehaviour
     private Path _path;
     private int _currentWaypoint = 0;
     #endregion
-    
+
+    public static bool EndOfPath;
    
     public void Start ()
     {
@@ -46,8 +47,9 @@ public class PlayerControllerThird : MonoBehaviour
             _currentWaypoint = 0;
         }
     }
-    public void Update () {
-
+    public void Update ()
+    {
+        EndOfPath = reachedEndOfPath;
         if (WorldManagerThird.CharacterMove && reachedEndOfPath)
         {
             reachedEndOfPath = false;

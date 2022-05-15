@@ -12,13 +12,12 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
      private Camera myCam;
      private Vector3 screenPos;
      public static float angleOffset;
-     private float curTime;
      private Collider2D col;
      private bool _drag;
      public static bool rotateOnce;
-    
 
-    private void Start()
+
+     private void Start()
     {
         rotateOnce = false;
         WorldsManagerToturial.CharacterMove = false;
@@ -34,10 +33,8 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
         
         Vector3 mousePos = myCam.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0))
-        {   curTime = Time.time;
-            if (col == Physics2D.OverlapPoint(mousePos))
-            {   print(gameObject.name + "click"); 
-                screenPos = myCam.WorldToScreenPoint(transform.position);
+        { if (col == Physics2D.OverlapPoint(mousePos))
+            { screenPos = myCam.WorldToScreenPoint(transform.position);
                 var vec3 = Input.mousePosition - screenPos;
                 angleOffset = (Mathf.Atan2(transform.right.y, transform.right.x) - Mathf.Atan2(vec3.y, vec3.x)) *
                               Mathf.Rad2Deg;
@@ -47,12 +44,9 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
         {   
             if (col == Physics2D.OverlapPoint(mousePos))
             {
-              
-                print(gameObject.name + "down"); 
-                
                 Vector3 vec3 = Input.mousePosition - screenPos;
                 float angle = Mathf.Atan2(vec3.y, vec3.x) * Mathf.Rad2Deg;
-                if ((Time.time - curTime) > 0.2f)
+                if (PlayerController.EndOfPath)
                 {
                     rotateOnce = true;
                     if (!WorldsManagerToturial.onLeft) WorldsManagerToturial.LeftRotate(angle, angleOffset); 
@@ -76,6 +70,7 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
         if (!_drag)
         {
             WorldsManagerToturial.CharacterMove = true;
+            
             
         }
     }

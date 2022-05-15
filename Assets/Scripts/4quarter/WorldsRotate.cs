@@ -5,74 +5,97 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class WorldsRotate : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler,IDragHandler,IPointerClickHandler
+public class WorldsRotate :  MonoBehaviour , IBeginDragHandler, IEndDragHandler, IDragHandler,IPointerDownHandler, IPointerClickHandler
 {
-    private bool _drag;
-    private Vector3 _mousePos;
+    #region variables
+     public static bool endDrag;
+     private Vector3 _mousePos;
+     private Camera myCam;
+     private Vector3 screenPos;
+     public static float angleOffset;
+     private Collider2D col;
+     private bool _drag;
+     public static bool rotateOnce;
 
 
-
-
-    public void OnBeginDrag(PointerEventData eventData)
+     private void Start()
     {
-        _drag = true;
-        _mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+        rotateOnce = false;
+        WorldsManager.CharacterMove = false;
+        myCam = Camera.main;
+        print(Camera.main);
+        col = GetComponent<Collider2D>();
     }
-
-    public void OnDrag(PointerEventData eventData)
+    #endregion
+    
+    #region World rotate
+    void Update()
     {
-        var tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if ((tmpPos.y >= _mousePos.y)&&(tmpPos.x<0 && Mathf.Abs(tmpPos.x) > Mathf.Abs(tmpPos.y)) 
-            || (tmpPos.x >= _mousePos.x)&& (tmpPos.y > 0 && tmpPos.y >= Mathf.Abs(tmpPos.x))||
-            (tmpPos.y <= _mousePos.y)&& (tmpPos.x > 0 && tmpPos.x > Mathf.Abs(tmpPos.y))|| (tmpPos.x<=_mousePos.x)&&
-            (tmpPos.y < 0 &&  Mathf.Abs(tmpPos.x) <= Mathf.Abs(tmpPos.y)) )
-        {
-            print("Right dragging");
-            WorldsManager.DragRight = true;
-        }
-        else if((tmpPos.y < _mousePos.y)&&(tmpPos.x<0 && Mathf.Abs(tmpPos.x) > Mathf.Abs(tmpPos.y))||
-                (tmpPos.x < _mousePos.x)&& (tmpPos.y > 0 && tmpPos.y >= Mathf.Abs(tmpPos.x))||
-                (tmpPos.y >= _mousePos.y)&& (tmpPos.x > 0 && tmpPos.x > Mathf.Abs(tmpPos.y))||
-                (tmpPos.x<=_mousePos.x)&& (tmpPos.y < 0 &&  Mathf.Abs(tmpPos.x) <= Mathf.Abs(tmpPos.y)))
-        {
-            print("left dragging");
-            WorldsManager.DragLeft = true;
-        }
         
+        Vector3 mousePos = myCam.ScreenToWorldPoint(Input.mousePosition);
+        if (Input.GetMouseButtonDown(0))
+        { if (col == Physics2D.OverlapPoint(mousePos))
+            { screenPos = myCam.WorldToScreenPoint(transform.position);
+                var vec3 = Input.mousePosition - screenPos;
+                angleOffset = (Mathf.Atan2(transform.right.y, transform.right.x) - Mathf.Atan2(vec3.y, vec3.x)) *
+                              Mathf.Rad2Deg;
+            }
+        }
+        if (Input.GetMouseButton(0))
+        {   
+            if (col == Physics2D.OverlapPoint(mousePos))
+            {
+                Vector3 vec3 = Input.mousePosition - screenPos;
+                float angle = Mathf.Atan2(vec3.y, vec3.x) * Mathf.Rad2Deg;
+                if (PlayerControllerFour.EndOfPath)
+                {
+                    rotateOnce = true;
+                    if (!WorldsManager.onLeft) WorldsManager.LeftRotate(angle, angleOffset); 
+                    if (!WorldsManager.onRight) WorldsManager.RightRotate(angle, angleOffset); 
+                    if(!WorldsManager.onTop) WorldsManager.TopRotate(angle, angleOffset);
+                    if(!WorldsManager.onButtom) WorldsManager.ButtomRotate(angle, angleOffset);
+                }
+            }
+        }
     }
+    
+    #endregion
 
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        WorldsManager.DragRight = false;
-        WorldsManager.DragLeft = false;
-        _drag = false;
-    }
-
+    #region sperate between walking and worlds rotate
     public void OnPointerDown(PointerEventData eventData)
     {
-        
     }
-
+    
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!_drag)
         {
             WorldsManager.CharacterMove = true;
-           _drag = true;
+            
+            
         }
-        
     }
 
-    private void RightDragging(Vector3 tmpPos)
+    public void OnBeginDrag(PointerEventData eventData)
     {
-        
+        _drag = true;
+      //  print("begin drag");
+    
     }
-
-    private void LeftDragging()
+    public void OnDrag(PointerEventData eventData)
     {
-        
+    
     }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        //print("end drag");
+        _drag = false;
+        endDrag = true;
+    }
+   
+    
+    #endregion
 
 
+   
 }
