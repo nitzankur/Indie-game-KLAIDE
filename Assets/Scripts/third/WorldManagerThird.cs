@@ -8,7 +8,6 @@ public class WorldManagerThird : MonoBehaviour
 {
     [SerializeField] private Transform rightNodes, leftNodes,buttomNodes;
     public static bool onRight, onLeft,CharacterMove,onButtom;
-    [Range(20, 200)] [SerializeField] private float fastParameter = 150;
     private static WorldManagerThird _shared;
     [SerializeField] private GameObject right, left,buttom;
     private static Transform leftTransform, rightTransform,buttomTransform;
