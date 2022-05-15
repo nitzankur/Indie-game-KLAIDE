@@ -21,7 +21,7 @@ public class WorldsRotate :  MonoBehaviour , IBeginDragHandler, IEndDragHandler,
      private void Start()
     {
         rotateOnce = false;
-        WorldsManager.CharacterMove = false;
+        WorldsManager.CharacterMove = true;
         myCam = Camera.main;
         print(Camera.main);
         col = GetComponent<Collider2D>();
