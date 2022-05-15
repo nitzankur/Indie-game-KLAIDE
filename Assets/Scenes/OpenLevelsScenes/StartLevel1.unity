@@ -638,7 +638,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1622553829}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: PlayGame
+        m_MethodName: RestartLevel1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -715,7 +715,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0ad0ce9e461c2438083a7c96ec20da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: Level0
 --- !u!4 &1622553830
 Transform:
   m_ObjectHideFlags: 0
