@@ -28,10 +28,10 @@ public class WorldsManager : MonoBehaviour
     
     void Update()
     {
-        if (WorldRotateTutorial.endDrag)
+        if (WorldsRotate.endDrag)
         {
             print("update graph");
-            WorldRotateTutorial.endDrag = false;
+            WorldsRotate.endDrag = false;
             UpdateLeftNodes();
             UpdateRightNodes();
             UpdateTopNodes();
@@ -64,7 +64,8 @@ public class WorldsManager : MonoBehaviour
         {
             var pos = node.position;
             if (node == rightNodes){ continue; }
-            node.tag = (pos.x<0 && Mathf.Abs(pos.x) > Mathf.Abs(pos.y)) ? "Node":"Untagged" ;
+            
+            node.tag = (pos.x > 0 && pos.x > Mathf.Abs(pos.y)) ? "Node":"Untagged" ;
         }
     }
     void UpdateLeftNodes()
@@ -73,7 +74,7 @@ public class WorldsManager : MonoBehaviour
         {
             var pos = node.position;
             if (node == leftNodes){ continue; }
-            node.tag = (pos.x > 0 && pos.x > Mathf.Abs(pos.y)) ? "Node":"Untagged";
+            node.tag = (pos.x<0 && Mathf.Abs(pos.x) > Mathf.Abs(pos.y)) ? "Node":"Untagged";
         }
     } 
     

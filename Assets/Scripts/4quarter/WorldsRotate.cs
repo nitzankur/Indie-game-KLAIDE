@@ -21,7 +21,7 @@ public class WorldsRotate :  MonoBehaviour , IBeginDragHandler, IEndDragHandler,
      private void Start()
     {
         rotateOnce = false;
-        WorldsManager.CharacterMove = true;
+        WorldsManager.CharacterMove = false;
         myCam = Camera.main;
         print(Camera.main);
         col = GetComponent<Collider2D>();
@@ -88,7 +88,7 @@ public class WorldsRotate :  MonoBehaviour , IBeginDragHandler, IEndDragHandler,
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        //print("end drag");
+        print("end drag");
         _drag = false;
         endDrag = true;
     }

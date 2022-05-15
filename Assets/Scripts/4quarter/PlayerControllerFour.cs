@@ -17,6 +17,7 @@ public class PlayerControllerFour : MonoBehaviour
     [SerializeField] private bool front;
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
+    [SerializeField] private Transform PortalRight, PortalLeft;
     private Animator playerAnimator;
 
     #endregion
@@ -209,6 +210,11 @@ public class PlayerControllerFour : MonoBehaviour
                 _key = true;
                other.gameObject.SetActive(false);
             }
+        }
+        
+        else if (other.CompareTag("Portal"))
+        {
+            print("Portal");
         }
     }
     
