@@ -52,6 +52,7 @@ public class PlayerControllerFour : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
+        if (_key) transform.position =new Vector3(-1.29999995f, -0.289999992f, 0);
         EndOfPath = reachedEndOfPath;
         if (WorldsManager.CharacterMove && reachedEndOfPath)
         {
@@ -102,6 +103,7 @@ public class PlayerControllerFour : MonoBehaviour
         var speedFactor = reachedEndOfPath ? Mathf.Sqrt(distanceToWaypoint/nextWaypointDistance) : 1f;
         Vector3 dir = (_path.vectorPath[_currentWaypoint] - transform.position).normalized;
         Vector3 velocity = dir * speed * speedFactor ;
+        if (PortalON) velocity = Vector3.zero;
         transform.position += velocity * Time.deltaTime;
         IndicateDirection(_path.vectorPath[_currentWaypoint]);
     }
@@ -233,18 +235,23 @@ public class PlayerControllerFour : MonoBehaviour
             print("Portal");
             if (other.transform == PortalLeft && WorldsManager.onLeft&& !PortalON)
             {
-                AstarData.active.Scan();
+                reachedEndOfPath = true;
+                _path = null;
                 WorldsManager.CharacterMove = false;
-                transform.position =PortalRight.position+Vector3.right*1.5f;
+                // transform.position = PortalRight.position;//+Vector3.right;
                 PortalON = true;
+                transform.position =new Vector3(-1.29999995f, -0.289999992f, 0);
                 
             }
-
+            
             else if (other.transform == PortalRight && WorldsManager.onRight&& !PortalON)
             {
-                PortalON = true;
+                reachedEndOfPath = true;
+                _path = null;
                 WorldsManager.CharacterMove = false;
-                transform.position = PortalLeft.position+Vector3.forward*1.5f;
+                PortalON = true;
+                // transform.position = PortalLeft.position+Vector3.forward*1.5f;
+                transform.position =new Vector3(-1.29999995f, -0.289999992f, 0);
                 
             }
         }
