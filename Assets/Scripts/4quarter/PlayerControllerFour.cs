@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,7 @@ public class PlayerControllerFour : MonoBehaviour
 
     #region PrivateProperties
 
+    
     private bool firstPoint = true;
     private bool _key,PortalON;
     private Seeker _seeker;
@@ -52,7 +54,6 @@ public class PlayerControllerFour : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
-        if (_key) transform.position =new Vector3(-1.29999995f, -0.289999992f, 0);
         EndOfPath = reachedEndOfPath;
         if (WorldsManager.CharacterMove && reachedEndOfPath)
         {
@@ -103,7 +104,6 @@ public class PlayerControllerFour : MonoBehaviour
         var speedFactor = reachedEndOfPath ? Mathf.Sqrt(distanceToWaypoint/nextWaypointDistance) : 1f;
         Vector3 dir = (_path.vectorPath[_currentWaypoint] - transform.position).normalized;
         Vector3 velocity = dir * speed * speedFactor ;
-        if (PortalON) velocity = Vector3.zero;
         transform.position += velocity * Time.deltaTime;
         IndicateDirection(_path.vectorPath[_currentWaypoint]);
     }
@@ -138,7 +138,6 @@ public class PlayerControllerFour : MonoBehaviour
                 front = !(angle > -10);
                 flip = true;
             }
-
             GetComponent<SpriteRenderer>().flipX = flip;
         }
 
@@ -196,7 +195,6 @@ public class PlayerControllerFour : MonoBehaviour
         targ.y = targ.y - objectPos.y; 
         float angle = (Mathf.Atan2(targ.y, targ.x) - 80)* Mathf.Rad2Deg; 
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        
     }
     
 
@@ -218,6 +216,7 @@ public class PlayerControllerFour : MonoBehaviour
                 _key = false;
             }
         }
+        
 
         else if (other.CompareTag("Key"))
         {
@@ -233,38 +232,59 @@ public class PlayerControllerFour : MonoBehaviour
         else if (other.CompareTag("Portal"))
         {
             print("Portal");
-            if (other.transform == PortalLeft && WorldsManager.onLeft&& !PortalON)
+            if (other.transform == PortalLeft && WorldsManager.onLeft && !PortalON &&
+                PortalRight.position.x > 0 &&  PortalRight.position.x > Mathf.Abs( PortalRight.position.y))
             {
-                reachedEndOfPath = true;
-                _path = null;
-                WorldsManager.CharacterMove = false;
-                // transform.position = PortalRight.position;//+Vector3.right;
+                if (_path != null)
+                {
+                    reachedEndOfPath = true;
+                    _currentWaypoint = _path.vectorPath.Count - 1;
+                    _path.vectorPath[_currentWaypoint] = PortalRight.position;
+                    _path = null;
+                }
                 PortalON = true;
-                transform.position =new Vector3(-1.29999995f, -0.289999992f, 0);
-                
+                transform.position = PortalRight.position;
+                Physics2D.IgnoreLayerCollision(3, 8, true);
+                StartCoroutine(waitSecond());
             }
-            
-            else if (other.transform == PortalRight && WorldsManager.onRight&& !PortalON)
+
+            else if (other.transform == PortalRight && WorldsManager.onRight && !PortalON && 
+                     (PortalLeft.position.x<0 && Mathf.Abs(PortalLeft.position.x) > Mathf.Abs(PortalLeft.position.y)))
             {
-                reachedEndOfPath = true;
-                _path = null;
-                WorldsManager.CharacterMove = false;
+                if (_path != null)
+                {
+                    reachedEndOfPath = true;
+                    _currentWaypoint = _path.vectorPath.Count - 1;
+                    _path.vectorPath[_currentWaypoint] = PortalLeft.position;
+                    _path = null;
+                }
                 PortalON = true;
-                // transform.position = PortalLeft.position+Vector3.forward*1.5f;
-                transform.position =new Vector3(-1.29999995f, -0.289999992f, 0);
-                
+                transform.position = PortalLeft.position;
+                Physics2D.IgnoreLayerCollision(3, 8, true);
+                StartCoroutine(waitSecond());
             }
         }
     }
-    
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        print("exit");
+        if (other.CompareTag("Portal"))
+            PortalON = false;
+    }
 
     #endregion   
-   
     
     IEnumerator waitAndLoad(string sceneName)
     {   
         yield return new WaitForSeconds(1f);
         LevelManager.unlockedLevel++;
         SceneManager.LoadScene(sceneName);
+    }
+    
+    IEnumerator waitSecond()
+    {
+        yield return new WaitForSeconds(5f);
+        Physics2D.IgnoreLayerCollision(3, 8, false);
     }
 }

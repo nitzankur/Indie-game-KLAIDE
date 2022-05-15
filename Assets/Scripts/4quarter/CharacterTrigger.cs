@@ -15,7 +15,7 @@ public class CharacterTrigger : MonoBehaviour
            WorldsManager.onTop = true;
            WorldsManager.onLeft = false;
            WorldsManager.onRight = false;
-           print("top");
+   //        print("top");
        }
       
        else if (pos.y < 0 &&  Mathf.Abs(pos.x) <= Mathf.Abs(pos.y))
@@ -23,7 +23,7 @@ public class CharacterTrigger : MonoBehaviour
            WorldsManager.onButtom = true;
            WorldsManager.onLeft = false;
            WorldsManager.onRight = false;
-           print("down");
+   //      print("down");
        }
 
        else if (pos.x > 0 && pos.x > Mathf.Abs(pos.y))
@@ -31,14 +31,14 @@ public class CharacterTrigger : MonoBehaviour
            WorldsManager.onRight = true;
            WorldsManager.onTop = false;
            WorldsManager.onButtom = false;
-           print("right");   
+    //      print("right");   
        }
        else if(pos.x<0 && Mathf.Abs(pos.x) > Mathf.Abs(pos.y))
        {
            WorldsManager.onLeft = true;
            WorldsManager.onTop = false;
            WorldsManager.onButtom = false;
-           print("LEFt"); 
+     //      print("LEFt"); 
        }
        
 
