@@ -49,7 +49,7 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
             {
                 Vector3 vec3 = Input.mousePosition - screenPos;
                 float angle = Mathf.Atan2(vec3.y, vec3.x) * Mathf.Rad2Deg;
-                if (PlayerController.EndOfPath && Time.time - startTime > 0.2f)
+                if (PlayerController.EndOfPath && Time.time - startTime > 0.3f)
                 {
                     rotateOnce = true;
                     if (!WorldsManagerToturial.onLeft) WorldsManagerToturial.LeftRotate(angle, angleOffset); 
