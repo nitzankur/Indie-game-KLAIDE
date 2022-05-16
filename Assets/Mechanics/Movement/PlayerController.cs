@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     private int _currentWaypoint = 0;
     #endregion
 
+    public static bool FinishLevel;
     public static bool EndOfPath;
     public void Start ()
     {
@@ -198,6 +199,7 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("Front", front);
     }
     
+    
     private void RotateTutorial()
     {
         if (!WorldRotateTutorial.rotateOnce)
@@ -248,7 +250,11 @@ public class PlayerController : MonoBehaviour
     IEnumerator WaitAndLoad()
     {   
         yield return new WaitForSeconds(2f);
-        LevelManager.unlockedLevel++;
+        if (!FinishLevel)
+        {
+            FinishLevel = true;
+            LevelManager.unlockedLevel++;
+        }
         SceneManager.LoadScene(nextScene);
     }
 }

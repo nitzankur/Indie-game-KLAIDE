@@ -30,6 +30,7 @@ public class PlayerControllerThird : MonoBehaviour
     private int _currentWaypoint = 0;
     #endregion
 
+    public static bool FinishLevel;
     public static bool EndOfPath;
    
     public void Start ()
@@ -215,7 +216,11 @@ public class PlayerControllerThird : MonoBehaviour
     IEnumerator waitAndLoad(string sceneName)
     {   
         yield return new WaitForSeconds(1f);
-        LevelManager.unlockedLevel++;
+        if (!FinishLevel)
+        {
+            FinishLevel = true;
+            LevelManager.unlockedLevel++;
+        }
         SceneManager.LoadScene(sceneName);
     }
 }
