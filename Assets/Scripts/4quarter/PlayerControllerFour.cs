@@ -104,11 +104,11 @@ public class PlayerControllerFour : MonoBehaviour
         var speedFactor = reachedEndOfPath ? Mathf.Sqrt(distanceToWaypoint/nextWaypointDistance) : 1f;
         Vector3 dir = (_path.vectorPath[_currentWaypoint] - transform.position).normalized;
         Vector3 velocity = dir * speed * speedFactor ;
+        GetComponent<AIPath>().constrainInsideGraph = false;
         transform.position += velocity * Time.deltaTime;
         IndicateDirection(_path.vectorPath[_currentWaypoint]);
     }
     
-
     #endregion
   
 
@@ -228,50 +228,60 @@ public class PlayerControllerFour : MonoBehaviour
                 other.gameObject.SetActive(false);
             }
         }
-        
-        else if (other.CompareTag("Portal"))
-        {
-            print("Portal");
-            if (other.transform == PortalLeft && WorldsManager.onLeft && !PortalON &&
-                PortalRight.position.x > 0 &&  PortalRight.position.x > Mathf.Abs( PortalRight.position.y))
-            {
-                if (_path != null)
-                {
-                    reachedEndOfPath = true;
-                    _currentWaypoint = _path.vectorPath.Count - 1;
-                    _path.vectorPath[_currentWaypoint] = PortalRight.position;
-                    _path = null;
-                }
-                PortalON = true;
-                transform.position = PortalRight.position;
-                Physics2D.IgnoreLayerCollision(3, 8, true);
-                StartCoroutine(waitSecond());
-            }
-
-            else if (other.transform == PortalRight && WorldsManager.onRight && !PortalON && 
-                     (PortalLeft.position.x<0 && Mathf.Abs(PortalLeft.position.x) > Mathf.Abs(PortalLeft.position.y)))
-            {
-                if (_path != null)
-                {
-                    reachedEndOfPath = true;
-                    _currentWaypoint = _path.vectorPath.Count - 1;
-                    _path.vectorPath[_currentWaypoint] = PortalLeft.position;
-                    _path = null;
-                }
-                PortalON = true;
-                transform.position = PortalLeft.position;
-                Physics2D.IgnoreLayerCollision(3, 8, true);
-                StartCoroutine(waitSecond());
-            }
-        }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        print("exit");
         if (other.CompareTag("Portal"))
-            PortalON = false;
+        {
+            if (!PortalON)
+            {
+                print("Portal");
+                if (other.transform == PortalLeft && WorldsManager.onLeft &&
+                    PortalRight.position.x > 0 &&  PortalRight.position.x > Mathf.Abs( PortalRight.position.y))
+                {
+                    if (_path != null)
+                    {
+                        _currentWaypoint = _path.vectorPath.Count - 1;
+                        _path.vectorPath[_currentWaypoint] = PortalRight.position;
+                        _path = null;
+                    }
+                    reachedEndOfPath = true;
+                    PortalON = true;
+                    GetComponent<AIPath>().constrainInsideGraph = true;
+                    transform.position = PortalRight.position;
+                    firstPoint = true;
+                    Physics2D.IgnoreLayerCollision(3, 8, true);
+                    StartCoroutine(waitSecond());
+                }
+
+                else if (other.transform == PortalRight && WorldsManager.onRight && 
+                         (PortalLeft.position.x<0 && Mathf.Abs(PortalLeft.position.x) > Mathf.Abs(PortalLeft.position.y)))
+                {
+                    if (_path != null)
+                    {
+                        _currentWaypoint = _path.vectorPath.Count - 1;
+                        _path.vectorPath[_currentWaypoint] = PortalLeft.position;
+                        _path = null;
+                    }
+                    reachedEndOfPath = true;
+                    PortalON = true;
+                    GetComponent<AIPath>().constrainInsideGraph = true;
+                    transform.position = PortalLeft.position;
+                    firstPoint = true;
+                    Physics2D.IgnoreLayerCollision(3, 8, true);
+                    StartCoroutine(waitSecond());
+                }
+            }
+            else if (PortalLeft.gameObject.GetInstanceID() == other.gameObject.GetInstanceID() || 
+                     PortalRight.gameObject.GetInstanceID() == other.gameObject.GetInstanceID())
+                PortalON = false;
+
+        }
+           
     }
+    
 
     #endregion   
     
@@ -284,7 +294,7 @@ public class PlayerControllerFour : MonoBehaviour
     
     IEnumerator waitSecond()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
         Physics2D.IgnoreLayerCollision(3, 8, false);
     }
 }
