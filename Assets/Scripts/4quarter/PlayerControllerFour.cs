@@ -252,9 +252,9 @@ public class PlayerControllerFour : MonoBehaviour
                     GetComponent<AIPath>().constrainInsideGraph = true;
                     transform.position = PortalRight.position;
                     firstPoint = true;
-                    Physics2D.IgnoreLayerCollision(3, 8, true);
-                    StartCoroutine(waitSecond());
-                    WorldsManager.onLeft = false;
+                    // Physics2D.IgnoreLayerCollision(3, 8, true);
+                    // StartCoroutine(waitSecond());
+                    // WorldsManager.onLeft = false;
                 }
 
                 else if (other.transform == PortalRight && WorldsManager.onRight && 
@@ -270,10 +270,10 @@ public class PlayerControllerFour : MonoBehaviour
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
                     transform.position = PortalLeft.position;
-                    WorldsManager.onRight = false;
+                    
                     firstPoint = true;
-                    Physics2D.IgnoreLayerCollision(3, 8, true);
-                    StartCoroutine(waitSecond());
+                    // Physics2D.IgnoreLayerCollision(3, 8, true);
+                    // StartCoroutine(waitSecond());
                 }
             }
             else if (PortalLeft.gameObject.GetInstanceID() == other.gameObject.GetInstanceID() || 
