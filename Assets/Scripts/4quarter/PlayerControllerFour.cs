@@ -254,6 +254,7 @@ public class PlayerControllerFour : MonoBehaviour
                     firstPoint = true;
                     Physics2D.IgnoreLayerCollision(3, 8, true);
                     StartCoroutine(waitSecond());
+                    WorldsManager.onLeft = false;
                 }
 
                 else if (other.transform == PortalRight && WorldsManager.onRight && 
@@ -269,6 +270,7 @@ public class PlayerControllerFour : MonoBehaviour
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
                     transform.position = PortalLeft.position;
+                    WorldsManager.onRight = false;
                     firstPoint = true;
                     Physics2D.IgnoreLayerCollision(3, 8, true);
                     StartCoroutine(waitSecond());
