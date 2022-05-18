@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
         if (tutorial && WorldRotateTutorial.rotateOnce)
             tutorialRotate.GetComponent<Animator>().SetBool("Rotate", true);
 
-        if (WorldsManagerToturial.CharacterMove && reachedEndOfPath)
+        if (WorldsManagerToturial.CharacterMove)
         {
             reachedEndOfPath = false;
             AstarData.active.Scan();

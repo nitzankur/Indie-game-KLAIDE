@@ -60,6 +60,18 @@ TagManager:
   - name: left
     uniqueID: 1194178567
     locked: 0
+  - name: down inside
+    uniqueID: 875882729
+    locked: 0
+  - name: top inside
+    uniqueID: 1411165645
+    locked: 0
+  - name: right inside
+    uniqueID: 1823681429
+    locked: 0
+  - name: left inside
+    uniqueID: 1780151959
+    locked: 0
   - name: stam
     uniqueID: 3882519271
     locked: 0
