@@ -18,7 +18,7 @@ public class CharcterTriggerThird : MonoBehaviour
             WorldManagerThird.onRight = false;
             WorldManagerThird.onButtom = false;
         }
-        else if(pos.y<0 && ((pos.x<0 && (pos.x >pos.y-1f))|| pos.x>0 && (pos.x<Mathf.Abs(pos.y)+1f)))
+        else if(pos.y<0 && ((pos.x<0 && pos.x >pos.y-1.7f)|| pos.x>0 && pos.x<Mathf.Abs(pos.y)+1f))
         {    print("down");
             WorldManagerThird.onButtom = true;
             WorldManagerThird.onLeft = false;
