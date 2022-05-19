@@ -23,7 +23,6 @@ public class PlayerControllerEight : MonoBehaviour
     #endregion
 
     #region PrivateProperties
-
     
     private bool firstPoint = true;
     private bool _key,PortalON;
@@ -102,10 +101,10 @@ public class PlayerControllerEight : MonoBehaviour
             }
         }
         var speedFactor = reachedEndOfPath ? Mathf.Sqrt(distanceToWaypoint/nextWaypointDistance) : 1f;
-        Vector3 dir = (_path.vectorPath[_currentWaypoint] - transform.position).normalized;
-        Vector3 velocity = dir * speed * speedFactor ;
+        Vector2 dir = (_path.vectorPath[_currentWaypoint] - transform.position).normalized;
+        Vector2 velocity = dir * speed * speedFactor ;
         GetComponent<AIPath>().constrainInsideGraph = false;
-        transform.position += velocity * Time.deltaTime;
+        transform.position += (Vector3) velocity * Time.deltaTime ; 
         IndicateDirection(_path.vectorPath[_currentWaypoint]);
     }
     
@@ -206,7 +205,7 @@ public class PlayerControllerEight : MonoBehaviour
         var pos = other.transform.position;
         if (other.CompareTag("Door"))
         {
-            if (pos.x <= 0f && (pos.y > 0 || pos.y < 0 && pos.x < pos.y) && WorldsManagerEight.onLeft && _key)
+            if (pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && WorldsManagerEight.onTop && _key)
             {
                 front = false;
                 side = 1;
@@ -221,7 +220,7 @@ public class PlayerControllerEight : MonoBehaviour
         else if (other.CompareTag("Key"))
         {
             print("key0" + WorldsManagerEight.onRight);
-            if ((pos.y > 0 && pos.y >= Mathf.Abs(pos.x)) && WorldsManagerEight.onTop)
+            if (pos.x > 0 && pos.x > Mathf.Abs(pos.y) && WorldsManagerEight.onRight)
             {
                 print("key") ;
                 _key = true;

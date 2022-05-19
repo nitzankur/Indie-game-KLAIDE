@@ -7,6 +7,7 @@ public class CharacterTriggerEight : MonoBehaviour
 {
 
     private const int Radius = 9;
+
     private void Update()
    {
        var pos = transform.position;
@@ -21,7 +22,7 @@ public class CharacterTriggerEight : MonoBehaviour
            WorldsManagerEight.onInsideLeft = false;
            WorldsManagerEight.onInsideRight = false;
            WorldsManagerEight.onInsideBottom = false;
-           //   print("top");
+            print("top");
        }
        
        else if (pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && Vector3.Distance(pos, Vector3.zero) < Radius)
