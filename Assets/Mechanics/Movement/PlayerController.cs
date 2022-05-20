@@ -230,12 +230,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Door"))
         {
-            print("door collision");
-            print("player:" + WorldsManagerToturial.onLeft);
-            print("door:" + (other.transform.position.x <= 0));
             if (WorldsManagerToturial.onLeft && other.transform.position.x <= 0)
             {
-                print("not left");
                 front = false;
                 side = 1;
                 playerAnimator.SetInteger("Side", side);

@@ -35,14 +35,27 @@ public class WorldsManagerToturial : MonoBehaviour
         }
     }
 
-    public static void RightRotate(float angle,float angleOffset)
+    // public static void RightRotate(float angle,float angleOffset)
+    // {
+    //    rightTransform.eulerAngles = new Vector3(0, 0, angle + angleOffset);
+    // }
+    public static void RightRotate(Vector3 startPos,Vector3 curPos)
     {
-       rightTransform.eulerAngles = new Vector3(0, 0, angle + angleOffset);
+        startPos.z = 0;
+        curPos.z = 0;
+        rightTransform.rotation = Quaternion.FromToRotation(startPos, curPos);
     }
 
-    public static void LeftRotate(float angle,float angleOffset)
+    // public static void LeftRotate(float angle,float angleOffset)
+    // {
+    //     leftTransform.eulerAngles = new Vector3(0, 0, angle + angleOffset);
+    // }
+    public static void LeftRotate(Vector3 startPos,Vector3 curPos)
     {
-        leftTransform.eulerAngles = new Vector3(0, 0, angle + angleOffset);
+        startPos.z = 0;
+        curPos.z = 0;
+        leftTransform.rotation = Quaternion.FromToRotation(startPos, curPos);
+        print("left rot" + leftTransform.rotation);
     }
     
     
