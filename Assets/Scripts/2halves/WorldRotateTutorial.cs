@@ -18,6 +18,7 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
      private float baseAngle ;
      private Vector3 pos;
      private bool rotateToRight;
+     private Vector2 mousePosStart;
 
 
      private void Start()
@@ -34,18 +35,19 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
         
         if (Input.GetMouseButtonDown(0))
         {
-            Vector2 mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
-            var pos = new Vector2(transform.position.x, transform.position.y);
-            pos = mousePos - pos;
+            mousePosStart = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+            var localpos = new Vector2(transform.position.x, transform.position.y);
+            pos = mousePosStart - localpos;
         }
 
         if (Input.GetMouseButton(0))
         {
             if (PlayerController.EndOfPath && Time.time - startTime > 0.3f)
             {
+                var ClockDrag = false;
                 Vector2 mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
-                var pos = new Vector2(transform.position.x, transform.position.y);
-                Vector2 tempPos = mousePos - pos;
+                var localpos = new Vector2(transform.position.x, transform.position.y);
+                Vector2 tempPos = mousePos - localpos;
                 // One of below: // TODO: add +/- factor based on side, if we need to? im not sure we do
                 // // 0.
                 float ang = Vector2.Angle(pos, tempPos);
@@ -57,8 +59,30 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
                 // // 2.
                 // float ang = Vector2.SignedAngle(pos, tempPos); 
                 // // // 2.1
-                if (!WorldsManagerToturial.onLeft) left.transform.rotation = Quaternion.Euler(0,0,ang/50) * left.transform.rotation;
-                if (!WorldsManagerToturial.onRight) transform.rotation = Quaternion.Euler(0,0,ang/50) * transform.rotation;
+                print(mousePos + " mousePos "+ mousePosStart + "mouse pos start ");
+                if (mousePos.x > 0 && (mousePos.y > mousePosStart.y) || (mousePos.y < 0 &&
+                                                                          mousePos.x > mousePosStart.x)
+                                                                      || mousePos.x < 0 &&
+                                                                      mousePos.y < mousePosStart.y
+                                                                      || mousePos.y > 0 &&
+                                                                      mousePos.x < mousePosStart.x)
+                {
+                    // if (ClockDrag) ang *= -1;
+                    // else ang = ang;
+                    mousePosStart = mousePos;
+                }
+                else if (mousePos.x > 0 && (mousePos.y < mousePosStart.y) || (mousePos.y < 0 && mousePos.x < mousePosStart.x)
+                                                                     || mousePos.x < 0 && mousePos.y > mousePosStart.y
+                                                                     || mousePos.y > 0 && mousePos.x > mousePosStart.x)
+                {
+                    ClockDrag = true;
+                    ang *= -1;
+                    
+                }
+
+                
+                if (!WorldsManagerToturial.onLeft) left.transform.rotation = Quaternion.Euler(0,0,ang) * left.transform.rotation;
+                if (!WorldsManagerToturial.onRight) transform.rotation = Quaternion.Euler(0,0,ang) * transform.rotation;
                 // // 2.2
                 // transform.rotation = Quaternion.AngleAxis(ang, Vector3.forward)* transform.rotation;
                 // // // 3. the easiest option probably: <<<<<<<<<<<<< - //this to much faster
@@ -69,53 +93,6 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
             }
             
         }
-        // if (Input.GetMouseButtonDown(0))
-        // {
-        //     // pos = Camera.main.WorldToScreenPoint(transform.position);
-        //     // pos = Input.mousePosition - pos ;
-        //     Vector3 mousePos = Camera.main.WorldToScreenPoint(Input.mousePosition);
-        //     pos = mousePos - transform.position;
-        //     // print("mousePos" + Input.mousePosition);
-        //     // baseAngle = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg;
-        //     // print("base angle" + baseAngle);
-        //     // if (!WorldsManager.onRight){ baseAngle -= Mathf.Atan2(transform.right.y, transform.right.x) * Mathf.Rad2Deg;}
-        //     // if (!WorldsManager.onLeft) { baseAngle += Mathf.Atan2(transform.right.y, transform.right.x) * Mathf.Rad2Deg; }
-        // }
-        //
-        // if (Input.GetMouseButton(0))
-        // {
-        //     Vector3 tmpPos = Camera.main.WorldToScreenPoint(Input.mousePosition);
-        //     tmpPos = Input.mousePosition - tmpPos;
-        //     
-        //     // float ang = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg - baseAngle;
-        //     rotateOnce = true;
-        //     if (PlayerController.EndOfPath && Time.time - startTime > 0.3f)
-        //     {
-        //         if (!WorldsManagerToturial.onLeft) left.transform.rotation = Quaternion.FromToRotation(pos, tmpPos);
-        //         if (!WorldsManagerToturial.onRight) transform.rotation = Quaternion.FromToRotation(pos, tmpPos);
-        //     }
-        // }
-
-        //     // if (col == Physics2D.OverlapPoint(mousePos))
-        //     // {
-        //        // var mousePos1 = myCam.WorldToScreenPoint(Input.mousePosition);
-        //         Vector3 curPos = Input.mousePosition - screenPos;
-        //         // float angle = Mathf.Atan2(vec3.y, vec3.x) * Mathf.Rad2Deg;
-        //         if (PlayerController.EndOfPath && Time.time - startTime > 0.3f)
-        //         {
-        //            
-        //             startPos.z = 0;
-        //             curPos.z = 0;
-        //             if (!WorldsManagerToturial.onLeft) left.transform.rotation = Quaternion.FromToRotation(startPos, curPos);
-        //             if (!WorldsManagerToturial.onRight) transform.rotation= Quaternion.FromToRotation(startPos, curPos);
-        //             // if (!WorldsManagerToturial.onLeft) WorldsManagerToturial.LeftRotate(startPos, curPos); 
-        //             // if (!WorldsManagerToturial.onRight) WorldsManagerToturial.RightRotate(startPos, curPos); 
-        //             // if (!WorldsManagerToturial.onRight) WorldsManagerToturial.RightRotate(angle, angleOffset); 
-        //         }
-            //    
-         //    // }
-         // }
-        
     }
     private void OnMouseDown()
     {
