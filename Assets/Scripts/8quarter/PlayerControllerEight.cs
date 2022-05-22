@@ -37,6 +37,7 @@ public class PlayerControllerEight : MonoBehaviour
     public void Start ()
     {
         findDoor = false;
+        _key = false;
         _seeker = GetComponent<Seeker>();
         playerAnimator = GetComponent<Animator>();
         reachedEndOfPath = true;
@@ -205,7 +206,7 @@ public class PlayerControllerEight : MonoBehaviour
         var pos = other.transform.position;
         if (other.CompareTag("Door"))
         {
-            if (pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && WorldsManagerEight.onTop && _key)
+            if (pos.x < 0 && Mathf.Abs(pos.x) > Mathf.Abs(pos.y) && WorldsManagerEight.onLeft && _key)
             {
                 front = false;
                 side = 1;
@@ -219,8 +220,7 @@ public class PlayerControllerEight : MonoBehaviour
 
         else if (other.CompareTag("Key"))
         {
-            print("key0" + WorldsManagerEight.onRight);
-            if (pos.x > 0 && pos.x > Mathf.Abs(pos.y) && WorldsManagerEight.onRight)
+            if (pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && WorldsManagerEight.onInsideTop)
             {
                 print("key") ;
                 _key = true;
