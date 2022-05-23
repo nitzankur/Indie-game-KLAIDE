@@ -19,6 +19,7 @@ public class PlayerControllerFour : MonoBehaviour
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
     [SerializeField] private Transform PortalRight, PortalLeft;
+    [SerializeField] private GameObject key;
     private Animator playerAnimator;
 
     #endregion
@@ -31,6 +32,7 @@ public class PlayerControllerFour : MonoBehaviour
     private Seeker _seeker;
     private Path _path;
     private int _currentWaypoint = 0;
+    
     #endregion
 
     public static bool FinishLevel;
@@ -207,14 +209,13 @@ public class PlayerControllerFour : MonoBehaviour
         var pos = other.transform.position;
         if (other.CompareTag("Door"))
         {
-            if (pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && WorldsManager.onTop && _key)
+            if (GameManager.Level == "level_2" && pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && WorldsManager.onTop && _key)
             {
-                front = false;
-                side = 1;
-                playerAnimator.SetInteger("Side", side);
-                playerAnimator.SetBool("Front", front);
-                StartCoroutine(waitAndLoad("StartLevel3"));
-                _key = false;
+                getInDoor(other);
+            }
+            if (GameManager.Level == "level_2" && (pos.y < 0 &&  Mathf.Abs(pos.x) <= Mathf.Abs(pos.y) && WorldsManager.onButtom && _key))
+            {
+                getInDoor(other);
             }
         }
         
@@ -222,13 +223,34 @@ public class PlayerControllerFour : MonoBehaviour
         else if (other.CompareTag("Key"))
         {
             print("key0" + WorldsManager.onRight);
-            if ((pos.y > 0 && pos.y >= Mathf.Abs(pos.x)) && WorldsManager.onTop)
+            if (GameManager.Level == "level_2" && (pos.y > 0 && pos.y >= Mathf.Abs(pos.x)) && WorldsManager.onTop)
             {
-                print("key") ;
-                _key = true;
-                other.gameObject.SetActive(false);
+                turnOfKey(other);
+            }
+            else if (GameManager.Level == "level_3" && (pos.x > 0 && pos.x > Mathf.Abs(pos.y)) && WorldsManager.onRight)
+            {
+                print("door");
+                turnOfKey(other);
             }
         }
+    }
+
+    private void turnOfKey(Collider2D other)
+    {
+        print("key") ;
+        _key = true;
+       key.SetActive(false);
+    }
+
+    private void getInDoor(Collider2D other)
+    {
+        front = false;
+        side = 1;
+        playerAnimator.SetInteger("Side", side);
+        playerAnimator.SetBool("Front", front);
+        StartCoroutine(waitAndLoad("StartLevel3"));
+        _key = false;
+        key.SetActive(true);
     }
 
 
