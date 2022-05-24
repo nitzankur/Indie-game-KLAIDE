@@ -276,6 +276,7 @@ public class PlayerControllerFour : MonoBehaviour
         if ((pos.x < (portalPosL.x+portalRadiusHor) && (pos.x > (portalPosL.x-portalRadiusHor))&& pos.y < portalPosL.y +portalRadiusVer && pos.y>portalPosL.y-portalRadiusVer &&WorldsManager.onLeft &&
             PortalRight.position.x > 0 &&  PortalRight.position.x > Mathf.Abs( PortalRight.position.y)))
                 {
+                    print("portal left");
                     if (_path != null)
                     {
                         _currentWaypoint = _path.vectorPath.Count - 1;
