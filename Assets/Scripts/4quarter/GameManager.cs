@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject winMessage;
     private static GameManager _shared;
     public static bool CollRight,CollLeft,CollUp,collDown;
-    public static string Level =  "level_3";
+    
 
     
     public static bool winGame;

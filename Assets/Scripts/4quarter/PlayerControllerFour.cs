@@ -209,11 +209,12 @@ public class PlayerControllerFour : MonoBehaviour
         var pos = other.transform.position;
         if (other.CompareTag("Door"))
         {
-            if (GameManager.Level == "level_2" && pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && WorldsManager.onTop && _key)
+            if (LevelManager.Level == 2 && pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && WorldsManager.onTop && _key)
             {
+                print("door");
                 getInDoor(other);
             }
-            if (GameManager.Level == "level_3" && (pos.y < 0 &&  Mathf.Abs(pos.x) <= Mathf.Abs(pos.y) && WorldsManager.onButtom && _key))
+            if (LevelManager.Level == 3 && (pos.y < 0 &&  Mathf.Abs(pos.x) <= Mathf.Abs(pos.y) && WorldsManager.onButtom && _key))
             {
                 print("door");
                 getInDoor(other);
@@ -224,11 +225,11 @@ public class PlayerControllerFour : MonoBehaviour
         else if (other.CompareTag("Key"))
         {
             print("key0" + WorldsManager.onRight);
-            if (GameManager.Level == "level_2" && (pos.y > 0 && pos.y >= Mathf.Abs(pos.x)) && WorldsManager.onTop)
+            if (LevelManager.Level ==2 && (pos.y > 0 && pos.y >= Mathf.Abs(pos.x)) && WorldsManager.onTop)
             {
                 turnOfKey(other);
             }
-            else if (GameManager.Level == "level_3" && (pos.x > 0 && pos.x > Mathf.Abs(pos.y)) && WorldsManager.onRight)
+            else if (LevelManager.Level ==3 && (pos.x > 0 && pos.x > Mathf.Abs(pos.y)) && WorldsManager.onRight)
             {
                 print("key");
                 turnOfKey(other);
@@ -245,13 +246,23 @@ public class PlayerControllerFour : MonoBehaviour
 
     private void getInDoor(Collider2D other)
     {
+        print("door should open");
         front = false;
         side = 1;
         playerAnimator.SetInteger("Side", side);
         playerAnimator.SetBool("Front", front);
-        StartCoroutine(waitAndLoad("StartLevel3"));
+        if (LevelManager.Level ==2)
+        {
+            StartCoroutine(waitAndLoad(sceneName: "StartLevel4"));
+            LevelManager.Level = 3;
+        }
+        else if (LevelManager.Level == 3)
+        {
+            StartCoroutine(waitAndLoad(sceneName: "StartLevel5"));
+            LevelManager.Level = 4;
+        }
         _key = false;
-        key.SetActive(true);
+        
     }
 
 
@@ -318,8 +329,10 @@ public class PlayerControllerFour : MonoBehaviour
         {
             FinishLevel = true;
             LevelManager.unlockedLevel++;
+            key.SetActive(true);
         }
         SceneManager.LoadScene(sceneName);
+        
     }
     
     IEnumerator waitSecond()

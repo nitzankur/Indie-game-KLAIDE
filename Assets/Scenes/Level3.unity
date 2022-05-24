@@ -3330,6 +3330,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79cc39b16fd0d37449e7935161cdcea2, type: 3}
+--- !u!1 &151130246 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7693329711137624224, guid: 6e5620080a125f748b0799c6775903f4, type: 3}
+  m_PrefabInstance: {fileID: 466380300}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &153554183
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16000,6 +16005,7 @@ MonoBehaviour:
   findDoor: 0
   PortalRight: {fileID: 0}
   PortalLeft: {fileID: 0}
+  key: {fileID: 151130246}
 --- !u!1001 &657903806
 PrefabInstance:
   m_ObjectHideFlags: 0

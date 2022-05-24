@@ -57,8 +57,8 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
                 // // 2.
                 // float ang = Vector2.SignedAngle(pos, tempPos); 
                 // // // 2.1
-                if (!WorldsManagerToturial.onLeft) left.transform.rotation = Quaternion.Euler(0,0,ang/50) * left.transform.rotation;
-                if (!WorldsManagerToturial.onRight) transform.rotation = Quaternion.Euler(0,0,ang/50) * transform.rotation;
+                if (!WorldsManagerToturial.onLeft) left.transform.rotation = Quaternion.Euler(0,0,ang) * left.transform.rotation;
+                if (!WorldsManagerToturial.onRight) transform.rotation = Quaternion.Euler(0,0,ang) * transform.rotation;
                 // // 2.2
                 // transform.rotation = Quaternion.AngleAxis(ang, Vector3.forward)* transform.rotation;
                 // // // 3. the easiest option probably: <<<<<<<<<<<<< - //this to much faster
