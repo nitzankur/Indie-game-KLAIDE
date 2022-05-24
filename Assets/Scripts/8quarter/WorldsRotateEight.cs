@@ -16,6 +16,11 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
      private Collider2D col;
      private bool _drag;
      private float startTime;
+     private float baseAngle ;
+     private Vector3 pos;
+     private Vector2 mousePosStart;
+     [SerializeField] private float step =10;
+     [SerializeField] private GameObject left,button,top,leftInside,rightInside,topInside,buttonInside;
 
 
      private void Start()
@@ -29,39 +34,43 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
     #region World rotate
     void Update()
     {
-        Vector3 mousePos = myCam.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0))
         {
-            startTime = Time.time;
-            if (col == Physics2D.OverlapPoint(mousePos))
-            { 
-                screenPos = myCam.WorldToScreenPoint(transform.position);
-                var vec3 = Input.mousePosition - screenPos;
-                angleOffset = (Mathf.Atan2(transform.right.y, transform.right.x) - Mathf.Atan2(vec3.y, vec3.x)) *
-                              Mathf.Rad2Deg;
-            }
+            mousePosStart = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+            var localpos = new Vector2(transform.position.x, transform.position.y);
+            pos = mousePosStart - localpos;
         }
+
         if (Input.GetMouseButton(0))
-        {   
-            if (col == Physics2D.OverlapPoint(mousePos))
+        {
+            if (PlayerControllerEight.EndOfPath && Time.time - startTime > 0.3f)
             {
-                Vector3 vec3 = Input.mousePosition - screenPos;
-                float angle = Mathf.Atan2(vec3.y, vec3.x) * Mathf.Rad2Deg;
-                if (PlayerControllerEight.EndOfPath && (Time.time - startTime > 0.2f))
-                {
-                    if (!WorldsManagerEight.onLeft) WorldsManagerEight.LeftRotate(angle, angleOffset); 
-                    if (!WorldsManagerEight.onRight) WorldsManagerEight.RightRotate(angle, angleOffset); 
-                    if(!WorldsManagerEight.onTop) WorldsManagerEight.TopRotate(angle, angleOffset);
-                    if(!WorldsManagerEight.onBottom) WorldsManagerEight.ButtomRotate(angle, angleOffset);
+                Vector2 mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+                var localpos = new Vector2(transform.position.x, transform.position.y);
+                Vector2 tempPos = mousePos - localpos;
+                if (!WorldsManagerEight.onLeft) RotateWorld(left, tempPos); 
+                    if (!WorldsManagerEight.onRight) RotateWorld(gameObject, tempPos);  
+                    if(!WorldsManagerEight.onTop) RotateWorld(top, tempPos);  
+                    if(!WorldsManagerEight.onBottom) RotateWorld(button, tempPos); 
                     
-                    if (!WorldsManagerEight.onInsideLeft) WorldsManagerEight.LeftInsideRotate(-angle, angleOffset); 
-                    if (!WorldsManagerEight.onInsideRight) WorldsManagerEight.RightInsideRotate(-angle, angleOffset); 
-                    if(!WorldsManagerEight.onInsideTop) WorldsManagerEight.TopInsideRotate(-angle, angleOffset);
-                    if(!WorldsManagerEight.onInsideBottom) WorldsManagerEight.ButtomInsideRotate(-angle, angleOffset);
-                }
+                    if (!WorldsManagerEight.onInsideLeft) RotateInsideWorld(leftInside, tempPos); 
+                    if (!WorldsManagerEight.onInsideRight) RotateInsideWorld(rightInside, tempPos);  
+                    if(!WorldsManagerEight.onInsideTop) RotateInsideWorld(topInside, tempPos); 
+                    if(!WorldsManagerEight.onInsideBottom) RotateInsideWorld(buttonInside, tempPos);
+                    pos = tempPos;
             }
         }
     }
+    private void RotateWorld(GameObject side, Vector3 tempPos)
+    {
+        side.transform.rotation = Quaternion.RotateTowards(side.transform.rotation,   Quaternion.FromToRotation(pos, tempPos) * side.transform.rotation, step);
+    }
+    
+    private void RotateInsideWorld(GameObject side, Vector3 tempPos)
+    {
+        side.transform.rotation = Quaternion.RotateTowards(side.transform.rotation,   Quaternion.FromToRotation(pos, tempPos) * side.transform.rotation, -step/5);
+    }
+    
     
     #endregion
 

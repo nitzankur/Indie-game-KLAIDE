@@ -45,7 +45,6 @@ public class WorldsRotate :  MonoBehaviour , IBeginDragHandler, IEndDragHandler,
                 Vector2 mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
                 var localpos = new Vector2(transform.position.x, transform.position.y);
                 Vector2 tempPos = mousePos - localpos;
-                float ang = Vector2.Angle(pos, tempPos);
                 if (!WorldsManager.onButtom) RotateWorld(button,tempPos);
                 if (!WorldsManager.onLeft) RotateWorld(left,tempPos);
                 if (!WorldsManager.onRight) RotateWorld(gameObject,tempPos); 
