@@ -213,8 +213,9 @@ public class PlayerControllerFour : MonoBehaviour
             {
                 getInDoor(other);
             }
-            if (GameManager.Level == "level_2" && (pos.y < 0 &&  Mathf.Abs(pos.x) <= Mathf.Abs(pos.y) && WorldsManager.onButtom && _key))
+            if (GameManager.Level == "level_3" && (pos.y < 0 &&  Mathf.Abs(pos.x) <= Mathf.Abs(pos.y) && WorldsManager.onButtom && _key))
             {
+                print("door");
                 getInDoor(other);
             }
         }
@@ -229,7 +230,7 @@ public class PlayerControllerFour : MonoBehaviour
             }
             else if (GameManager.Level == "level_3" && (pos.x > 0 && pos.x > Mathf.Abs(pos.y)) && WorldsManager.onRight)
             {
-                print("door");
+                print("key");
                 turnOfKey(other);
             }
         }
