@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
     public void Update ()
     {
         EndOfPath = reachedEndOfPath;
-        if (tutorial && WorldRotateTutorial.rotateOnce)
+        if (tutorial && WorldRotateTutorial.rotateOnce && tutorialRotate.gameObject.activeSelf)
             tutorialRotate.GetComponent<Animator>().SetBool("Rotate", true);
 
         if (WorldsManagerToturial.CharacterMove)
@@ -207,11 +207,9 @@ public class PlayerController : MonoBehaviour
             tutorialRotate.transform.position = WorldsManagerToturial.onRight ? tutorialRotatePos[1] : tutorialRotatePos[0];
             tutorialRotate.SetActive(true);
         }
-        else
-        {
+        else if (tutorialRotate.activeSelf)
             tutorialRotate.GetComponent<Animator>().SetBool("Rotate", true);
-        }
-           
+        
     }
     
     
@@ -245,7 +243,7 @@ public class PlayerController : MonoBehaviour
     
     IEnumerator WaitAndLoad()
     {   
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         if (!FinishLevel)
         {
             FinishLevel = true;
