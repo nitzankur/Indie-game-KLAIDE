@@ -20,6 +20,7 @@ public class PlayerControllerFour : MonoBehaviour
     [SerializeField] private bool findDoor;
     [SerializeField] private Transform PortalRight, PortalLeft;
     [SerializeField] private GameObject key;
+    [SerializeField] private float portalRadiusHor,portalRadiusVer;
     private Animator playerAnimator;
 
     #endregion
@@ -57,6 +58,7 @@ public class PlayerControllerFour : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
+        Portal();
         EndOfPath = reachedEndOfPath;
         if (WorldsManager.CharacterMove)
         {
@@ -266,15 +268,13 @@ public class PlayerControllerFour : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Portal()
     {
-        if (other.CompareTag("Portal"))
-        {
-            if (!PortalON)
-            {
-                print("Portal");
-                if (other.transform == PortalLeft && WorldsManager.onLeft &&
-                    PortalRight.position.x > 0 &&  PortalRight.position.x > Mathf.Abs( PortalRight.position.y))
+        var pos = gameObject.transform.position;
+        var portalPosL = PortalLeft.transform.position;
+        var portalPosR = PortalRight.transform.position;
+        if ((pos.x < (portalPosL.x+portalRadiusHor) && (pos.x > (portalPosL.x-portalRadiusHor))&& pos.y < portalPosL.y +portalRadiusVer && pos.y>portalPosL.y-portalRadiusVer &&WorldsManager.onLeft &&
+            PortalRight.position.x > 0 &&  PortalRight.position.x > Mathf.Abs( PortalRight.position.y)))
                 {
                     if (_path != null)
                     {
@@ -285,15 +285,14 @@ public class PlayerControllerFour : MonoBehaviour
                     reachedEndOfPath = true;
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
-                    transform.position = PortalRight.position;
+                    transform.position = PortalRight.position + Vector3.up;//* 0.2f;
                     firstPoint = true;
-                    portalRight = true;
-
                 }
 
-                else if (other.transform == PortalRight && WorldsManager.onRight && 
-                         (PortalLeft.position.x<0 && Mathf.Abs(PortalLeft.position.x) > Mathf.Abs(PortalLeft.position.y)))
+                else if ((pos.x < (portalPosR.x + portalRadiusHor) && (pos.x > (portalPosR.x-portalRadiusHor))&& pos.y < portalPosR.y +portalRadiusVer && pos.y>portalPosR.y-portalRadiusVer && WorldsManager.onRight && 
+                          (PortalLeft.position.x<0 && Mathf.Abs(PortalLeft.position.x) > Mathf.Abs(PortalLeft.position.y))))
                 {
+                    print("portal right");
                     if (_path != null)
                     {
                         _currentWaypoint = _path.vectorPath.Count - 1;
@@ -303,24 +302,9 @@ public class PlayerControllerFour : MonoBehaviour
                     reachedEndOfPath = true;
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
-                    transform.position = PortalLeft.position;
+                    transform.position = PortalLeft.position + Vector3.left;//* 0.2f;
                     firstPoint = true;
-                    portalLeft = true;
                 }
-            }
-            // else if (PortalLeft.gameObject.GetInstanceID() == other.gameObject.GetInstanceID() || 
-            //          PortalRight.gameObject.GetInstanceID() == other.gameObject.GetInstanceID())
-            //     PortalON = false;
-            else if (Physics2D.OverlapPoint(Camera.main!.ScreenToWorldPoint(Input.mousePosition)) && portalRight ||
-                     Physics2D.OverlapPoint(Camera.main!.ScreenToWorldPoint(Input.mousePosition)) && portalLeft  )
-            {
-                PortalON = false;
-                portalLeft = false;
-                portalRight = false;
-            }
-
-        }
-           
     }
 
     #endregion   
