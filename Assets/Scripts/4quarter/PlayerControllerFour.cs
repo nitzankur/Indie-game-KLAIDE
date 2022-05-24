@@ -28,7 +28,7 @@ public class PlayerControllerFour : MonoBehaviour
 
     
     private bool firstPoint = true;
-    private bool _key,PortalON;
+    private bool _key,PortalON,portalLeft,portalRight;
     private Seeker _seeker;
     private Path _path;
     private int _currentWaypoint = 0;
@@ -287,9 +287,8 @@ public class PlayerControllerFour : MonoBehaviour
                     GetComponent<AIPath>().constrainInsideGraph = true;
                     transform.position = PortalRight.position;
                     firstPoint = true;
-                    // Physics2D.IgnoreLayerCollision(3, 8, true);
-                    // StartCoroutine(waitSecond());
-                    // WorldsManager.onLeft = false;
+                    portalRight = true;
+
                 }
 
                 else if (other.transform == PortalRight && WorldsManager.onRight && 
@@ -305,20 +304,24 @@ public class PlayerControllerFour : MonoBehaviour
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
                     transform.position = PortalLeft.position;
-                    
                     firstPoint = true;
-                    // Physics2D.IgnoreLayerCollision(3, 8, true);
-                    // StartCoroutine(waitSecond());
+                    portalLeft = true;
                 }
             }
-            else if (PortalLeft.gameObject.GetInstanceID() == other.gameObject.GetInstanceID() || 
-                     PortalRight.gameObject.GetInstanceID() == other.gameObject.GetInstanceID())
+            // else if (PortalLeft.gameObject.GetInstanceID() == other.gameObject.GetInstanceID() || 
+            //          PortalRight.gameObject.GetInstanceID() == other.gameObject.GetInstanceID())
+            //     PortalON = false;
+            else if (Physics2D.OverlapPoint(Camera.main!.ScreenToWorldPoint(Input.mousePosition)) && portalRight ||
+                     Physics2D.OverlapPoint(Camera.main!.ScreenToWorldPoint(Input.mousePosition)) && portalLeft  )
+            {
                 PortalON = false;
+                portalLeft = false;
+                portalRight = false;
+            }
 
         }
            
     }
-    
 
     #endregion   
     
@@ -333,11 +336,5 @@ public class PlayerControllerFour : MonoBehaviour
         }
         SceneManager.LoadScene(sceneName);
         
-    }
-    
-    IEnumerator waitSecond()
-    {
-        yield return new WaitForSeconds(2f);
-        Physics2D.IgnoreLayerCollision(3, 8, false);
     }
 }
