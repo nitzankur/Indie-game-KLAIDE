@@ -8243,6 +8243,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc38a88bc87425c48b4615f5083628ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  step: 10
+  left: {fileID: 0}
+  button: {fileID: 0}
+  top: {fileID: 0}
 --- !u!58 &375942359
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11483,6 +11487,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc38a88bc87425c48b4615f5083628ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  step: 10
+  left: {fileID: 0}
+  button: {fileID: 0}
+  top: {fileID: 0}
 --- !u!212 &592387711
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14993,7 +15001,6 @@ GameObject:
   m_Component:
   - component: {fileID: 771026434}
   - component: {fileID: 771026436}
-  - component: {fileID: 771026435}
   m_Layer: 0
   m_Name: top
   m_TagString: Untagged
@@ -15016,18 +15023,6 @@ Transform:
   m_Father: {fileID: 47198858}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 11}
---- !u!114 &771026435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 771026433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc38a88bc87425c48b4615f5083628ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &771026436
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15823,6 +15818,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc38a88bc87425c48b4615f5083628ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  step: 10
+  left: {fileID: 0}
+  button: {fileID: 0}
+  top: {fileID: 0}
 --- !u!212 &815776772
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -21113,6 +21112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc38a88bc87425c48b4615f5083628ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  step: 10
+  left: {fileID: 946312320}
+  button: {fileID: 922390674}
+  top: {fileID: 771026433}
 --- !u!114 &1125823103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23246,10 +23249,6 @@ MonoBehaviour:
   leftNodes: {fileID: 347109115}
   buttomNodes: {fileID: 2094019050}
   topNodes: {fileID: 875034472}
-  right: {fileID: 1125823100}
-  left: {fileID: 946312320}
-  top: {fileID: 771026433}
-  buttom: {fileID: 922390674}
 --- !u!4 &1238840132
 Transform:
   m_ObjectHideFlags: 0
@@ -30750,6 +30749,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc38a88bc87425c48b4615f5083628ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  step: 10
+  left: {fileID: 0}
+  button: {fileID: 0}
+  top: {fileID: 0}
 --- !u!212 &1580188178
 SpriteRenderer:
   m_ObjectHideFlags: 0

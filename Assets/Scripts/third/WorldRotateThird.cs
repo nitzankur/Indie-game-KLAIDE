@@ -7,17 +7,17 @@ public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandl
      #region variables
      public static bool endDrag;
      private Vector3 _mousePos;
-     private Camera myCam;
      private Vector3 screenPos;
-     public static float angleOffset;
-     private Collider2D col;
      private bool _drag;
      private float startTime;
+     private float baseAngle ;
+     private Vector3 pos;
+     private Vector2 mousePosStart;
+     [SerializeField] private float step =10;
+     [SerializeField] private GameObject left,button;
      private void Start()
     {
         WorldManagerThird.CharacterMove = false;
-        myCam = Camera.main;
-        col = GetComponent<Collider2D>();
     }
     #endregion
     
@@ -25,34 +25,35 @@ public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandl
     void Update()
     {
         
-        Vector3 mousePos = myCam.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0))
         {
-            startTime = Time.time;
-            if (col == Physics2D.OverlapPoint(mousePos))
-            {   screenPos = myCam.WorldToScreenPoint(transform.position);
-                var vec3 = Input.mousePosition - screenPos;
-                angleOffset = (Mathf.Atan2(transform.right.y, transform.right.x) - Mathf.Atan2(vec3.y, vec3.x)) *
-                              Mathf.Rad2Deg;
+            mousePosStart = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+            var localpos = new Vector2(transform.position.x, transform.position.y);
+            pos = mousePosStart - localpos;
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            if (PlayerControllerThird.EndOfPath && Time.time - startTime > 0.3f)
+            {
+                var ClockDrag = false;
+                Vector2 mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+                var localpos = new Vector2(transform.position.x, transform.position.y);
+                Vector2 tempPos = mousePos - localpos;
+                float ang = Vector2.Angle(pos, tempPos);
+                if (!WorldManagerThird.onButtom) RotateWorld(button,tempPos);
+                if (!WorldManagerThird.onLeft) RotateWorld(left,tempPos);
+                if (!WorldManagerThird.onRight) RotateWorld(gameObject,tempPos); 
+
+                pos = tempPos;
             }
         }
-        if (Input.GetMouseButton(0))
-        {   
-            if (col == Physics2D.OverlapPoint(mousePos))
-            {
-                Vector3 vec3 = Input.mousePosition - screenPos;
-                float angle = Mathf.Atan2(vec3.y, vec3.x) * Mathf.Rad2Deg;
-                if(PlayerControllerThird.EndOfPath && (Time.time - startTime) > 0.2f)
-                {
-                    if (!WorldManagerThird.onLeft) WorldManagerThird.LeftRotate(angle, angleOffset); 
-                    if (!WorldManagerThird.onRight) WorldManagerThird.RightRotate(angle, angleOffset);
-                    if (!WorldManagerThird.onButtom) WorldManagerThird.buttomRotate(angle, angleOffset);
-                }
-               
-            }
-         }
     }
-    
+
+    private void RotateWorld(GameObject side, Vector3 tempPos)
+    {
+        side.transform.rotation = Quaternion.RotateTowards(side.transform.rotation,   Quaternion.FromToRotation(pos, tempPos) * side.transform.rotation, step);
+    }
 
     #endregion
 

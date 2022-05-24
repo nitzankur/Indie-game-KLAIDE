@@ -17829,6 +17829,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc38a88bc87425c48b4615f5083628ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  step: 10
+  left: {fileID: 0}
+  button: {fileID: 0}
+  top: {fileID: 0}
 --- !u!58 &735155894
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -28212,10 +28216,6 @@ MonoBehaviour:
   leftNodes: {fileID: 281002168}
   buttomNodes: {fileID: 1816922862}
   topNodes: {fileID: 814383474}
-  right: {fileID: 1314620991}
-  left: {fileID: 1162680018}
-  top: {fileID: 1659825339}
-  buttom: {fileID: 1324517652}
 --- !u!4 &1208485782
 Transform:
   m_ObjectHideFlags: 0
@@ -30796,6 +30796,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc38a88bc87425c48b4615f5083628ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  step: 10
+  left: {fileID: 1162680018}
+  button: {fileID: 1324517652}
+  top: {fileID: 1659825339}
 --- !u!114 &1314620994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31934,6 +31938,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc38a88bc87425c48b4615f5083628ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  step: 10
+  left: {fileID: 0}
+  button: {fileID: 0}
+  top: {fileID: 0}
 --- !u!212 &1358412152
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -33672,6 +33680,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc38a88bc87425c48b4615f5083628ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  step: 10
+  left: {fileID: 0}
+  button: {fileID: 0}
+  top: {fileID: 0}
 --- !u!212 &1442492359
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -33904,6 +33916,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc38a88bc87425c48b4615f5083628ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  step: 10
+  left: {fileID: 0}
+  button: {fileID: 0}
+  top: {fileID: 0}
 --- !u!212 &1453110963
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -38030,7 +38046,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1659825340}
   - component: {fileID: 1659825342}
-  - component: {fileID: 1659825341}
   m_Layer: 0
   m_Name: top
   m_TagString: Untagged
@@ -38053,18 +38068,6 @@ Transform:
   m_Father: {fileID: 1123865023}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -39}
---- !u!114 &1659825341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659825339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc38a88bc87425c48b4615f5083628ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &1659825342
 SpriteRenderer:
   m_ObjectHideFlags: 0

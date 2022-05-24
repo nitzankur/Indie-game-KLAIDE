@@ -9,8 +9,7 @@ public class WorldsManager : MonoBehaviour
     [SerializeField] private Transform rightNodes, leftNodes,buttomNodes,topNodes;
     public static bool onRight, onLeft,onTop,onButtom,CharacterMove;
     private static WorldsManager _shared;
-    [SerializeField] private GameObject right, left,top,buttom;
-    private static Transform leftTransform, rightTransform,topTransform,buttomTransform;
+
     
     
     void Start()
@@ -20,10 +19,6 @@ public class WorldsManager : MonoBehaviour
         UpdateRightNodes();
         UpdateTopNodes();
         UpdateButtomNodes();
-        leftTransform = left.transform;
-        rightTransform = right.transform;
-        buttomTransform = buttom.transform;
-        topTransform = top.transform;
     }
     
     void Update()
@@ -40,24 +35,6 @@ public class WorldsManager : MonoBehaviour
         }
     }
 
-    public static void RightRotate(float angle,float angleOffset)
-    {
-        rightTransform.eulerAngles = new Vector3(0, 0, angle + angleOffset);
-    }
-
-    public static void LeftRotate(float angle,float angleOffset)
-    {
-        leftTransform.eulerAngles = new Vector3(0, 0, angle + angleOffset);
-    }
-    public static void TopRotate(float angle,float angleOffset)
-    {
-       topTransform.eulerAngles = new Vector3(0, 0, angle + angleOffset);
-    }
-    public static void ButtomRotate(float angle,float angleOffset)
-    {
-        buttomTransform.eulerAngles = new Vector3(0, 0, angle + angleOffset);
-    }
-    
     void UpdateRightNodes()
     {
         foreach (var node in rightNodes.GetComponentsInChildren<Transform>())

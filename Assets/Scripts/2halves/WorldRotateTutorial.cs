@@ -15,9 +15,9 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
      public static bool rotateOnce;
      private Vector3 startPos;
      [SerializeField] private GameObject left;
+     [SerializeField] private float step =10;
      private float baseAngle ;
      private Vector3 pos;
-     private bool rotateToRight;
      private Vector2 mousePosStart;
 
 
@@ -52,59 +52,15 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
                 // // 0.
                 float ang = Vector2.Angle(pos, tempPos);
                 rotateOnce = true;
-                // transform.rotation = Quaternion.RotateTowards(transform.rotation,   Quaternion.FromToRotation(pos, tempPos) * transform.rotation, 1); // TODO: step really high, to not matter at all
-                // // Wher target rotation is one of the quaternions we describe below?
-                // // 1.
-                // transform.rotation = Quaternion.FromToRotation(pos, tempPos) * transform.rotation;
-                // // 2.
-                // float ang = Vector2.SignedAngle(pos, tempPos); 
-                // // // 2.1
+                if (!WorldsManagerToturial.onLeft) left.transform.rotation = Quaternion.RotateTowards(left.transform.rotation,   Quaternion.FromToRotation(pos, tempPos) * left.transform.rotation, step); // TODO: step really high, to not matter at all
+                if (!WorldsManagerToturial.onRight) transform.rotation = Quaternion.RotateTowards(transform.rotation,   Quaternion.FromToRotation(pos, tempPos) * transform.rotation, step); 
 
-                print(mousePos + " mousePos "+ mousePosStart + "mouse pos start ");
-                if (mousePos.x > 0 && (mousePos.y > mousePosStart.y) || (mousePos.y < 0 &&
-                                                                          mousePos.x > mousePosStart.x)
-                                                                      || mousePos.x < 0 &&
-                                                                      mousePos.y < mousePosStart.y
-                                                                      || mousePos.y > 0 &&
-                                                                      mousePos.x < mousePosStart.x)
-                {
-                    // if (ClockDrag) ang *= -1;
-                    // else ang = ang;
-                    mousePosStart = mousePos;
-                }
-                else if (mousePos.x > 0 && (mousePos.y < mousePosStart.y) || (mousePos.y < 0 && mousePos.x < mousePosStart.x)
-                                                                     || mousePos.x < 0 && mousePos.y > mousePosStart.y
-                                                                     || mousePos.y > 0 && mousePos.x > mousePosStart.x)
-                {
-                    ClockDrag = true;
-                    ang *= -1;
-                    
-                }
-
-                
-
-                if (!WorldsManagerToturial.onLeft) left.transform.rotation = Quaternion.Euler(0,0,ang) * left.transform.rotation;
-                if (!WorldsManagerToturial.onRight) transform.rotation = Quaternion.Euler(0,0,ang) * transform.rotation;
-                // // 2.2
-                // transform.rotation = Quaternion.AngleAxis(ang, Vector3.forward)* transform.rotation;
-                // // // 3. the easiest option probably: <<<<<<<<<<<<< - //this to much faster
-                // transform.Rotate(0,0,ang, Space.World);
-	
-                // Also worth looking at: https://docs.unity3d.com/ScriptReference/Transform.html
                 pos = tempPos;
             }
             
         }
     }
-    private void OnMouseDown()
-    {
-      
-    }
-
-    private void OnMouseDrag()
-    {
-       
-    }
+  
 
     #endregion
 
