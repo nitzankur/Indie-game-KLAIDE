@@ -6,15 +6,16 @@ using UnityEngine;
 public class CharacterTriggerEight : MonoBehaviour
 {
 
-    private const int Radius = 9;
+    private const float Radius = 9.1f;
 
     private void Update()
    {
        var pos = transform.position;
+       print(pos);
+       print(Vector3.Distance(pos, Vector3.zero));
        if (pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && Vector3.Distance(pos, Vector3.zero) >= Radius)
        {
            WorldsManagerEight.onTop = true;
-           
            WorldsManagerEight.onLeft = false;
            WorldsManagerEight.onRight = false;
            WorldsManagerEight.onBottom = false;
@@ -28,7 +29,6 @@ public class CharacterTriggerEight : MonoBehaviour
        else if (pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && Vector3.Distance(pos, Vector3.zero) < Radius)
        {
            WorldsManagerEight.onInsideTop = true;
-           
            WorldsManagerEight.onTop = false;
            WorldsManagerEight.onLeft = false;
            WorldsManagerEight.onRight = false;
@@ -36,7 +36,7 @@ public class CharacterTriggerEight : MonoBehaviour
            WorldsManagerEight.onInsideLeft = false;
            WorldsManagerEight.onInsideRight = false;
            WorldsManagerEight.onInsideBottom = false;
-         //  print("top-inside");
+           print("top-inside");
        }
       
        else if (pos.y < 0 &&  Mathf.Abs(pos.x) <= Mathf.Abs(pos.y) && Vector3.Distance(pos, Vector3.zero) >= Radius)

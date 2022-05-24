@@ -20,7 +20,7 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
      private Vector3 pos;
      private Vector2 mousePosStart;
      [SerializeField] private float step =10;
-     [SerializeField] private GameObject left,button,top,leftInside,rightInside,topInside,buttonInside;
+     [SerializeField] private GameObject left,right,button,top,leftInside,rightInside,topInside,buttonInside;
 
 
      private void Start()
@@ -49,15 +49,15 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
                 var localpos = new Vector2(transform.position.x, transform.position.y);
                 Vector2 tempPos = mousePos - localpos;
                 if (!WorldsManagerEight.onLeft) RotateWorld(left, tempPos); 
-                    if (!WorldsManagerEight.onRight) RotateWorld(gameObject, tempPos);  
-                    if(!WorldsManagerEight.onTop) RotateWorld(top, tempPos);  
-                    if(!WorldsManagerEight.onBottom) RotateWorld(button, tempPos); 
-                    
-                    if (!WorldsManagerEight.onInsideLeft) RotateInsideWorld(leftInside, tempPos); 
-                    if (!WorldsManagerEight.onInsideRight) RotateInsideWorld(rightInside, tempPos);  
-                    if(!WorldsManagerEight.onInsideTop) RotateInsideWorld(topInside, tempPos); 
-                    if(!WorldsManagerEight.onInsideBottom) RotateInsideWorld(buttonInside, tempPos);
-                    pos = tempPos;
+                if (!WorldsManagerEight.onRight) RotateWorld(right, tempPos);  
+                if(!WorldsManagerEight.onTop) RotateWorld(top, tempPos);  
+                if(!WorldsManagerEight.onBottom) RotateWorld(button, tempPos); 
+                
+                if (!WorldsManagerEight.onInsideLeft) RotateInsideWorld(leftInside, tempPos); 
+                if (!WorldsManagerEight.onInsideRight) RotateInsideWorld(rightInside, tempPos);  
+                if(!WorldsManagerEight.onInsideTop) RotateInsideWorld(topInside, tempPos); 
+                if(!WorldsManagerEight.onInsideBottom) RotateInsideWorld(buttonInside, tempPos);
+                pos = tempPos;
             }
         }
     }
