@@ -7,25 +7,21 @@ using UnityEngine.EventSystems;
 public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHandler, IDragHandler,IPointerDownHandler, IPointerClickHandler
 {
      #region variables
-     public static bool endDrag;
-     private Vector3 _mousePos;
-     private Vector3 screenPos;
-     private float startTime;
+     public static bool EndDrag;
+     private float _startTime;
      private bool _drag;
-     public static bool rotateOnce;
-     private Vector3 startPos;
+     public static bool RotateOnce;
      [SerializeField] private GameObject left;
      [SerializeField] private float step =10;
-     private float baseAngle ;
-     private Vector3 pos;
-     private Vector2 mousePosStart;
+     private Vector3 _pos;
+     private Vector2 _mousePosStart;
 
 
      private void Start()
     {
-        rotateOnce = false;
+        RotateOnce = false;
         WorldsManagerToturial.CharacterMove = false;
-        print("Pos" + pos);
+        print("Pos" + _pos);
     }
     #endregion
     
@@ -35,14 +31,15 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
         
         if (Input.GetMouseButtonDown(0))
         {
-            mousePosStart = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+            _mousePosStart = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
             var localpos = new Vector2(transform.position.x, transform.position.y);
-            pos = mousePosStart - localpos;
+            _pos = _mousePosStart - localpos;
+            _startTime = Time.time;
         }
 
         if (Input.GetMouseButton(0))
         {
-            if (PlayerController.EndOfPath && Time.time - startTime > 0.3f)
+            if (PlayerController.EndOfPath && Time.time - _startTime > 0.3f)
             {
                 var ClockDrag = false;
                 Vector2 mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
@@ -50,13 +47,13 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
                 Vector2 tempPos = mousePos - localpos;
                 // One of below: // TODO: add +/- factor based on side, if we need to? im not sure we do
                 // // 0.
-                float ang = Vector2.Angle(pos, tempPos);
+                float ang = Vector2.Angle(_pos, tempPos);
                 if (!WorldsManagerToturial.onLeft) left.transform.rotation = Quaternion.RotateTowards
-                    (left.transform.rotation,   Quaternion.FromToRotation(pos, tempPos) * left.transform.rotation, step); // TODO: step really high, to not matter at all
+                    (left.transform.rotation,   Quaternion.FromToRotation(_pos, tempPos) * left.transform.rotation, step); // TODO: step really high, to not matter at all
                 if (!WorldsManagerToturial.onRight) transform.rotation = Quaternion.RotateTowards
-                    (transform.rotation,   Quaternion.FromToRotation(pos, tempPos) * transform.rotation, step); 
+                    (transform.rotation,   Quaternion.FromToRotation(_pos, tempPos) * transform.rotation, step); 
 
-                pos = tempPos;
+                _pos = tempPos;
             }
             
         }
@@ -91,9 +88,9 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
     public void OnEndDrag(PointerEventData eventData)
     {
         //print("end drag");
-        rotateOnce = true;
+        RotateOnce = true;
         _drag = false;
-        endDrag = true;
+        EndDrag = true;
     }
    
     

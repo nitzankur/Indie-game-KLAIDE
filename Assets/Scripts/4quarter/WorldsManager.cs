@@ -23,10 +23,10 @@ public class WorldsManager : MonoBehaviour
     
     void Update()
     {
-        if (WorldsRotate.endDrag)
+        if (WorldsRotate.EndDrag)
         {
             print("update graph");
-            WorldsRotate.endDrag = false;
+            WorldsRotate.EndDrag = false;
             UpdateLeftNodes();
             UpdateRightNodes();
             UpdateTopNodes();

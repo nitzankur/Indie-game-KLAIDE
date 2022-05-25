@@ -7,18 +7,12 @@ using UnityEngine.EventSystems;
 
 public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHandler, IDragHandler,IPointerDownHandler, IPointerClickHandler
 {
-    #region variables
-     public static bool endDrag;
-     private Vector3 _mousePos;
-     private Camera myCam;
-     private Vector3 screenPos;
-     private static float angleOffset;
-     private Collider2D col;
+    #region variabales
+     public static bool EndDrag,StartDrag;
      private bool _drag;
      private float startTime;
-     private float baseAngle ;
-     private Vector3 pos;
-     private Vector2 mousePosStart;
+     private Vector3 _pos;
+     private Vector2 _mousePosStart;
      [SerializeField] private float step =10;
      [SerializeField] private GameObject left,right,button,top,leftInside,rightInside,topInside,buttonInside;
 
@@ -26,8 +20,8 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
      private void Start()
     {
         WorldsManagerEight.CharacterMove = false;
-        myCam = Camera.main;
-        col = GetComponent<Collider2D>();
+        EndDrag = true;
+
     }
     #endregion
     
@@ -36,15 +30,17 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
     {
         if (Input.GetMouseButtonDown(0))
         {
-            mousePosStart = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+            _mousePosStart = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
             var localpos = new Vector2(transform.position.x, transform.position.y);
-            pos = mousePosStart - localpos;
+            _pos = _mousePosStart - localpos;
+            startTime = Time.time;
         }
 
         if (Input.GetMouseButton(0))
         {
             if (PlayerControllerEight.EndOfPath && Time.time - startTime > 0.3f)
             {
+                StartDrag = true;
                 Vector2 mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
                 var localpos = new Vector2(transform.position.x, transform.position.y);
                 Vector2 tempPos = mousePos - localpos;
@@ -57,18 +53,18 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
                 if (!WorldsManagerEight.onInsideRight) RotateInsideWorld(rightInside, tempPos);  
                 if(!WorldsManagerEight.onInsideTop) RotateInsideWorld(topInside, tempPos); 
                 if(!WorldsManagerEight.onInsideBottom) RotateInsideWorld(buttonInside, tempPos);
-                pos = tempPos;
+                _pos = tempPos;
             }
         }
     }
     private void RotateWorld(GameObject side, Vector3 tempPos)
     {
-        side.transform.rotation = Quaternion.RotateTowards(side.transform.rotation,   Quaternion.FromToRotation(pos, tempPos) * side.transform.rotation, step);
+        side.transform.rotation = Quaternion.RotateTowards(side.transform.rotation,   Quaternion.FromToRotation(_pos, tempPos) * side.transform.rotation, step);
     }
     
     private void RotateInsideWorld(GameObject side, Vector3 tempPos)
     {
-        side.transform.rotation = Quaternion.RotateTowards(side.transform.rotation,   Quaternion.FromToRotation(pos, tempPos) * side.transform.rotation, -step/5);
+        side.transform.rotation = Quaternion.RotateTowards(side.transform.rotation,   Quaternion.FromToRotation(_pos, tempPos) * side.transform.rotation, -step/5);
     }
     
     
@@ -83,6 +79,8 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
     {
         if (!_drag)
         {
+            StartDrag = false;
+            EndDrag = true;
             WorldsManagerEight.CharacterMove = true;
         }
     }
@@ -101,7 +99,7 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
     {
         print("end drag");
         _drag = false;
-        endDrag = true;
+        EndDrag = true;
     }
 
     #endregion

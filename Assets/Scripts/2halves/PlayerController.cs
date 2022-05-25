@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     public void Update ()
     {
         EndOfPath = reachedEndOfPath;
-        if (tutorial && WorldRotateTutorial.rotateOnce && tutorialRotate.gameObject.activeSelf)
+        if (tutorial && WorldRotateTutorial.RotateOnce && tutorialRotate.gameObject.activeSelf)
             tutorialRotate.GetComponent<Animator>().SetBool("Rotate", true);
 
         if (WorldsManagerToturial.CharacterMove)
@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour
     
     private void RotateTutorial()
     {
-        if (!WorldRotateTutorial.rotateOnce)
+        if (!WorldRotateTutorial.RotateOnce)
         {
             tutorialRotate.transform.position = WorldsManagerToturial.onRight ? tutorialRotatePos[1] : tutorialRotatePos[0];
             tutorialRotate.SetActive(true);
