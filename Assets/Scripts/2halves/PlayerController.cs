@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int side = 0;
     [SerializeField] private bool move;
     [SerializeField] private bool front;
-    
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
     private Animator playerAnimator;

@@ -18,17 +18,20 @@ public class PlayerControllerEight : MonoBehaviour
     [SerializeField] private bool front;
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
-    private Animator playerAnimator;
-
+    [SerializeField] private int level;
+    [SerializeField] private Sprite openDoorSprite;
+    [SerializeField] private GameObject door;
     #endregion
 
     #region PrivateProperties
     
+    private Animator playerAnimator;
     private bool firstPoint = true;
     private bool _key,PortalON;
     private Seeker _seeker;
     private Path _path;
     private int _currentWaypoint = 0;
+    
     #endregion
 
     public static bool FinishLevel;
@@ -186,7 +189,6 @@ public class PlayerControllerEight : MonoBehaviour
         playerAnimator.SetBool("Front", front);
     }
 
-
     private void FixedUpdate()
     { 
         Vector3 targ = Vector3.zero; 
@@ -197,7 +199,6 @@ public class PlayerControllerEight : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
     
-
     #endregion
 
     #region Trigger
@@ -216,19 +217,40 @@ public class PlayerControllerEight : MonoBehaviour
                 _key = false;
             }
         }
-        
-
-        else if (other.CompareTag("Key"))
+        switch (level)
         {
-            if (pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && WorldsManagerEight.onInsideTop)
-            {
-                print("key") ;
-                _key = true;
-                other.gameObject.SetActive(false);
-            }
+            case 6:
+                TriggerLevel6(other);
+                break;
+            case 8:
+                TriggerLevel8(other);
+                break;
         }
     }
-    
+
+    private void TriggerLevel8(Collider2D other)
+    {
+        var pos = other.transform.position;
+        if (!other.CompareTag("Key")) return;
+        if (pos.x > 0 && pos.x > Mathf.Abs(pos.y) && WorldsManagerEight.onRight)
+        {
+            _key = true;
+            other.gameObject.SetActive(false);
+            door.GetComponent<SpriteRenderer>().sprite = openDoorSprite;
+        }
+    }
+
+    private void TriggerLevel6(Collider2D other)
+    {
+        var pos = other.transform.position;
+        if (!other.CompareTag("Key")) return;
+        if (pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && WorldsManagerEight.onInsideTop)
+        {
+            _key = true;
+            other.gameObject.SetActive(false);
+            door.GetComponent<SpriteRenderer>().sprite = openDoorSprite;
+        }
+    }
 
     #endregion   
     
