@@ -51,9 +51,10 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
                 // One of below: // TODO: add +/- factor based on side, if we need to? im not sure we do
                 // // 0.
                 float ang = Vector2.Angle(pos, tempPos);
-                rotateOnce = true;
-                if (!WorldsManagerToturial.onLeft) left.transform.rotation = Quaternion.RotateTowards(left.transform.rotation,   Quaternion.FromToRotation(pos, tempPos) * left.transform.rotation, step); // TODO: step really high, to not matter at all
-                if (!WorldsManagerToturial.onRight) transform.rotation = Quaternion.RotateTowards(transform.rotation,   Quaternion.FromToRotation(pos, tempPos) * transform.rotation, step); 
+                if (!WorldsManagerToturial.onLeft) left.transform.rotation = Quaternion.RotateTowards
+                    (left.transform.rotation,   Quaternion.FromToRotation(pos, tempPos) * left.transform.rotation, step); // TODO: step really high, to not matter at all
+                if (!WorldsManagerToturial.onRight) transform.rotation = Quaternion.RotateTowards
+                    (transform.rotation,   Quaternion.FromToRotation(pos, tempPos) * transform.rotation, step); 
 
                 pos = tempPos;
             }
@@ -74,8 +75,6 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
         if (!_drag)
         {
             WorldsManagerToturial.CharacterMove = true;
-            
-            
         }
     }
 
@@ -92,6 +91,7 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
     public void OnEndDrag(PointerEventData eventData)
     {
         //print("end drag");
+        rotateOnce = true;
         _drag = false;
         endDrag = true;
     }
