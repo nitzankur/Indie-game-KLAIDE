@@ -293,9 +293,9 @@ public class PlayerControllerEight : MonoBehaviour
                     reachedEndOfPath = true;
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
-                    transform.position = portalTop.position;// + Vector3.left* 0.22f;
+                    transform.position = portalTop.position;
                     firstPoint = true;
-                }
+        }
     }
     private void PressAnotherPortal()
     {
