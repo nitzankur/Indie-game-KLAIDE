@@ -11251,11 +11251,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308694, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.17
+      value: -0.68
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308694, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.57
+      value: 1.88
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308694, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13334,7 +13334,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1189674354}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: RestartLevel3
+        m_MethodName: RestartLevel8
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -46883,7 +46883,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2108135618389161485, guid: 03dbc6bccec24824fba2769f4810da31, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -8.647
       objectReference: {fileID: 0}
     - target: {fileID: 2108135618389161485, guid: 03dbc6bccec24824fba2769f4810da31, type: 3}
       propertyPath: m_LocalRotation.w
@@ -84615,7 +84615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2108135618389161485, guid: 03dbc6bccec24824fba2769f4810da31, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -8.647
       objectReference: {fileID: 0}
     - target: {fileID: 2108135618389161485, guid: 03dbc6bccec24824fba2769f4810da31, type: 3}
       propertyPath: m_LocalRotation.w

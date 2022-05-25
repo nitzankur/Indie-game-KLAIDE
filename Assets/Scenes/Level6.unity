@@ -72615,9 +72615,12 @@ MonoBehaviour:
   front: 0
   flip: 1
   findDoor: 0
-  level: 6
   openDoorSprite: {fileID: 21300000, guid: 758902965727246a1bfa88027c27aae9, type: 3}
   door: {fileID: 5217888883607147936}
+  portalInsideRight: {fileID: 0}
+  portalTop: {fileID: 0}
+  portalRadiusHor: 0
+  portalRadiusVer: 0
 --- !u!114 &1819335383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75141,9 +75144,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2126823930}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: RestartLevel3
+        m_MethodName: RestartLevel6
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -86611,7 +86614,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2126823930}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: MenuLevels
         m_Mode: 1

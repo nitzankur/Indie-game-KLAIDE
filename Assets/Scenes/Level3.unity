@@ -5920,9 +5920,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1208485780}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: RestartLevel3
+        m_MethodName: RestartLevel4
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13240,7 +13240,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1208485780}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: MenuLevels
         m_Mode: 1
@@ -16136,6 +16136,8 @@ MonoBehaviour:
   PortalRight: {fileID: 0}
   PortalLeft: {fileID: 0}
   key: {fileID: 151130246}
+  portalRadiusHor: 0
+  portalRadiusVer: 0
 --- !u!1001 &657903806
 PrefabInstance:
   m_ObjectHideFlags: 0

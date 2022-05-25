@@ -18,7 +18,6 @@ public class PlayerControllerEight : MonoBehaviour
     [SerializeField] private bool front;
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
-    [SerializeField] private int level;
     [SerializeField] private Sprite openDoorSprite;
     [SerializeField] private GameObject door;
     [SerializeField] private Transform portalInsideRight, portalTop;
@@ -61,8 +60,11 @@ public class PlayerControllerEight : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
-        Portal();
-        PressAnotherPortal();
+        if (LevelManager.Level == 8)
+        {
+            Portal();
+            PressAnotherPortal();
+        }
         EndOfPath = reachedEndOfPath;
         if (WorldsManagerEight.CharacterMove)
         {
@@ -223,7 +225,7 @@ public class PlayerControllerEight : MonoBehaviour
                 _key = false;
             }
         }
-        switch (level)
+        switch (LevelManager.Level)
         {
             case 6:
                 TriggerLevel6(other);
@@ -332,7 +334,18 @@ public class PlayerControllerEight : MonoBehaviour
             FinishLevel = true;
             LevelManager.unlockedLevel++;
         }
-        SceneManager.LoadScene(sceneName);
+
+        if (LevelManager.Level == 6)
+        {
+            LevelManager.Level = 8; //todo: change to 7 
+            SceneManager.LoadScene("Level8");
+        }
+        if (LevelManager.Level == 8)
+        {
+            LevelManager.Level = 8; //todo: change to end scene
+            SceneManager.LoadScene("Level8");
+        }
+        
     }
     
     IEnumerator waitSecond()

@@ -18,6 +18,7 @@ public class PlayerControllerFour : MonoBehaviour
     [SerializeField] private bool front;
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
+    [SerializeField] private int level;
     [SerializeField] private Transform PortalRight, PortalLeft;
     [SerializeField] private GameObject key;
     [SerializeField] private float portalRadiusHor,portalRadiusVer;
@@ -59,8 +60,12 @@ public class PlayerControllerFour : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
-        Portal();
-        PressAnotherPortal();
+        if (LevelManager.Level == 2)
+        {
+            Portal();
+            PressAnotherPortal();
+        }
+        
         EndOfPath = reachedEndOfPath;
         if (WorldsManager.CharacterMove)
         {
@@ -229,11 +234,11 @@ public class PlayerControllerFour : MonoBehaviour
         else if (other.CompareTag("Key"))
         {
             print("key0" + WorldsManager.onRight);
-            if (LevelManager.Level ==2 && (pos.y > 0 && pos.y >= Mathf.Abs(pos.x)) && WorldsManager.onTop)
+            if (LevelManager.Level == 2 && (pos.y > 0 && pos.y >= Mathf.Abs(pos.x)) && WorldsManager.onTop)
             {
                 turnOfKey(other);
             }
-            else if (LevelManager.Level ==3 && (pos.x > 0 && pos.x > Mathf.Abs(pos.y)) && WorldsManager.onRight)
+            else if (LevelManager.Level == 3 && (pos.x > 0 && pos.x > Mathf.Abs(pos.y)) && WorldsManager.onRight)
             {
                 print("key");
                 turnOfKey(other);
@@ -255,15 +260,15 @@ public class PlayerControllerFour : MonoBehaviour
         side = 1;
         playerAnimator.SetInteger("Side", side);
         playerAnimator.SetBool("Front", front);
-        if (LevelManager.Level ==2)
+        if (LevelManager.Level == 2)
         {
             StartCoroutine(waitAndLoad(sceneName: "StartLevel4"));
             LevelManager.Level = 3;
         }
         else if (LevelManager.Level == 3)
         {
-            StartCoroutine(waitAndLoad(sceneName: "StartLevel5"));
-            LevelManager.Level = 4;
+            StartCoroutine(waitAndLoad(sceneName: "Level6")); //todo: change to start of level 5
+            LevelManager.Level = 6;
         }
         _key = false;
         
