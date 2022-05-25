@@ -21,6 +21,9 @@ public class PlayerControllerEight : MonoBehaviour
     [SerializeField] private int level;
     [SerializeField] private Sprite openDoorSprite;
     [SerializeField] private GameObject door;
+    [SerializeField] private Transform portalInsideRight, portalTop;
+    [SerializeField] private float portalRadiusHor,portalRadiusVer;
+    private bool _onInsideRightPortal, _onTopPortal;
     #endregion
 
     #region PrivateProperties
@@ -31,6 +34,7 @@ public class PlayerControllerEight : MonoBehaviour
     private Seeker _seeker;
     private Path _path;
     private int _currentWaypoint = 0;
+    private const float Radius = 9.1f;
     
     #endregion
 
@@ -57,6 +61,8 @@ public class PlayerControllerEight : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
+        Portal();
+        PressAnotherPortal();
         EndOfPath = reachedEndOfPath;
         if (WorldsManagerEight.CharacterMove)
         {
@@ -249,6 +255,70 @@ public class PlayerControllerEight : MonoBehaviour
             _key = true;
             other.gameObject.SetActive(false);
             door.GetComponent<SpriteRenderer>().sprite = openDoorSprite;
+        }
+    }
+        private void Portal()
+    {
+        var pos = gameObject.transform.position;
+        var portalPosT = portalTop.transform.position;
+        var portalPosIR = portalInsideRight.transform.position;
+        if ((pos.x < (portalPosT.x+portalRadiusHor) && (pos.x > (portalPosT.x-portalRadiusHor))&& pos.y < portalPosT.y +portalRadiusVer && pos.y>portalPosT.y-portalRadiusVer &&WorldsManagerEight.onTop &&
+            (portalPosIR.x > 0 && portalPosIR.x > Mathf.Abs(portalPosIR.y) && Vector3.Distance(portalPosIR, Vector3.zero) < Radius))&& _onInsideRightPortal)
+                {
+                    
+                    print("portal top");
+                    if (_path != null)
+                    {
+                        _currentWaypoint = _path.vectorPath.Count - 1;
+                        _path.vectorPath[_currentWaypoint] = portalInsideRight.position;
+                        _path = null;
+                    }
+                    reachedEndOfPath = true;
+                    PortalON = true;
+                    GetComponent<AIPath>().constrainInsideGraph = true;
+                    transform.position = portalInsideRight.position;//+ Vector3.right* 0.22f;
+                    firstPoint = true;
+                }
+
+                else if ((pos.x < (portalPosIR.x + portalRadiusHor) && (pos.x > (portalPosIR.x-portalRadiusHor))&& pos.y < portalPosIR.y +portalRadiusVer && pos.y>portalPosIR.y-portalRadiusVer && WorldsManagerEight.onInsideRight && 
+                          (portalPosT.y > 0 && portalPosT.y >= Mathf.Abs(portalPosT.x)&& _onTopPortal)))
+        {
+                    print("portal right");
+                    if (_path != null)
+                    {
+                        _currentWaypoint = _path.vectorPath.Count - 1;
+                        _path.vectorPath[_currentWaypoint] = portalTop.position;
+                        _path = null;
+                    }
+                    reachedEndOfPath = true;
+                    PortalON = true;
+                    GetComponent<AIPath>().constrainInsideGraph = true;
+                    transform.position = portalTop.position;// + Vector3.left* 0.22f;
+                    firstPoint = true;
+                }
+    }
+    private void PressAnotherPortal()
+    {
+        var portalPosL = portalTop.transform.position;
+        var portalPosR = portalInsideRight.transform.position;
+        var mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+        if((mousePos.x < (portalPosL.x+portalRadiusHor) && (mousePos.x > (portalPosL.x-portalRadiusHor))&& mousePos.y < portalPosL.y +portalRadiusVer && 
+            mousePos.y>portalPosL.y-portalRadiusVer && Input.GetMouseButtonDown(0)))
+        {
+            _onTopPortal = true;
+           
+        }
+        else if(((mousePos.x < (portalPosR.x + portalRadiusHor) && (mousePos.x > (portalPosR.x-portalRadiusHor))&& mousePos.y < portalPosR.y +portalRadiusVer &&
+                  mousePos.y>portalPosR.y-portalRadiusVer && Input.GetMouseButtonDown(0))))
+
+        {
+            _onInsideRightPortal = true;
+         
+        }
+        else
+        {
+            _onTopPortal = false;
+            _onInsideRightPortal = false;
         }
     }
 

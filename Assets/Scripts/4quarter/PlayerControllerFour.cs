@@ -312,8 +312,8 @@ public class PlayerControllerFour : MonoBehaviour
 
     private void PressAnotherPortal()
     {
-        var portalPosL = PortalLeft.transform.position;
-        var portalPosR = PortalRight.transform.position;
+        var portalPosL = PortalLeft.position;
+        var portalPosR = PortalRight.position;
         var mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
         if((mousePos.x < (portalPosL.x+portalRadiusHor) && (mousePos.x > (portalPosL.x-portalRadiusHor))&& mousePos.y < portalPosL.y +portalRadiusVer && 
             mousePos.y>portalPosL.y-portalRadiusVer && Input.GetMouseButtonDown(0)))

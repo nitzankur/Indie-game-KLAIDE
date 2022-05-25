@@ -11251,11 +11251,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308694, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.69
+      value: -3.17
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308694, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.97
+      value: 2.57
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308694, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: m_LocalPosition.z
@@ -51614,6 +51614,10 @@ MonoBehaviour:
   level: 8
   openDoorSprite: {fileID: 21300000, guid: 758902965727246a1bfa88027c27aae9, type: 3}
   door: {fileID: 6984272}
+  portalInsideRight: {fileID: 1091359731}
+  portalTop: {fileID: 2107779087}
+  portalRadiusHor: 1
+  portalRadiusVer: 1
 --- !u!4 &1208670138 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1836323175003308694, guid: 913572e6ef161794b800a95f60435f85, type: 3}
