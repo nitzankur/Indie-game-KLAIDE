@@ -70403,6 +70403,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7654142152558554309, guid: 79cc39b16fd0d37449e7935161cdcea2, type: 3}
   m_PrefabInstance: {fileID: 1757752309}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1759961170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1759961171}
+  m_Layer: 0
+  m_Name: portal - none object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1759961171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759961170}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.75, y: -4.08, z: -4.505902}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1760923720
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -72618,6 +72648,10 @@ MonoBehaviour:
   level: 6
   openDoorSprite: {fileID: 21300000, guid: 758902965727246a1bfa88027c27aae9, type: 3}
   door: {fileID: 5217888883607147936}
+  portalInsideRight: {fileID: 1759961171}
+  portalTop: {fileID: 1759961171}
+  portalRadiusHor: 0
+  portalRadiusVer: 0
 --- !u!114 &1819335383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74877,6 +74911,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f56e5740105ac447914f58ce8dfa68d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dragSprite: {fileID: 21300000, guid: 80d4929eb07014f7a8125dcc2664b2a5, type: 3}
+  walkingSprite: {fileID: -4750761433519615375, guid: d652673f06967944590b2adbd3b29d3a, type: 3}
+  _spriteRenderer: {fileID: 1872980534}
 --- !u!4 &1872980536
 Transform:
   m_ObjectHideFlags: 0
@@ -74904,7 +74941,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 3e31d48a8a6c43d43b92217de3dab163, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -85297,7 +85334,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2119937399}
   m_LocalRotation: {x: 0, y: 0, z: -0.28066668, w: 0.95980537}
-  m_LocalPosition: {x: 2.38, y: 0.31, z: 8.64657}
+  m_LocalPosition: {x: 2.36, y: 0.31, z: 8.64657}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 2057867756}

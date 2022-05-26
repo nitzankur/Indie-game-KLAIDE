@@ -5,6 +5,8 @@ using UnityEngine;
 public class mouseCursor : MonoBehaviour
 {
     private Animator mouseAnimator;
+    [SerializeField] private Sprite dragSprite,walkingSprite;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
     void Start()
     {
         Cursor.visible = false;
@@ -13,20 +15,25 @@ public class mouseCursor : MonoBehaviour
 
     void Update()
     {
+        print(WorldsRotateEight.StartDrag + " start drag");
         Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = cursorPos;
-        if (WorldsRotateEight.StartDrag)
+        if(WorldsRotateEight.StartDrag)
         {
-            Cursor.visible = true;
-            gameObject.SetActive(false);
+            print("cursor drag");
+            mouseAnimator.SetTrigger("Start Drag");
         }
-        else if(WorldsRotateEight.EndDrag)
+        else 
         {
-            Cursor.visible = false;
-            gameObject.SetActive(true);
+            mouseAnimator.SetTrigger("Start Drag");
+            _spriteRenderer.sprite = walkingSprite;
+            print("cursor walking");
             if (Input.GetMouseButton(0))
                 mouseAnimator.SetTrigger("Press");
+           
         }
+        
+        
 
      
 

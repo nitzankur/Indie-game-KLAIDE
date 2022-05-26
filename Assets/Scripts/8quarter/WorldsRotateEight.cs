@@ -40,7 +40,7 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
         {
             if (PlayerControllerEight.EndOfPath && Time.time - startTime > 0.3f)
             {
-                StartDrag = true;
+              
                 Vector2 mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
                 var localpos = new Vector2(transform.position.x, transform.position.y);
                 Vector2 tempPos = mousePos - localpos;
@@ -79,7 +79,6 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
     {
         if (!_drag)
         {
-            StartDrag = false;
             EndDrag = true;
             WorldsManagerEight.CharacterMove = true;
         }
@@ -88,6 +87,7 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
     public void OnBeginDrag(PointerEventData eventData)
     {
         _drag = true;
+        StartDrag = true;
     }
     
     public void OnDrag(PointerEventData eventData)
@@ -97,9 +97,8 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        print("end drag");
         _drag = false;
-        EndDrag = true;
+        StartDrag = false;
     }
 
     #endregion

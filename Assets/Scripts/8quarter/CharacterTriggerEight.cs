@@ -11,8 +11,7 @@ public class CharacterTriggerEight : MonoBehaviour
     private void Update()
    {
        var pos = transform.position;
-       print(Vector3.Distance(pos, Vector3.zero));
- 
+
        if (pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && Vector3.Distance(pos, Vector3.zero) >= Radius)
        {
            WorldsManagerEight.onTop = true;
