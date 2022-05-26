@@ -41,15 +41,22 @@ public class ButtonLevel : MonoBehaviour
     public void OnClick()
     {
         if (!isUnlock) return;
-        image.sprite = openSprite;
+        GetComponent<AudioSource>().Play();
         StartCoroutine(WaitAndLoad());
     }
     
     IEnumerator WaitAndLoad()
     {   
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.6f);
+        image.sprite = openSprite;
+        yield return new WaitForSeconds(1f);
         int nextLevel;
         nextLevel = level + 1;
         SceneManager.LoadScene("StartLevel" + nextLevel);
+    }
+    IEnumerator WaitForOpen()
+    {   
+        yield return new WaitForSeconds(1f);
+       
     }
 }
