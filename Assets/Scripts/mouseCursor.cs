@@ -24,11 +24,10 @@ public class mouseCursor : MonoBehaviour
         }
         else 
         {
-            mouseAnimator.SetTrigger("End Drag");
+         //   mouseAnimator.SetTrigger("End Drag");
             print("cursor walking");
             if (Input.GetMouseButton(0))
                 mouseAnimator.SetTrigger("Press");
-           
         }
         
         
