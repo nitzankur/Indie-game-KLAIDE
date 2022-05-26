@@ -81,6 +81,8 @@ public class PlayerControllerEight : MonoBehaviour
             playerAnimator.SetBool("Move", move);
             playerAnimator.SetInteger("Side", side);
             _path = null;
+            GetComponent<AudioSource>().Stop();
+            GetComponent<PlayAudio>().enabled = false;
         }
             
         
@@ -221,7 +223,8 @@ public class PlayerControllerEight : MonoBehaviour
                 side = 1;
                 playerAnimator.SetInteger("Side", side);
                 playerAnimator.SetBool("Front", front);
-                StartCoroutine(waitAndLoad("StartLevel3"));
+                other.GetComponent<AudioSource>().enabled = true;
+                StartCoroutine(waitAndLoad());
                 _key = false;
             }
         }
@@ -326,7 +329,7 @@ public class PlayerControllerEight : MonoBehaviour
 
     #endregion   
     
-    IEnumerator waitAndLoad(string sceneName)
+    IEnumerator waitAndLoad()
     {   
         yield return new WaitForSeconds(1f);
         if (!FinishLevel)
@@ -335,22 +338,17 @@ public class PlayerControllerEight : MonoBehaviour
             LevelManager.unlockedLevel++;
         }
 
-        if (LevelManager.Level == 6)
+        switch (LevelManager.Level)
         {
-            LevelManager.Level = 8; //todo: change to 7 
-            SceneManager.LoadScene("Level8");
+            case 6:
+                LevelManager.Level = 8; //todo: change to 7 
+                SceneManager.LoadScene("Level8");
+                break;
+            case 8:
+                LevelManager.Level = 8; //todo: change to end scene
+                SceneManager.LoadScene("Level8");
+                break;
         }
-        if (LevelManager.Level == 8)
-        {
-            LevelManager.Level = 8; //todo: change to end scene
-            SceneManager.LoadScene("Level8");
-        }
-        
     }
     
-    IEnumerator waitSecond()
-    {
-        yield return new WaitForSeconds(2f);
-        Physics2D.IgnoreLayerCollision(3, 8, false);
-    }
 }

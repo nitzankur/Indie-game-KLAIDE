@@ -82,6 +82,8 @@ public class PlayerControllerFour : MonoBehaviour
             playerAnimator.SetBool("Move", move);
             playerAnimator.SetInteger("Side", side);
             _path = null;
+            GetComponent<AudioSource>().Stop();
+            GetComponent<PlayAudio>().enabled = false;
         }
             
         
@@ -267,11 +269,11 @@ public class PlayerControllerFour : MonoBehaviour
         }
         else if (LevelManager.Level == 3)
         {
+            other.GetComponent<AudioSource>().enabled = true;
             StartCoroutine(waitAndLoad(sceneName: "Level6")); //todo: change to start of level 5
             LevelManager.Level = 6;
         }
         _key = false;
-        
     }
 
 
