@@ -34,9 +34,9 @@ public class WorldsManagerEight : MonoBehaviour
     
     void Update()
     {
-        if (WorldsRotateEight.endDrag)
+        if (WorldsRotateEight.EndDrag)
         {
-            WorldsRotateEight.endDrag = false;
+            WorldsRotateEight.EndDrag = false;
             UpdateOutsideCircle();
             UpdateInsideCircle();
             AstarData.active.Scan();

@@ -5,14 +5,11 @@ using UnityEngine.EventSystems;
 public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandler, IDragHandler,IPointerDownHandler, IPointerClickHandler
 {
      #region variables
-     public static bool endDrag;
-     private Vector3 _mousePos;
-     private Vector3 screenPos;
+     public static bool EndDrag;
      private bool _drag;
-     private float startTime;
-     private float baseAngle ;
-     private Vector3 pos;
-     private Vector2 mousePosStart;
+     private float _startTime;
+     private Vector3 _pos;
+     private Vector2 _mousePosStart;
      [SerializeField] private float step =10;
      [SerializeField] private GameObject left,button;
      private void Start()
@@ -27,32 +24,32 @@ public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandl
         
         if (Input.GetMouseButtonDown(0))
         {
-            mousePosStart = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+            _mousePosStart = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
             var localpos = new Vector2(transform.position.x, transform.position.y);
-            pos = mousePosStart - localpos;
+            _pos = _mousePosStart - localpos;
+            _startTime = Time.time;
         }
 
         if (Input.GetMouseButton(0))
         {
-            if (PlayerControllerThird.EndOfPath && Time.time - startTime > 0.3f)
+            if (PlayerControllerThird.EndOfPath && Time.time - _startTime > 0.3f)
             {
-                var ClockDrag = false;
                 Vector2 mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
                 var localpos = new Vector2(transform.position.x, transform.position.y);
                 Vector2 tempPos = mousePos - localpos;
-                float ang = Vector2.Angle(pos, tempPos);
+                float ang = Vector2.Angle(_pos, tempPos);
                 if (!WorldManagerThird.onButtom) RotateWorld(button,tempPos);
                 if (!WorldManagerThird.onLeft) RotateWorld(left,tempPos);
                 if (!WorldManagerThird.onRight) RotateWorld(gameObject,tempPos); 
 
-                pos = tempPos;
+                _pos = tempPos;
             }
         }
     }
 
     private void RotateWorld(GameObject side, Vector3 tempPos)
     {
-        side.transform.rotation = Quaternion.RotateTowards(side.transform.rotation,   Quaternion.FromToRotation(pos, tempPos) * side.transform.rotation, step);
+        side.transform.rotation = Quaternion.RotateTowards(side.transform.rotation,   Quaternion.FromToRotation(_pos, tempPos) * side.transform.rotation, step);
     }
 
     #endregion
@@ -84,7 +81,7 @@ public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandl
     {
         //print("end drag");
         _drag = false;
-        endDrag = true;
+        EndDrag = true;
     }
    
     

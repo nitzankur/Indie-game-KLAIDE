@@ -25,10 +25,10 @@ public class WorldsManagerToturial : MonoBehaviour
     
     void Update()
     {
-        if (WorldRotateTutorial.endDrag)
+        if (WorldRotateTutorial.EndDrag)
         {
             print("update graph");
-            WorldRotateTutorial.endDrag = false;
+            WorldRotateTutorial.EndDrag = false;
             UpdateLeftNodes();
             UpdateRightNodes();
             AstarData.active.Scan();

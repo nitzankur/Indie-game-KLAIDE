@@ -25,10 +25,10 @@ public class WorldManagerThird : MonoBehaviour
     
     void Update()
     {
-        if (WorldRotateThird.endDrag)
+        if (WorldRotateThird.EndDrag)
         {
             print("update graph");
-            WorldRotateThird.endDrag = false;
+            WorldRotateThird.EndDrag = false;
             UpdateLeftNodes();
             UpdateRightNodes();
             UpdateButtomNodes();
