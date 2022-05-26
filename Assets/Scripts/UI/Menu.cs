@@ -38,4 +38,10 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene("LevelsMenu");
     }
+    
+    public void MenuLevelsFromMenu()
+    {
+        DontDestroyOnLoad(GetComponent<AudioSource>());
+        SceneManager.LoadScene("LevelsMenu");
+    }
 }

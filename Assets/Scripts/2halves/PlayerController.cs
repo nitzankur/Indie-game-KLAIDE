@@ -238,15 +238,16 @@ public class PlayerController : MonoBehaviour
                 playerAnimator.SetInteger("Side", side);
                 playerAnimator.SetBool("Front", front);
                 findDoor = true;
+                other.GetComponent<AudioSource>().enabled = true;
                 StartCoroutine(WaitAndLoad());
             }
         }
     }
     
-    
+
     IEnumerator WaitAndLoad()
     {   
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         if (!FinishLevel)
         {
             FinishLevel = true;
