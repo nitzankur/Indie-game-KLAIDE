@@ -209,9 +209,10 @@ public class PlayerControllerThird : MonoBehaviour
             print("key0" + WorldManagerThird.onRight);
             if (pos.x > 0f && (pos.y >0 || pos.y <0 &&pos.x>Mathf.Abs(pos.y)) && WorldManagerThird.onRight)
             {
-                print("key") ;
+                print("key");
+                FindObjectOfType<Camera>().GetComponent<AudioSource>().Play();
                 _key = true;
-               other.gameObject.SetActive(false);
+                other.gameObject.SetActive(false);
             }
         }
     }

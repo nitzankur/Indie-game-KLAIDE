@@ -57,6 +57,5 @@ public class ButtonLevel : MonoBehaviour
     IEnumerator WaitForOpen()
     {   
         yield return new WaitForSeconds(1f);
-       
     }
 }

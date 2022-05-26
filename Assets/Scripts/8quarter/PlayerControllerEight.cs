@@ -246,6 +246,7 @@ public class PlayerControllerEight : MonoBehaviour
         if (pos.x > 0 && pos.x > Mathf.Abs(pos.y) && WorldsManagerEight.onRight)
         {
             _key = true;
+            FindObjectOfType<Camera>().GetComponent<AudioSource>().Play();
             other.gameObject.SetActive(false);
             door.GetComponent<SpriteRenderer>().sprite = openDoorSprite;
         }
@@ -258,6 +259,7 @@ public class PlayerControllerEight : MonoBehaviour
         if (pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && WorldsManagerEight.onInsideTop)
         {
             _key = true;
+            FindObjectOfType<Camera>().GetComponent<AudioSource>().Play();
             other.gameObject.SetActive(false);
             door.GetComponent<SpriteRenderer>().sprite = openDoorSprite;
         }
@@ -281,6 +283,7 @@ public class PlayerControllerEight : MonoBehaviour
                     reachedEndOfPath = true;
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
+                    portalInsideRight.GetComponent<AudioSource>().Play();
                     transform.position = portalInsideRight.position;//+ Vector3.right* 0.22f;
                     firstPoint = true;
                 }
@@ -298,6 +301,7 @@ public class PlayerControllerEight : MonoBehaviour
                     reachedEndOfPath = true;
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
+                    portalTop.GetComponent<AudioSource>().Play();
                     transform.position = portalTop.position;
                     firstPoint = true;
         }

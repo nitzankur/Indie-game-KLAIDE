@@ -252,7 +252,8 @@ public class PlayerControllerFour : MonoBehaviour
     {
         print("key") ;
         _key = true;
-       key.SetActive(false);
+        FindObjectOfType<Camera>().GetComponent<AudioSource>().Play();
+        key.SetActive(false);
     }
 
     private void getInDoor(Collider2D other)
@@ -295,6 +296,7 @@ public class PlayerControllerFour : MonoBehaviour
                     reachedEndOfPath = true;
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
+                    PortalLeft.GetComponent<AudioSource>().Play();
                     transform.position = PortalRight.position;//+ Vector3.right* 0.22f;
                     firstPoint = true;
                 }
@@ -312,6 +314,7 @@ public class PlayerControllerFour : MonoBehaviour
                     reachedEndOfPath = true;
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
+                    PortalRight.GetComponent<AudioSource>().Play();
                     transform.position = PortalLeft.position;// + Vector3.left* 0.22f;
                     firstPoint = true;
                 }

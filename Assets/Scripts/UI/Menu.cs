@@ -7,41 +7,55 @@ public class Menu : MonoBehaviour
 {
     public void RestartLevel1()
     {
-        SceneManager.LoadScene("Level0");
+        GetComponent<AudioSource>().Play();
+        StartCoroutine(WaitForOpen("Level0"));
     }
     
     public void RestartLevel2()
     {
-        SceneManager.LoadScene("Level1");
+        GetComponent<AudioSource>().Play();
+        StartCoroutine(WaitForOpen("Level1"));
     }
     
     public void RestartLevel3()
     {
-        SceneManager.LoadScene("Level2");
+        GetComponent<AudioSource>().Play();
+        StartCoroutine(WaitForOpen("Level2"));
     }
 
     public void RestartLevel4()
     {
-        SceneManager.LoadScene("Level3");
+        GetComponent<AudioSource>().Play();
+        StartCoroutine(WaitForOpen("Level3"));
     }
     
     public void RestartLevel6()
     {
-        SceneManager.LoadScene("Level6");
+        GetComponent<AudioSource>().Play();
+        StartCoroutine(WaitForOpen("Level6"));
     }
     
     public void RestartLevel8()
     {
-        SceneManager.LoadScene("Level8");
+        GetComponent<AudioSource>().Play();
+        StartCoroutine(WaitForOpen("Level8"));
     }
     public void MenuLevels()
     {
-        SceneManager.LoadScene("LevelsMenu");
+        GetComponent<AudioSource>().Play();
+        StartCoroutine(WaitForOpen("LevelsMenu"));
     }
-    
-    public void MenuLevelsFromMenu()
+
+    public void MenuLevelsFromStart()
     {
         DontDestroyOnLoad(GetComponent<AudioSource>());
-        SceneManager.LoadScene("LevelsMenu");
+        StartCoroutine(WaitForOpen("LevelsMenu"));
+    }
+
+
+    IEnumerator WaitForOpen(string scene)
+    {   
+        yield return new WaitForSeconds(0.7f);
+        SceneManager.LoadScene(scene);
     }
 }
