@@ -5,8 +5,7 @@ using UnityEngine;
 public class mouseCursor : MonoBehaviour
 {
     private Animator mouseAnimator;
-    [SerializeField] private Sprite dragSprite,walkingSprite;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+
     void Start()
     {
         Cursor.visible = false;
@@ -26,7 +25,6 @@ public class mouseCursor : MonoBehaviour
         else 
         {
             mouseAnimator.SetTrigger("End Drag");
-            _spriteRenderer.sprite = walkingSprite;
             print("cursor walking");
             if (Input.GetMouseButton(0))
                 mouseAnimator.SetTrigger("Press");
