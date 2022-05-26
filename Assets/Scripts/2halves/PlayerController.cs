@@ -77,6 +77,10 @@ public class PlayerController : MonoBehaviour
             WorldsManagerToturial.CharacterMove = false;
         }
 
+        /*else
+        {
+            GetComponent<AudioSource>().Stop();
+        }*/
         if (reachedEndOfPath)
         {
             if (tutorial && move)
@@ -84,15 +88,16 @@ public class PlayerController : MonoBehaviour
             move = false;
             playerAnimator.SetBool("Move", move);
             _path = null;
+            GetComponent<AudioSource>().Stop();
+            GetComponent<PlayAudio>().enabled = false;
         }
-            
+        
         
         if (_path == null)
             return;
         
         reachedEndOfPath = false;
         float distanceToWaypoint;
-        
         if (firstPoint)
         {
             transform.position = _path.vectorPath[0];
@@ -121,7 +126,7 @@ public class PlayerController : MonoBehaviour
         transform.position += velocity * Time.deltaTime;
         IndicateDirection(_path.vectorPath[_currentWaypoint]);
     }
-
+    
 
     private void IndicateDirection(Vector3 target)
     {
@@ -131,7 +136,6 @@ public class PlayerController : MonoBehaviour
             tutorialMove.GetComponent<Animator>().SetBool("Click",true);
           //  tutorialMove.SetActive(false);
         }
-        
         move = true;
         playerAnimator.SetBool("Move", move);
         

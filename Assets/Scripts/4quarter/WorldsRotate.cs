@@ -69,8 +69,6 @@ public class WorldsRotate :  MonoBehaviour , IBeginDragHandler, IEndDragHandler,
         if (!_drag)
         {
             WorldsManager.CharacterMove = true;
-            
-            
         }
     }
 
