@@ -25,7 +25,7 @@ public class mouseCursor : MonoBehaviour
         }
         else 
         {
-            mouseAnimator.SetTrigger("Start Drag");
+            mouseAnimator.SetTrigger("End Drag");
             _spriteRenderer.sprite = walkingSprite;
             print("cursor walking");
             if (Input.GetMouseButton(0))
