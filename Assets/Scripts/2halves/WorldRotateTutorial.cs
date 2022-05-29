@@ -95,12 +95,12 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
         EndDrag = true;
     }
 
-    public void OnMouseExit()
-    {
-        RotateOnce = true;
-        _drag = false;
-        EndDrag = true;
-    }
+    // public void OnMouseExit()
+    // {
+    //     RotateOnce = true;
+    //     _drag = false;
+    //     EndDrag = true;
+    // }
 
     #endregion
 
