@@ -9929,7 +9929,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 550394361}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9d05b7e3d6b2bbb4b8e4bd6a511de2c2, type: 3}
@@ -10028,14 +10028,14 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.48005438, y: 0.03891015}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.34, y: 1.55}
+    oldSize: {x: 0.97142863, y: 1.7}
     newSize: {x: 0.96, y: 1.93}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -39736,7 +39736,7 @@ PrefabInstance:
     - target: {fileID: 5217888882670775087, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: fca710fe976eb45569626275aac46db3, type: 3}
+      objectReference: {fileID: 3532922073204104729, guid: 4c38225d899740f4686216173f39ea0c, type: 3}
     - target: {fileID: 6174255685774721752, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_Enabled
       value: 0
