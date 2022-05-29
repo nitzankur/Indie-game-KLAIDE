@@ -71,7 +71,7 @@ public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandl
     public void OnBeginDrag(PointerEventData eventData)
     {
         _drag = true;
-      //  print("begin drag");
+       print("begin drag");
     
     }
     public void OnDrag(PointerEventData eventData)
