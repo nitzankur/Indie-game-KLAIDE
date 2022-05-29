@@ -65,12 +65,14 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
     #region sperate between walking and worlds rotate
     public void OnPointerDown(PointerEventData eventData)
     {
+        print("onPointerDown");
     }
     
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!_drag)
         {
+            print("on Pointer click");
             WorldsManagerToturial.CharacterMove = true;
         }
     }
@@ -83,7 +85,7 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
     }
     public void OnDrag(PointerEventData eventData)
     {
-    
+        print("drag");
     }
     public void OnEndDrag(PointerEventData eventData)
     {

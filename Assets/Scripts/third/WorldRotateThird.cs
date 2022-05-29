@@ -58,6 +58,7 @@ public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandl
     #region sperate between walking and World rotate
     public void OnPointerDown(PointerEventData eventData)
     {
+        
     }
     
     public void OnPointerClick(PointerEventData eventData)
