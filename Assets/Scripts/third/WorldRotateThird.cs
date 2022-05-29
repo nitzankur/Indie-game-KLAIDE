@@ -15,6 +15,7 @@ public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandl
      private void Start()
     {
         WorldManagerThird.CharacterMove = false;
+        EndDrag = true;
     }
     #endregion
     
