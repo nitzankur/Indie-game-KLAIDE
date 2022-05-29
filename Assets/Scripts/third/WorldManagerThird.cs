@@ -25,6 +25,7 @@ public class WorldManagerThird : MonoBehaviour
     
     void Update()
     {
+        print(WorldRotateThird.EndDrag +" end drag");
         if (WorldRotateThird.EndDrag)
         {
             print("update graph");
