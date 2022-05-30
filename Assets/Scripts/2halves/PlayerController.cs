@@ -231,7 +231,17 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Door"))
         {
-            if (WorldsManagerToturial.onLeft && other.transform.position.x <= 0)
+            if (tutorial && WorldsManagerToturial.onRight && other.transform.position.x > 0)
+            {
+                front = false;
+                side = 1;
+                playerAnimator.SetInteger("Side", side);
+                playerAnimator.SetBool("Front", front);
+                findDoor = true;
+                other.GetComponent<AudioSource>().enabled = true;
+                StartCoroutine(WaitAndLoad());
+            }
+            else if (!tutorial && WorldsManagerToturial.onLeft && other.transform.position.x <= 0)
             {
                 front = false;
                 side = 1;

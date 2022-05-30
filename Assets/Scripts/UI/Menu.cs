@@ -8,13 +8,13 @@ public class Menu : MonoBehaviour
     public void RestartLevel1()
     {
         GetComponent<AudioSource>().Play();
-        StartCoroutine(WaitForOpen("Level0"));
+        StartCoroutine(WaitForOpen("Level-1"));
     }
     
     public void RestartLevel2()
     {
         GetComponent<AudioSource>().Play();
-        StartCoroutine(WaitForOpen("Level1"));
+        StartCoroutine(WaitForOpen("Level-2"));
     }
     
     public void RestartLevel3()
