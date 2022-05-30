@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private int totalLevel = 3;
     public static int unlockedLevel = 0;
     private ButtonLevel[] levelButtons;
-    public static int Level =  3;
+    public static int Level = 2;
 
     private void Start()
     {

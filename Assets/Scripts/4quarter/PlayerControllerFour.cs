@@ -266,7 +266,7 @@ public class PlayerControllerFour : MonoBehaviour
         if (LevelManager.Level == 2)
         {
             StartCoroutine(waitAndLoad(sceneName: "StartLevel4"));
-            LevelManager.Level = 3;
+            LevelManager.Level++;
         }
         else if (LevelManager.Level == 3)
         {
