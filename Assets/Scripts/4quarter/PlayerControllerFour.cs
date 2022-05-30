@@ -60,7 +60,7 @@ public class PlayerControllerFour : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
-        if (LevelManager.Level == 2)
+        if (LevelManager.Level == 5 && !findDoor)
         {
             Portal();
             PressAnotherPortal();
@@ -220,12 +220,12 @@ public class PlayerControllerFour : MonoBehaviour
         var pos = other.transform.position;
         if (other.CompareTag("Door"))
         {
-            if (LevelManager.Level == 2 && pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && WorldsManager.onTop && _key)
+            if (LevelManager.Level == 5 && pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && WorldsManager.onTop && _key)
             {
                 print("door");
                 getInDoor(other);
             }
-            if (LevelManager.Level == 3 && (pos.y < 0 &&  Mathf.Abs(pos.x) <= Mathf.Abs(pos.y) && WorldsManager.onButtom && _key))
+            if (LevelManager.Level == 4 && (pos.y < 0 &&  Mathf.Abs(pos.x) <= Mathf.Abs(pos.y) && WorldsManager.onButtom && _key))
             {
                 print("door");
                 getInDoor(other);
@@ -236,11 +236,11 @@ public class PlayerControllerFour : MonoBehaviour
         else if (other.CompareTag("Key"))
         {
             print("key0" + WorldsManager.onRight);
-            if (LevelManager.Level == 2 && (pos.y > 0 && pos.y >= Mathf.Abs(pos.x)) && WorldsManager.onTop)
+            if (LevelManager.Level == 5 && (pos.y > 0 && pos.y >= Mathf.Abs(pos.x)) && WorldsManager.onTop)
             {
                 turnOfKey(other);
             }
-            else if (LevelManager.Level == 3 && (pos.x > 0 && pos.x > Mathf.Abs(pos.y)) && WorldsManager.onRight)
+            else if (LevelManager.Level == 4 && (pos.x > 0 && pos.x > Mathf.Abs(pos.y)) && WorldsManager.onRight)
             {
                 print("key");
                 turnOfKey(other);
@@ -259,16 +259,17 @@ public class PlayerControllerFour : MonoBehaviour
     private void getInDoor(Collider2D other)
     {
         print("door should open");
+        findDoor = true;
         front = false;
         side = 1;
         playerAnimator.SetInteger("Side", side);
         playerAnimator.SetBool("Front", front);
-        if (LevelManager.Level == 2)
+        if (LevelManager.Level == 4)
         {
-            StartCoroutine(waitAndLoad(sceneName: "StartLevel4"));
-            LevelManager.Level++;
+            StartCoroutine(waitAndLoad(sceneName: "StartLevel5"));
+            LevelManager.Level = 5;
         }
-        else if (LevelManager.Level == 3)
+        else if (LevelManager.Level == 5)
         {
             other.GetComponent<AudioSource>().enabled = true;
             StartCoroutine(waitAndLoad(sceneName: "Level6")); //todo: change to start of level 5

@@ -3469,6 +3469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0ad0ce9e461c2438083a7c96ec20da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
 --- !u!82 &347200313
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16471,23 +16472,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.336666
+      value: 5.625045
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5.1622257
+      value: 4.7078776
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.99837255
+      value: 0.997908
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.402687
+      value: 19.305
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.130683
+      value: 3.68
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16671,7 +16672,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.008071721, y: 0.1582264}
+  m_Offset: {x: -0.010865003, y: 0.05316572}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -16682,7 +16683,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7371398, y: 0.97765535}
+  m_Size: {x: 0.45728672, y: 0.767534}
   m_EdgeRadius: 0
 --- !u!1001 &1893431270
 PrefabInstance:

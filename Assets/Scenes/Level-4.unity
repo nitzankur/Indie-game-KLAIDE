@@ -11525,6 +11525,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1314620992}
     m_Modifications:
+    - target: {fileID: 7693329711137624157, guid: 6e5620080a125f748b0799c6775903f4, type: 3}
+      propertyPath: m_Size.x
+      value: 0.4240011
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693329711137624157, guid: 6e5620080a125f748b0799c6775903f4, type: 3}
+      propertyPath: m_Size.y
+      value: 0.42499745
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693329711137624157, guid: 6e5620080a125f748b0799c6775903f4, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.01030305
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693329711137624157, guid: 6e5620080a125f748b0799c6775903f4, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.013616674
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693329711137624157, guid: 6e5620080a125f748b0799c6775903f4, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693329711137624157, guid: 6e5620080a125f748b0799c6775903f4, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 7693329711137624158, guid: 6e5620080a125f748b0799c6775903f4, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -30540,6 +30564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0ad0ce9e461c2438083a7c96ec20da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
 --- !u!114 &1208485781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39254,11 +39279,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.50002
+      value: 2.6775215
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.7178621
+      value: 2.443358
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalScale.z
@@ -39266,11 +39291,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7
+      value: 6.844
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.04
+      value: -0.179
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalPosition.z
@@ -39358,7 +39383,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.48005438, y: 0.03891015}
+  m_Offset: {x: -0.052464657, y: 0.0063311756}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -39369,7 +39394,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6811051, y: 3.2477117}
+  m_Size: {x: 0.56031835, y: 0.7870633}
   m_EdgeRadius: 0
 --- !u!82 &1546814075
 AudioSource:
