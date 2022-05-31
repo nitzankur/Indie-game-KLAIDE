@@ -47068,11 +47068,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2108135618389161485, guid: 03dbc6bccec24824fba2769f4810da31, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.0998464
+      value: 3.64
       objectReference: {fileID: 0}
     - target: {fileID: 2108135618389161485, guid: 03dbc6bccec24824fba2769f4810da31, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.1510224
+      value: -2.83
       objectReference: {fileID: 0}
     - target: {fileID: 2108135618389161485, guid: 03dbc6bccec24824fba2769f4810da31, type: 3}
       propertyPath: m_LocalPosition.z
@@ -50853,6 +50853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0ad0ce9e461c2438083a7c96ec20da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
 --- !u!114 &1189674355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52006,8 +52007,9 @@ MonoBehaviour:
   door: {fileID: 6984272}
   portalInsideRight: {fileID: 1091359731}
   portalTop: {fileID: 2107779087}
-  portalRadiusHor: 1
-  portalRadiusVer: 1
+  portalRadiusHor: 0.2
+  portalRadiusVer: 0.2
+  portalDistanceParameter: 0.7
 --- !u!114 &1208670132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85105,11 +85107,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2108135618389161485, guid: 03dbc6bccec24824fba2769f4810da31, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.32
+      value: 6.01
       objectReference: {fileID: 0}
     - target: {fileID: 2108135618389161485, guid: 03dbc6bccec24824fba2769f4810da31, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.94
+      value: -5.71
       objectReference: {fileID: 0}
     - target: {fileID: 2108135618389161485, guid: 03dbc6bccec24824fba2769f4810da31, type: 3}
       propertyPath: m_LocalPosition.z

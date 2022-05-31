@@ -21,8 +21,7 @@ public class PlayerControllerEight : MonoBehaviour
     [SerializeField] private Sprite openDoorSprite;
     [SerializeField] private GameObject door;
     [SerializeField] private Transform portalInsideRight, portalTop;
-    [SerializeField] private float portalRadiusHor,portalRadiusVer;
-    private bool _onInsideRightPortal, _onTopPortal;
+    [SerializeField] private float portalRadiusHor,portalRadiusVer,portalDistanceParameter;
     #endregion
 
     #region PrivateProperties
@@ -63,7 +62,7 @@ public class PlayerControllerEight : MonoBehaviour
         if (LevelManager.Level == 8)
         {
             Portal();
-            PressAnotherPortal();
+    
         }
         EndOfPath = reachedEndOfPath;
         if (WorldsManagerEight.CharacterMove)
@@ -270,7 +269,7 @@ public class PlayerControllerEight : MonoBehaviour
         var portalPosT = portalTop.transform.position;
         var portalPosIR = portalInsideRight.transform.position;
         if ((pos.x < (portalPosT.x+portalRadiusHor) && (pos.x > (portalPosT.x-portalRadiusHor))&& pos.y < portalPosT.y +portalRadiusVer && pos.y>portalPosT.y-portalRadiusVer &&WorldsManagerEight.onTop &&
-            (portalPosIR.x > 0 && portalPosIR.x > Mathf.Abs(portalPosIR.y) && Vector3.Distance(portalPosIR, Vector3.zero) < Radius))&& _onInsideRightPortal)
+            (portalPosIR.x > 0 && portalPosIR.x > Mathf.Abs(portalPosIR.y) && Vector3.Distance(portalPosIR, Vector3.zero) < Radius)))
                 {
                     
                     print("portal top");
@@ -284,12 +283,12 @@ public class PlayerControllerEight : MonoBehaviour
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
                     portalInsideRight.GetComponent<AudioSource>().Play();
-                    transform.position = portalInsideRight.position;//+ Vector3.right* 0.22f;
+                    transform.position = portalInsideRight.position+ Vector3.right* portalDistanceParameter;
                     firstPoint = true;
                 }
 
                 else if ((pos.x < (portalPosIR.x + portalRadiusHor) && (pos.x > (portalPosIR.x-portalRadiusHor))&& pos.y < portalPosIR.y +portalRadiusVer && pos.y>portalPosIR.y-portalRadiusVer && WorldsManagerEight.onInsideRight && 
-                          (portalPosT.y > 0 && portalPosT.y >= Mathf.Abs(portalPosT.x)&& _onTopPortal)))
+                          (portalPosT.y > 0 && portalPosT.y >= Mathf.Abs(portalPosT.x))))
         {
                     print("portal right");
                     if (_path != null)
@@ -302,36 +301,11 @@ public class PlayerControllerEight : MonoBehaviour
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
                     portalTop.GetComponent<AudioSource>().Play();
-                    transform.position = portalTop.position;
+                    transform.position = portalTop.position+ Vector3.left* portalDistanceParameter;;
                     firstPoint = true;
         }
     }
-    private void PressAnotherPortal()
-    {
-        var portalPosL = portalTop.transform.position;
-        var portalPosR = portalInsideRight.transform.position;
-        var mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
-        if((mousePos.x < (portalPosL.x+portalRadiusHor) && (mousePos.x > (portalPosL.x-portalRadiusHor))&& mousePos.y < portalPosL.y +portalRadiusVer && 
-            mousePos.y>portalPosL.y-portalRadiusVer && Input.GetMouseButtonDown(0)))
-        {
-            _onTopPortal = true;
-           
-        }
-        else if(((mousePos.x < (portalPosR.x + portalRadiusHor) && (mousePos.x > (portalPosR.x-portalRadiusHor))&& mousePos.y < portalPosR.y +portalRadiusVer &&
-                  mousePos.y>portalPosR.y-portalRadiusVer && Input.GetMouseButtonDown(0))))
-
-        {
-            _onInsideRightPortal = true;
-         
-        }
-        else
-        {
-            _onTopPortal = false;
-            _onInsideRightPortal = false;
-        }
-    }
-
-    #endregion   
+        #endregion   
     
     IEnumerator waitAndLoad()
     {   
