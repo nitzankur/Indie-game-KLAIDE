@@ -22,6 +22,7 @@ public class PlayerControllerFour : MonoBehaviour
     [SerializeField] private Transform PortalRight, PortalLeft;
     [SerializeField] private GameObject key;
     [SerializeField] private float portalRadiusHor,portalRadiusVer;
+    [SerializeField] private float portalDistanceParameter;
     private Animator playerAnimator;
 
     #endregion
@@ -63,7 +64,6 @@ public class PlayerControllerFour : MonoBehaviour
         if (LevelManager.Level == 5 && !findDoor)
         {
             Portal();
-            PressAnotherPortal();
         }
         
         EndOfPath = reachedEndOfPath;
@@ -285,7 +285,7 @@ public class PlayerControllerFour : MonoBehaviour
         var portalPosL = PortalLeft.transform.position;
         var portalPosR = PortalRight.transform.position;
         if ((pos.x < (portalPosL.x+portalRadiusHor) && (pos.x > (portalPosL.x-portalRadiusHor))&& pos.y < portalPosL.y +portalRadiusVer && pos.y>portalPosL.y-portalRadiusVer &&WorldsManager.onLeft &&
-            PortalRight.position.x > 0 &&  PortalRight.position.x > Mathf.Abs( PortalRight.position.y))&& onRightPortal)
+            PortalRight.position.x > 0 &&  PortalRight.position.x > Mathf.Abs( PortalRight.position.y)))
                 {
                     print("portal left");
                     if (_path != null)
@@ -298,12 +298,12 @@ public class PlayerControllerFour : MonoBehaviour
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
                     PortalLeft.GetComponent<AudioSource>().Play();
-                    transform.position = PortalRight.position;//+ Vector3.right* 0.22f;
+                    transform.position = PortalRight.position+ Vector3.right * portalDistanceParameter;
                     firstPoint = true;
                 }
 
                 else if ((pos.x < (portalPosR.x + portalRadiusHor) && (pos.x > (portalPosR.x-portalRadiusHor))&& pos.y < portalPosR.y +portalRadiusVer && pos.y>portalPosR.y-portalRadiusVer && WorldsManager.onRight && 
-                          (PortalLeft.position.x<0 && Mathf.Abs(PortalLeft.position.x) > Mathf.Abs(PortalLeft.position.y)))&& onLeftPortal)
+                          (PortalLeft.position.x<0 && Mathf.Abs(PortalLeft.position.x) > Mathf.Abs(PortalLeft.position.y))))
                 {
                     print("portal right");
                     if (_path != null)
@@ -316,34 +316,11 @@ public class PlayerControllerFour : MonoBehaviour
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
                     PortalRight.GetComponent<AudioSource>().Play();
-                    transform.position = PortalLeft.position;// + Vector3.left* 0.22f;
+                    transform.position = PortalLeft.position+ Vector3.left* portalDistanceParameter;
                     firstPoint = true;
                 }
     }
-
-    private void PressAnotherPortal()
-    {
-        var portalPosL = PortalLeft.position;
-        var portalPosR = PortalRight.position;
-        var mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
-        if((mousePos.x < (portalPosL.x+portalRadiusHor) && (mousePos.x > (portalPosL.x-portalRadiusHor))&& mousePos.y < portalPosL.y +portalRadiusVer && 
-            mousePos.y>portalPosL.y-portalRadiusVer && Input.GetMouseButtonDown(0)))
-        {
-            onLeftPortal = true;
-        }
-        else if(((mousePos.x < (portalPosR.x + portalRadiusHor) && (mousePos.x > (portalPosR.x-portalRadiusHor))&& mousePos.y < portalPosR.y +portalRadiusVer &&
-                  mousePos.y>portalPosR.y-portalRadiusVer && Input.GetMouseButtonDown(0))))
-
-        {
-            onRightPortal = true;
-        }
-        else
-        {
-            onLeftPortal = false;
-            onRightPortal = false;
-        }
-    }
-
+    
     #endregion   
     
     IEnumerator waitAndLoad(string sceneName)
