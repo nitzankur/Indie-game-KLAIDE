@@ -301,7 +301,7 @@ public class PlayerControllerEight : MonoBehaviour
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
                     portalTop.GetComponent<AudioSource>().Play();
-                    transform.position = portalTop.position+ Vector3.left* portalDistanceParameter;;
+                    transform.position = portalTop.position+ (Vector3.left + Vector3.up*2)* portalDistanceParameter;;
                     firstPoint = true;
         }
     }
