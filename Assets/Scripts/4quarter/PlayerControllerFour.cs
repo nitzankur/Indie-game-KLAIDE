@@ -21,6 +21,8 @@ public class PlayerControllerFour : MonoBehaviour
     [SerializeField] private int level;
     [SerializeField] private Transform PortalRight, PortalLeft;
     [SerializeField] private GameObject key;
+    [SerializeField] private GameObject keyAppear;
+    [SerializeField] private GameObject door;
     [SerializeField] private float portalRadiusHor,portalRadiusVer;
     [SerializeField] private float portalDistanceParameter;
     private Animator playerAnimator;
@@ -253,6 +255,8 @@ public class PlayerControllerFour : MonoBehaviour
         print("key") ;
         _key = true;
         FindObjectOfType<Camera>().GetComponent<AudioSource>().Play();
+        door.GetComponent<Animator>().SetTrigger("Key");
+        keyAppear.SetActive(true);
         key.SetActive(false);
     }
 

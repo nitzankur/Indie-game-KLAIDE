@@ -17,6 +17,8 @@ public class PlayerControllerThird : MonoBehaviour
     [SerializeField] private bool front;
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
+    [SerializeField] private GameObject key;
+    [SerializeField] private GameObject door;
     private Animator playerAnimator;
 
     #endregion
@@ -212,6 +214,8 @@ public class PlayerControllerThird : MonoBehaviour
                 print("key");
                 FindObjectOfType<Camera>().GetComponent<AudioSource>().Play();
                 _key = true;
+                door.GetComponent<Animator>().SetTrigger("Key");
+                key.SetActive(true);
                 other.gameObject.SetActive(false);
             }
         }
