@@ -69,7 +69,8 @@ public class PlayerController : MonoBehaviour
         EndOfPath = reachedEndOfPath;
         if (tutorial && WorldRotateTutorial.RotateOnce && tutorialRotate.gameObject.activeSelf)
             tutorialRotate.GetComponent<Animator>().SetBool("Rotate", true);
-
+        print(WorldsManagerToturial.CharacterMove + "Move");
+        print( targetPosition + "target position");
         if (WorldsManagerToturial.CharacterMove)
         {
             reachedEndOfPath = false;
