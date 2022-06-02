@@ -12,7 +12,7 @@ public class PlayerControllerFour : MonoBehaviour
     [SerializeField] private Vector3 targetPosition;
     [SerializeField] private bool reachedEndOfPath;
     [SerializeField] private float speed = 2;
-    [SerializeField] private float nextWaypointDistance;
+    [SerializeField] private float nextWaypointDistance,waitTime,horRadDoor, verRadDoor;
     [SerializeField] private int side = 0;
     [SerializeField] private bool move;
     [SerializeField] private bool front;
@@ -329,7 +329,7 @@ public class PlayerControllerFour : MonoBehaviour
     
     IEnumerator waitAndLoad(string sceneName)
     {   
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(waitTime);
         if (!FinishLevel)
         {
             FinishLevel = true;

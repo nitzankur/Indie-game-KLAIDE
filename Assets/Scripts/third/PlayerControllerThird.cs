@@ -11,7 +11,7 @@ public class PlayerControllerThird : MonoBehaviour
     [SerializeField] private Vector3 targetPosition;
     [SerializeField] private bool reachedEndOfPath;
     [SerializeField] private float speed = 2;
-    [SerializeField] private float nextWaypointDistance;
+    [SerializeField] private float nextWaypointDistance,verRadDoor,horRadDoor,waitTime;
     [SerializeField] private int side = 0;
     [SerializeField] private bool move;
     [SerializeField] private bool front;
@@ -52,6 +52,7 @@ public class PlayerControllerThird : MonoBehaviour
     }
     public void Update ()
     {
+        GetInDoor();
         EndOfPath = reachedEndOfPath;
         if (WorldManagerThird.CharacterMove && reachedEndOfPath)
         {
@@ -188,25 +189,29 @@ public class PlayerControllerThird : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         
     }
+
+    private void GetInDoor()
+    {
+        var doorPos = door.transform.position;
+        var pos = gameObject.transform.position;
+        if (doorPos.x <= 0f && (doorPos.y > 0 || doorPos.y < 0 &&doorPos.x < doorPos.y) && WorldManagerThird.onLeft && _key
+            &&  pos.x < doorPos.x + horRadDoor && pos.x > 
+            doorPos.x - horRadDoor && pos.y < doorPos.y + verRadDoor && pos.y >doorPos.y - verRadDoor)
+        {
+            front = false;
+            side = 1;
+            playerAnimator.SetInteger("Side", side);
+            playerAnimator.SetBool("Front", front);
+            door.GetComponent<AudioSource>().enabled = true;
+            StartCoroutine(waitAndLoad("StartLevel4"));
+            _key = false;
+        }
+    }
     
     private void OnTriggerStay2D(Collider2D other)
     {
         var pos = other.transform.position;
-        if (other.CompareTag("Door"))
-        {
-            if (pos.x <= 0f && (pos.y > 0 || pos.y < 0 && pos.x < pos.y) && WorldManagerThird.onLeft && _key)
-            {
-                front = false;
-                side = 1;
-                playerAnimator.SetInteger("Side", side);
-                playerAnimator.SetBool("Front", front);
-                other.GetComponent<AudioSource>().enabled = true;
-                StartCoroutine(waitAndLoad("StartLevel4"));
-                _key = false;
-            }
-        }
-
-        else if (other.CompareTag("Key"))
+         if (other.CompareTag("Key"))
         {
             print("key0" + WorldManagerThird.onRight);
             if (pos.x > 0f && (pos.y >0 || pos.y <0 &&pos.x>Mathf.Abs(pos.y)) && WorldManagerThird.onRight)
@@ -223,7 +228,7 @@ public class PlayerControllerThird : MonoBehaviour
     
     IEnumerator waitAndLoad(string sceneName)
     {   
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(waitTime);
         if (!FinishLevel)
         {
             FinishLevel = true;
