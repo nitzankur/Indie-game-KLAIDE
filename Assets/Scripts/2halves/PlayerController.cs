@@ -14,13 +14,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 targetPosition;
     [SerializeField] private bool reachedEndOfPath;
     [SerializeField] private float speed = 2;
-    [SerializeField] private float nextWaypointDistance;
+    [SerializeField] private float nextWaypointDistance, horRadDoor, verRadDoor,waitTime;
     [SerializeField] private string nextScene;
     [SerializeField] private int side = 0;
     [SerializeField] private bool move;
     [SerializeField] private bool front;
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
+    [SerializeField] private GameObject door;
     private Animator playerAnimator;
     
     //TUTORIAL ADDITION
@@ -64,6 +65,7 @@ public class PlayerController : MonoBehaviour
     
     public void Update ()
     {
+        GetInDoor();
         EndOfPath = reachedEndOfPath;
         if (tutorial && WorldRotateTutorial.RotateOnce && tutorialRotate.gameObject.activeSelf)
             tutorialRotate.GetComponent<Animator>().SetBool("Rotate", true);
@@ -227,37 +229,37 @@ public class PlayerController : MonoBehaviour
         
     }
     
-    private void OnTriggerStay2D(Collider2D other)
+    private void GetInDoor()
     {
-        if (other.CompareTag("Door"))
+        var pos = gameObject.transform.position;
+        var doorPos = door.transform.position;
+        if (tutorial && WorldsManagerToturial.onRight && doorPos.x > 0 && pos.x < doorPos.x + horRadDoor && pos.x > 
+            doorPos.x - horRadDoor && pos.y < doorPos.y + verRadDoor && pos.y >doorPos.y - verRadDoor)
         {
-            if (tutorial && WorldsManagerToturial.onRight && other.transform.position.x > 0)
-            {
-                front = false;
-                side = 1;
-                playerAnimator.SetInteger("Side", side);
-                playerAnimator.SetBool("Front", front);
-                findDoor = true;
-                other.GetComponent<AudioSource>().enabled = true;
-                StartCoroutine(WaitAndLoad());
-            }
-            else if (!tutorial && WorldsManagerToturial.onLeft && other.transform.position.x <= 0)
-            {
-                front = false;
-                side = 1;
-                playerAnimator.SetInteger("Side", side);
-                playerAnimator.SetBool("Front", front);
-                findDoor = true;
-                other.GetComponent<AudioSource>().enabled = true;
-                StartCoroutine(WaitAndLoad());
-            }
+            front = false;
+            side = 1;
+            playerAnimator.SetInteger("Side", side);
+            playerAnimator.SetBool("Front", front);
+            findDoor = true;
+            door.GetComponent<AudioSource>().enabled = true;
+            StartCoroutine(WaitAndLoad());
+        }
+        else if (!tutorial && WorldsManagerToturial.onLeft && door.transform.position.x <= 0)
+        {
+            front = false;
+            side = 1;
+            playerAnimator.SetInteger("Side", side);
+            playerAnimator.SetBool("Front", front);
+            findDoor = true;
+            door.GetComponent<AudioSource>().enabled = true;
+            StartCoroutine(WaitAndLoad());
         }
     }
     
 
     IEnumerator WaitAndLoad()
     {   
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(waitTime);
         if (!FinishLevel)
         {
             FinishLevel = true;
