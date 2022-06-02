@@ -211,7 +211,21 @@ public class PlayerControllerThird : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         var pos = other.transform.position;
-         if (other.CompareTag("Key"))
+
+        if (other.CompareTag("Door"))
+        {
+            if (pos.x <= 0f && (pos.y > 0 || pos.y < 0 && pos.x < pos.y) && WorldManagerThird.onLeft && _key)
+            {
+                front = false;
+                side = 1;
+                playerAnimator.SetInteger("Side", side);
+                playerAnimator.SetBool("Front", front);
+                other.GetComponent<AudioSource>().enabled = true;
+                StartCoroutine(waitAndLoad("Level-4"));
+                _key = false;
+            }
+        }
+        else if (other.CompareTag("Key"))
         {
             print("key0" + WorldManagerThird.onRight);
             if (pos.x > 0f && (pos.y >0 || pos.y <0 &&pos.x>Mathf.Abs(pos.y)) && WorldManagerThird.onRight)
@@ -234,6 +248,7 @@ public class PlayerControllerThird : MonoBehaviour
             FinishLevel = true;
             LevelManager.unlockedLevel++;
         }
+        Menu.fromRestart = false;
         LevelManager.Level = 4;
         SceneManager.LoadScene(sceneName);
     }

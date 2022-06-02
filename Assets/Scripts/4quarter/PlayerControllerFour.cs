@@ -41,7 +41,8 @@ public class PlayerControllerFour : MonoBehaviour
     
     #endregion
 
-    public static bool FinishLevel;
+    public static bool FinishLevel4;
+    public static bool FinishLevel5;
     public static bool EndOfPath;
    
     public void Start ()
@@ -277,11 +278,22 @@ public class PlayerControllerFour : MonoBehaviour
         playerAnimator.SetBool("Front", front);
         if (LevelManager.Level == 4)
         {
-            StartCoroutine(waitAndLoad(sceneName: "StartLevel5"));
+            if (!FinishLevel4)
+            {
+                FinishLevel4 = true;
+                LevelManager.unlockedLevel++;
+            }
+            StartCoroutine(waitAndLoad(sceneName: "Level-5"));
             LevelManager.Level = 5;
         }
         else if (LevelManager.Level == 5)
         {
+            door.GetComponent<AudioSource>().enabled = true;
+            if (!FinishLevel5)
+            {
+                FinishLevel5 = true;
+                LevelManager.unlockedLevel++;
+            }
             door.GetComponent<AudioSource>().enabled = true;
             StartCoroutine(waitAndLoad(sceneName: "Level6")); //todo: change to start of level 5
             LevelManager.Level = 6;
@@ -342,12 +354,8 @@ public class PlayerControllerFour : MonoBehaviour
     IEnumerator waitAndLoad(string sceneName)
     {   
         yield return new WaitForSeconds(waitTime);
-        if (!FinishLevel)
-        {
-            FinishLevel = true;
-            LevelManager.unlockedLevel++;
-            
-        }
+        key.SetActive(true);
+        Menu.fromRestart = false;
         SceneManager.LoadScene(sceneName);
         
     }
