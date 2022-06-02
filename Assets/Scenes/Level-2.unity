@@ -4996,7 +4996,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 550394361}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -13068,6 +13068,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308689, guid: 913572e6ef161794b800a95f60435f85, type: 3}
+      propertyPath: maxSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836323175003308689, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: slowdownDistance
       value: 0
       objectReference: {fileID: 0}
@@ -13076,12 +13080,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 442949326}
     - target: {fileID: 1836323175003308690, guid: 913572e6ef161794b800a95f60435f85, type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 550394361}
+    - target: {fileID: 1836323175003308690, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: tutorial
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308690, guid: 913572e6ef161794b800a95f60435f85, type: 3}
+      propertyPath: waitTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836323175003308690, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: nextScene
       value: StartLevel3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836323175003308690, guid: 913572e6ef161794b800a95f60435f85, type: 3}
+      propertyPath: horRadDoor
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836323175003308690, guid: 913572e6ef161794b800a95f60435f85, type: 3}
+      propertyPath: verRadDoor
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308690, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: tutorialMove

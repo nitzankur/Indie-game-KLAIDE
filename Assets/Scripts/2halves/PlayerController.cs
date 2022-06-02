@@ -244,7 +244,8 @@ public class PlayerController : MonoBehaviour
             door.GetComponent<AudioSource>().enabled = true;
             StartCoroutine(WaitAndLoad());
         }
-        else if (!tutorial && WorldsManagerToturial.onLeft && door.transform.position.x <= 0)
+        else if (!tutorial && WorldsManagerToturial.onLeft && doorPos.x <= 0  && pos.x < doorPos.x + horRadDoor && pos.x > 
+            doorPos.x - horRadDoor && pos.y < doorPos.y + verRadDoor && pos.y >doorPos.y - verRadDoor)
         {
             front = false;
             side = 1;
