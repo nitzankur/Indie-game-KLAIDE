@@ -11,6 +11,7 @@ public class ButtonLevel : MonoBehaviour
     [SerializeField] private Sprite unlockSprite;
     [SerializeField] private Sprite lockSprite;
     [SerializeField] private Sprite openSprite;
+    [SerializeField] private GameObject player;
     private int level = 0;
     private bool isUnlock;
     private Button button;
@@ -18,6 +19,8 @@ public class ButtonLevel : MonoBehaviour
 
     private void OnEnable()
     {
+        if (player.activeSelf && !Menu.first)
+            player.SetActive(false);
         button = GetComponent<Button>();
         image = GetComponent<Image>();
     }
@@ -41,6 +44,14 @@ public class ButtonLevel : MonoBehaviour
     public void OnClick()
     {
         if (!isUnlock) return;
+        if (level == 0 && Menu.first)
+        {
+            player.GetComponent<Animator>().SetBool("start", true);
+            //button.GetComponent<Animator>().SetTrigger("open");
+            Menu.first = false;
+            StartCoroutine(WaitForLevel1());
+            return;
+        }
         GetComponent<AudioSource>().Play();
         StartCoroutine(WaitAndLoad());
     }
@@ -52,10 +63,16 @@ public class ButtonLevel : MonoBehaviour
         yield return new WaitForSeconds(1f);
         int nextLevel;
         nextLevel = level + 1;
-        SceneManager.LoadScene("StartLevel" + nextLevel);
+        SceneManager.LoadScene("Level-" + nextLevel);
     }
-    IEnumerator WaitForOpen()
+    IEnumerator WaitForLevel1()
     {   
+        yield return new WaitForSeconds(1.8f);
+        GetComponent<AudioSource>().Play();
+        image.sprite = openSprite;
         yield return new WaitForSeconds(1f);
+        int nextLevel;
+        nextLevel = level + 1;
+        SceneManager.LoadScene("Level-" + nextLevel);
     }
 }

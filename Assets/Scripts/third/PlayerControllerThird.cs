@@ -201,7 +201,7 @@ public class PlayerControllerThird : MonoBehaviour
                 playerAnimator.SetInteger("Side", side);
                 playerAnimator.SetBool("Front", front);
                 other.GetComponent<AudioSource>().enabled = true;
-                StartCoroutine(waitAndLoad("StartLevel4"));
+                StartCoroutine(waitAndLoad("Level-4"));
                 _key = false;
             }
         }
@@ -229,6 +229,7 @@ public class PlayerControllerThird : MonoBehaviour
             FinishLevel = true;
             LevelManager.unlockedLevel++;
         }
+        Menu.fromRestart = false;
         LevelManager.Level = 4;
         SceneManager.LoadScene(sceneName);
     }

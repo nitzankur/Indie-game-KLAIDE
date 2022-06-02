@@ -25,10 +25,8 @@ public class WorldsManagerToturial : MonoBehaviour
     
     void Update()
     {
-        print((WorldRotateTutorial.EndDrag + " end drag"));
         if (WorldRotateTutorial.EndDrag)
         {
-            print("update graph");
             WorldRotateTutorial.EndDrag = false;
             UpdateLeftNodes();
             UpdateRightNodes();

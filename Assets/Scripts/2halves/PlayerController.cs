@@ -41,8 +41,11 @@ public class PlayerController : MonoBehaviour
     private int _currentWaypoint = 0;
     #endregion
 
-    public static bool FinishLevel;
+    public static bool FinishLevel1;
+    public static bool FinishLevel2;
     public static bool EndOfPath;
+   
+    
     public void Start ()
     {
         findDoor = false;
@@ -239,6 +242,11 @@ public class PlayerController : MonoBehaviour
                 playerAnimator.SetBool("Front", front);
                 findDoor = true;
                 other.GetComponent<AudioSource>().enabled = true;
+                if (!FinishLevel1)
+                {
+                    FinishLevel1 = true;
+                    LevelManager.unlockedLevel++;
+                }
                 StartCoroutine(WaitAndLoad());
             }
             else if (!tutorial && WorldsManagerToturial.onLeft && other.transform.position.x <= 0)
@@ -249,6 +257,11 @@ public class PlayerController : MonoBehaviour
                 playerAnimator.SetBool("Front", front);
                 findDoor = true;
                 other.GetComponent<AudioSource>().enabled = true;
+                if (!FinishLevel2)
+                {
+                    FinishLevel2 = true;
+                    LevelManager.unlockedLevel++;
+                }
                 StartCoroutine(WaitAndLoad());
             }
         }
@@ -258,11 +271,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator WaitAndLoad()
     {   
         yield return new WaitForSeconds(1.5f);
-        if (!FinishLevel)
-        {
-            FinishLevel = true;
-            LevelManager.unlockedLevel++;
-        }
+        Menu.fromRestart = false;
         SceneManager.LoadScene(nextScene);
     }
 }

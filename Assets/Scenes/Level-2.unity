@@ -10888,6 +10888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
+  background: {fileID: 1902381760}
 --- !u!82 &1255245764
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13161,7 +13162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308690, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: nextScene
-      value: StartLevel3
+      value: Level-3
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308690, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: tutorialMove
