@@ -32,10 +32,16 @@ public class WorldsRotate :  MonoBehaviour , IBeginDragHandler, IEndDragHandler,
             var localpos = new Vector2(transform.position.x, transform.position.y);
             _pos = _mousePosStart - localpos;
             _startTime = Time.time;
+            if (!_drag)
+            {
+                WorldsManager.CharacterMove = true;
+            }
         }
 
         if (Input.GetMouseButton(0))
         {
+            _drag = true;
+            EndDrag = false;
             if (PlayerControllerFour.EndOfPath && Time.time - _startTime > 0.3f)
             {
                 Vector2 mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
@@ -48,6 +54,11 @@ public class WorldsRotate :  MonoBehaviour , IBeginDragHandler, IEndDragHandler,
 
                 _pos = tempPos;
             }
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            _drag = false;
+            EndDrag = true; 
         }
     }
     private void RotateWorld(GameObject side, Vector3 tempPos)
@@ -65,10 +76,7 @@ public class WorldsRotate :  MonoBehaviour , IBeginDragHandler, IEndDragHandler,
     
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!_drag)
-        {
-            WorldsManager.CharacterMove = true;
-        }
+      
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -83,9 +91,7 @@ public class WorldsRotate :  MonoBehaviour , IBeginDragHandler, IEndDragHandler,
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        print("end drag");
-        _drag = false;
-        EndDrag = true;
+    
     }
    
     
