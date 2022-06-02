@@ -356,7 +356,7 @@ public class PlayerControllerFour : MonoBehaviour
     IEnumerator waitAndLoad(string sceneName)
     {   
         yield return new WaitForSeconds(waitTime);
-        key.SetActive(true);
+        //key.SetActive(true);
         Menu.fromRestart = false;
         SceneManager.LoadScene(sceneName);
         

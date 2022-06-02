@@ -73,6 +73,12 @@ public class ButtonLevel : MonoBehaviour
         yield return new WaitForSeconds(1f);
         int nextLevel;
         nextLevel = level + 1;
+        LevelManager.Level = nextLevel switch
+        {
+            4 => 4,
+            5 => 5,
+            _ => LevelManager.Level
+        };
         SceneManager.LoadScene("Level-" + nextLevel);
     }
 }

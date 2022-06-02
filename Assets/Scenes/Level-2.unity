@@ -13150,7 +13150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308689, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: maxSpeed
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308689, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: slowdownDistance
@@ -13164,6 +13164,10 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 550394361}
+    - target: {fileID: 1836323175003308690, guid: 913572e6ef161794b800a95f60435f85, type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308690, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: tutorial
       value: 0

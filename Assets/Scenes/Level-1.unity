@@ -992,7 +992,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308689, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: maxSpeed
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308689, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: slowdownDistance
@@ -1006,6 +1006,10 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 1891802447}
+    - target: {fileID: 1836323175003308690, guid: 913572e6ef161794b800a95f60435f85, type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308690, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: tutorial
       value: 1
@@ -1098,6 +1102,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1836323175003308695, guid: 913572e6ef161794b800a95f60435f85, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2355068737976007400, guid: e0bf1cfa25f2aff49b4657f52d845bee, type: 3}
     - target: {fileID: 1836323175003308695, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -14961,7 +14969,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662624871}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.019022875, w: 0.99981904}
   m_LocalPosition: {x: 2.4, y: 0.3, z: 8.64657}
   m_LocalScale: {x: 0.2003197, y: 0.19948235, z: 1}
   m_Children:
@@ -14969,7 +14977,7 @@ Transform:
   - {fileID: 2064978051}
   m_Father: {fileID: 603332859}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2.18}
 --- !u!95 &1662624874
 Animator:
   serializedVersion: 3
