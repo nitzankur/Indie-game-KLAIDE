@@ -203,7 +203,7 @@ public class PlayerControllerThird : MonoBehaviour
             playerAnimator.SetInteger("Side", side);
             playerAnimator.SetBool("Front", front);
             door.GetComponent<AudioSource>().enabled = true;
-            StartCoroutine(waitAndLoad("StartLevel4"));
+            StartCoroutine(waitAndLoad("Level-4"));
             _key = false;
         }
     }
@@ -235,6 +235,7 @@ public class PlayerControllerThird : MonoBehaviour
                 _key = true;
                 door.GetComponent<Animator>().SetTrigger("Key");
                 key.SetActive(true);
+                key.GetComponentInChildren<Animator>().enabled = true;
                 other.gameObject.SetActive(false);
             }
         }
