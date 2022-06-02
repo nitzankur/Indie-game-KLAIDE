@@ -17193,6 +17193,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1836323175003308695, guid: 913572e6ef161794b800a95f60435f85, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2355068737976007400, guid: e0bf1cfa25f2aff49b4657f52d845bee, type: 3}
     m_RemovedComponents:
     - {fileID: 1836323175003308685, guid: 913572e6ef161794b800a95f60435f85, type: 3}
     - {fileID: 1836323175003308690, guid: 913572e6ef161794b800a95f60435f85, type: 3}
@@ -40077,7 +40081,7 @@ BoxCollider2D:
   m_Offset: {x: -0.052464657, y: 0.0063311756}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.50000024, y: 0.31560078}
     oldSize: {x: 0.64, y: 1.24}
     newSize: {x: 0.96, y: 1.93}
     adaptiveTilingThreshold: 0.5
