@@ -72669,7 +72669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308694, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.93
+      value: -1.54
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308694, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: m_LocalPosition.z
@@ -72737,6 +72737,9 @@ MonoBehaviour:
   reachedEndOfPath: 0
   speed: 2
   nextWaypointDistance: 0.5
+  horRadDoor: 0.7
+  verRadDoor: 0.7
+  waitTime: 0.5
   side: 0
   move: 0
   front: 0
@@ -72744,10 +72747,12 @@ MonoBehaviour:
   findDoor: 0
   openDoorSprite: {fileID: 21300000, guid: 758902965727246a1bfa88027c27aae9, type: 3}
   door: {fileID: 5217888883607147936}
+  key: {fileID: 1933704884}
   portalInsideRight: {fileID: 0}
   portalTop: {fileID: 0}
   portalRadiusHor: 0
   portalRadiusVer: 0
+  portalDistanceParameter: 0
 --- !u!114 &1819335383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77011,6 +77016,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7654142152558554309, guid: 79cc39b16fd0d37449e7935161cdcea2, type: 3}
   m_PrefabInstance: {fileID: 1933289769}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1933704884 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7693329711137624224, guid: 6e5620080a125f748b0799c6775903f4, type: 3}
+  m_PrefabInstance: {fileID: 2001562447}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1938986003
 PrefabInstance:
@@ -85973,6 +85983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0ad0ce9e461c2438083a7c96ec20da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
 --- !u!114 &2126823931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87304,5 +87315,6 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.24767798
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8237362725050217833, guid: 883756769c5800e419c3bceb81b4233e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 883756769c5800e419c3bceb81b4233e, type: 3}

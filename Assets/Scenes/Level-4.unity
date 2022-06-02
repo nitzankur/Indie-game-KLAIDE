@@ -17115,11 +17115,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308694, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.78
+      value: -2.12
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308694, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.23
+      value: 2.38
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308694, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17195,6 +17195,9 @@ MonoBehaviour:
   reachedEndOfPath: 0
   speed: 2
   nextWaypointDistance: 0.5
+  waitTime: 0.5
+  horRadDoor: 0.5
+  verRadDoor: 0.5
   side: 0
   move: 0
   front: 0

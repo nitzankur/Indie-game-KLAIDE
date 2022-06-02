@@ -12,14 +12,14 @@ public class PlayerControllerEight : MonoBehaviour
     [SerializeField] private Vector3 targetPosition;
     [SerializeField] private bool reachedEndOfPath;
     [SerializeField] private float speed = 2;
-    [SerializeField] private float nextWaypointDistance;
+    [SerializeField] private float nextWaypointDistance,horRadDoor, verRadDoor,waitTime;
     [SerializeField] private int side = 0;
     [SerializeField] private bool move;
     [SerializeField] private bool front;
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
     [SerializeField] private Sprite openDoorSprite;
-    [SerializeField] private GameObject door;
+    [SerializeField] private GameObject door,key;
     [SerializeField] private Transform portalInsideRight, portalTop;
     [SerializeField] private float portalRadiusHor,portalRadiusVer,portalDistanceParameter;
     #endregion
@@ -46,6 +46,8 @@ public class PlayerControllerEight : MonoBehaviour
         _seeker = GetComponent<Seeker>();
         playerAnimator = GetComponent<Animator>();
         reachedEndOfPath = true;
+        key.SetActive(true);
+        
     }
 
     public void OnPathComplete (Path p) {
@@ -59,6 +61,7 @@ public class PlayerControllerEight : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
+        GetInDoor();
         if (LevelManager.Level == 8)
         {
             Portal();
@@ -211,22 +214,27 @@ public class PlayerControllerEight : MonoBehaviour
     #endregion
 
     #region Trigger
+
+    private void GetInDoor()
+    {
+        var doorPos = door.transform.position;
+        var pos = gameObject.transform.position;
+        if (doorPos.x < 0 && Mathf.Abs(doorPos.x) > Mathf.Abs(doorPos.y) && WorldsManagerEight.onLeft && _key && pos.x < doorPos.x + horRadDoor && pos.x > 
+            doorPos.x - horRadDoor && pos.y < doorPos.y + verRadDoor && pos.y >doorPos.y - verRadDoor)
+        {
+            print("door");
+            front = false;
+            side = 1;
+            playerAnimator.SetInteger("Side", side);
+            playerAnimator.SetBool("Front", front);
+            door.GetComponent<AudioSource>().enabled = true;
+            StartCoroutine(waitAndLoad());
+            _key = false;
+        }
+    }
     private void OnTriggerStay2D(Collider2D other)
     {
         var pos = other.transform.position;
-        if (other.CompareTag("Door"))
-        {
-            if (pos.x < 0 && Mathf.Abs(pos.x) > Mathf.Abs(pos.y) && WorldsManagerEight.onLeft && _key)
-            {
-                front = false;
-                side = 1;
-                playerAnimator.SetInteger("Side", side);
-                playerAnimator.SetBool("Front", front);
-                other.GetComponent<AudioSource>().enabled = true;
-                StartCoroutine(waitAndLoad());
-                _key = false;
-            }
-        }
         switch (LevelManager.Level)
         {
             case 6:
@@ -309,7 +317,7 @@ public class PlayerControllerEight : MonoBehaviour
     
     IEnumerator waitAndLoad()
     {   
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(waitTime);
         if (!FinishLevel)
         {
             FinishLevel = true;

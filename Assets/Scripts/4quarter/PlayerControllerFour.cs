@@ -50,6 +50,7 @@ public class PlayerControllerFour : MonoBehaviour
         _seeker = GetComponent<Seeker>();
         playerAnimator = GetComponent<Animator>();
         reachedEndOfPath = true;
+        key.SetActive(true);
     }
 
     public void OnPathComplete (Path p) {
@@ -63,6 +64,7 @@ public class PlayerControllerFour : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
+        GetInDoor();
         if (LevelManager.Level == 5 && !findDoor)
         {
             Portal();
@@ -215,27 +217,31 @@ public class PlayerControllerFour : MonoBehaviour
     
 
     #endregion
-
+    
     #region Trigger
+
+    private void GetInDoor()
+    {
+        var doorPos = door.transform.position;
+        var pos = gameObject.transform.position;
+        if (LevelManager.Level == 5 && doorPos.y > 0 && doorPos.y >= Mathf.Abs(doorPos.x) && WorldsManager.onTop  && _key &&  pos.x < doorPos.x + horRadDoor && pos.x > 
+            doorPos.x - horRadDoor && pos.y < doorPos.y + verRadDoor && pos.y >doorPos.y - verRadDoor)
+        {
+            print("door");
+            GetInDoorHalper();
+        }
+        if (LevelManager.Level == 4 && (doorPos.y < 0 &&  Mathf.Abs(doorPos.x) <= Mathf.Abs(doorPos.y) && WorldsManager.onButtom  && _key  &&  pos.x < doorPos.x + horRadDoor && pos.x > 
+            doorPos.x - horRadDoor && pos.y < doorPos.y + verRadDoor && pos.y >doorPos.y - verRadDoor))
+        {
+            print("door");
+            GetInDoorHalper();
+        }
+    }
     private void OnTriggerStay2D(Collider2D other)
     {
         var pos = other.transform.position;
-        if (other.CompareTag("Door"))
-        {
-            if (LevelManager.Level == 5 && pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && WorldsManager.onTop && _key)
-            {
-                print("door");
-                getInDoor(other);
-            }
-            if (LevelManager.Level == 4 && (pos.y < 0 &&  Mathf.Abs(pos.x) <= Mathf.Abs(pos.y) && WorldsManager.onButtom && _key))
-            {
-                print("door");
-                getInDoor(other);
-            }
-        }
-        
 
-        else if (other.CompareTag("Key"))
+        if (other.CompareTag("Key"))
         {
             print("key0" + WorldsManager.onRight);
             if (LevelManager.Level == 5 && (pos.y > 0 && pos.y >= Mathf.Abs(pos.x)) && WorldsManager.onTop)
@@ -260,7 +266,7 @@ public class PlayerControllerFour : MonoBehaviour
         key.SetActive(false);
     }
 
-    private void getInDoor(Collider2D other)
+    private void GetInDoorHalper()
     {
         print("door should open");
         findDoor = true;
@@ -275,7 +281,7 @@ public class PlayerControllerFour : MonoBehaviour
         }
         else if (LevelManager.Level == 5)
         {
-            other.GetComponent<AudioSource>().enabled = true;
+            door.GetComponent<AudioSource>().enabled = true;
             StartCoroutine(waitAndLoad(sceneName: "Level6")); //todo: change to start of level 5
             LevelManager.Level = 6;
         }
@@ -334,7 +340,7 @@ public class PlayerControllerFour : MonoBehaviour
         {
             FinishLevel = true;
             LevelManager.unlockedLevel++;
-            key.SetActive(true);
+            
         }
         SceneManager.LoadScene(sceneName);
         

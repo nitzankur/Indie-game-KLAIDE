@@ -24334,32 +24334,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
   m_PrefabInstance: {fileID: 85914534}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &903773619
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 903773617}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.010271236, y: 0.13925779}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.65, y: 1.24}
-    newSize: {x: 0.96, y: 1.93}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.48856023, y: 0.96559167}
-  m_EdgeRadius: 0
 --- !u!82 &903773620
 AudioSource:
   m_ObjectHideFlags: 0
@@ -42498,11 +42472,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308694, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.08
+      value: -3.39
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308694, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.86
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308694, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: m_LocalPosition.z
@@ -42566,6 +42540,9 @@ MonoBehaviour:
   reachedEndOfPath: 0
   speed: 2
   nextWaypointDistance: 0.5
+  waitTime: 0.5
+  horRadDoor: 0.8
+  verRadDoor: 0.8
   side: 0
   move: 0
   front: 0
@@ -42577,8 +42554,9 @@ MonoBehaviour:
   key: {fileID: 280084031}
   keyAppear: {fileID: 2101622685}
   door: {fileID: 903773617}
-  portalRadiusHor: 0.3
-  portalRadiusVer: 0.3
+  portalRadiusHor: 0.25
+  portalRadiusVer: 0.25
+  portalDistanceParameter: 0.37
 --- !u!114 &1500486510
 MonoBehaviour:
   m_ObjectHideFlags: 0
