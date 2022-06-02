@@ -265,9 +265,10 @@ public class PlayerControllerFour : MonoBehaviour
         FindObjectOfType<Camera>().GetComponent<AudioSource>().Play();
         door.GetComponent<Animator>().SetTrigger("Key");
         keyAppear.SetActive(true);
+        keyAppear.GetComponentInChildren<Animator>().enabled = true;
         key.SetActive(false);
     }
-
+    
     private void GetInDoorHalper()
     {
         print("door should open");
@@ -283,12 +284,12 @@ public class PlayerControllerFour : MonoBehaviour
                 FinishLevel4 = true;
                 LevelManager.unlockedLevel++;
             }
+            door.GetComponent<AudioSource>().enabled = true;
             StartCoroutine(waitAndLoad(sceneName: "Level-5"));
             LevelManager.Level = 5;
         }
         else if (LevelManager.Level == 5)
         {
-            door.GetComponent<AudioSource>().enabled = true;
             if (!FinishLevel5)
             {
                 FinishLevel5 = true;
@@ -302,6 +303,7 @@ public class PlayerControllerFour : MonoBehaviour
     }
 
 
+    
     private void Portal()
     {
         var pos = gameObject.transform.position;

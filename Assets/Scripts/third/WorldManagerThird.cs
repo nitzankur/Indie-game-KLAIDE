@@ -15,9 +15,11 @@ public class WorldManagerThird : MonoBehaviour
     
     void Start()
     {
+        print("start");
         _shared = this;
         UpdateLeftNodes();
         UpdateRightNodes();
+        UpdateButtomNodes();
         leftTransform = left.transform;
         rightTransform = right.transform;
         buttomTransform = buttom.transform;
@@ -25,7 +27,6 @@ public class WorldManagerThird : MonoBehaviour
     
     void Update()
     {
-        print(WorldRotateThird.EndDrag +" end drag");
         if (WorldRotateThird.EndDrag)
         {
             print("update graph");
