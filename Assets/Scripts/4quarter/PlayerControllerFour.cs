@@ -66,7 +66,6 @@ public class PlayerControllerFour : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
-        LevelManager.Level = 5;
         GetInDoor();
         if (LevelManager.Level == 5 && !findDoor)
         {
