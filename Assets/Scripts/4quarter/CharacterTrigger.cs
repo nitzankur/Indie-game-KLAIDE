@@ -10,7 +10,7 @@ public class CharacterTrigger : MonoBehaviour
    private void Update()
    {
        var pos = transform.position;
-       if (pos.y > 0 && pos.y >= Mathf.Abs(pos.x))
+       if (pos.y > 0 && pos.y > Mathf.Abs(pos.x))
        {
            WorldsManager.onTop = true;
            WorldsManager.onLeft = false;
@@ -34,7 +34,7 @@ public class CharacterTrigger : MonoBehaviour
            WorldsManager.onLeft = false;
            //      print("right");   
        }
-       else if(pos.x<0 && Mathf.Abs(pos.x) > Mathf.Abs(pos.y))
+       else if(pos.x<0 && Mathf.Abs(pos.x) >= Mathf.Abs(pos.y))
        {
            WorldsManager.onLeft = true;
            WorldsManager.onTop = false;
