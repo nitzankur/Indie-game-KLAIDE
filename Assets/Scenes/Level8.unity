@@ -11360,6 +11360,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308695, guid: 913572e6ef161794b800a95f60435f85, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2355068737976007400, guid: e0bf1cfa25f2aff49b4657f52d845bee, type: 3}
+    - target: {fileID: 1836323175003308695, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: m_SortingOrder
       value: 2
       objectReference: {fileID: 0}
@@ -50828,6 +50832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
+  background: {fileID: 0}
 --- !u!114 &1189674355
 MonoBehaviour:
   m_ObjectHideFlags: 0

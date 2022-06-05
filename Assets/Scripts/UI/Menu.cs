@@ -17,29 +17,7 @@ public class Menu : MonoBehaviour
         if (fromRestart && level == 0)
             background.SetActive(false);
     }
-
-    private void Update()
-    {
-        // fromRestart = level == 0;
-       /*switch (level)
-       {
-           case 1:
-               RestartLevel1();
-               break;
-           case 2:
-               RestartLevel2();
-               break;
-           case 3:
-               RestartLevel3();
-               break;
-           case 4:
-               RestartLevel4();
-               break;
-           case 5:
-               RestartLevel5();
-               break;
-       }*/
-    }
+    
 
     public void RestartLevel1()
     {
@@ -64,12 +42,14 @@ public class Menu : MonoBehaviour
 
     public void RestartLevel4()
     {
+        LevelManager.Level = 4;
         fromRestart = true;
         GetComponent<AudioSource>().Play();
         StartCoroutine(WaitForOpen("Level-4"));
     }
     public void RestartLevel5()
     {
+        LevelManager.Level = 5;
         fromRestart = true;
         GetComponent<AudioSource>().Play();
         StartCoroutine(WaitForOpen("Level-5"));

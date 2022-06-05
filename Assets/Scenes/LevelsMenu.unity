@@ -791,7 +791,7 @@ GameObject:
   - component: {fileID: 956627854}
   - component: {fileID: 956627853}
   m_Layer: 0
-  m_Name: walk-sidefront_0
+  m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -856,7 +856,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2555647988305936542, guid: f7f1aa83341f47d4db8e0b59413946eb, type: 3}
+  m_Sprite: {fileID: 7219805012320129397, guid: 6fd746d42ed2212459c1f146e31e6f84, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0

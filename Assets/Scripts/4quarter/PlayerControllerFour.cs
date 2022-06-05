@@ -31,7 +31,7 @@ public class PlayerControllerFour : MonoBehaviour
 
     #region PrivateProperties
 
-    
+    private bool portalAnim = false;
     private bool firstPoint = true;
     private bool _key, PortalON;
     private Seeker _seeker;
@@ -313,6 +313,11 @@ public class PlayerControllerFour : MonoBehaviour
             PortalRight.position.x > 0 &&  PortalRight.position.x > Mathf.Abs( PortalRight.position.y))&PortalON)
                 {
                     print("portal left");
+                    if (!portalAnim)
+                    {
+                        portalAnim = true;
+                        playerAnimator.SetTrigger("inPortal");
+                    }
                     if (_path != null)
                     {
                         _currentWaypoint = _path.vectorPath.Count - 1;
@@ -323,17 +328,23 @@ public class PlayerControllerFour : MonoBehaviour
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
                     PortalLeft.GetComponent<AudioSource>().Play();
-                    transform.position = PortalRight.position ;//+ Vector3.right * portalDistanceParameter;
+                    StartCoroutine(WaitForRight());
                     firstPoint = true;
-                    PortalON = false;
+                    //transform.position = PortalRight.position ;//+ Vector3.right * portalDistanceParameter;
                     StartCoroutine(WaitAndMove());
-                    
                 }
+        
 
                 else if ((pos.x < (portalPosR.x + portalRadiusHor) && (pos.x > (portalPosR.x-portalRadiusHor))&& pos.y < portalPosR.y +portalRadiusVer && pos.y>portalPosR.y-portalRadiusVer && WorldsManager.onRight && 
                           (PortalLeft.position.x<0 && Mathf.Abs(PortalLeft.position.x) > Mathf.Abs(PortalLeft.position.y)&&PortalON)))
                 {
                     print("portal right");
+                    if (!portalAnim)
+                    {
+                        portalAnim = true;
+                        playerAnimator.SetTrigger("inPortal");
+                    }
+                        
                     if (_path != null)
                     {
                         _currentWaypoint = _path.vectorPath.Count - 1;
@@ -342,11 +353,12 @@ public class PlayerControllerFour : MonoBehaviour
                     }
                     reachedEndOfPath = true;
                     PortalON = true;
-                    GetComponent<AIPath>().constrainInsideGraph = true;
                     PortalRight.GetComponent<AudioSource>().Play();
-                    transform.position = PortalLeft.position;//+ Vector3.left* portalDistanceParameter;
+                    GetComponent<AIPath>().constrainInsideGraph = true;
+                    StartCoroutine(WaitForLeft());
+                    //transform.position = PortalLeft.position;//+ Vector3.left* portalDistanceParameter;
                     firstPoint = true;
-                    PortalON = false;
+                    //PortalON = false;
                     StartCoroutine(WaitAndMove());
                 }
     }
@@ -356,7 +368,7 @@ public class PlayerControllerFour : MonoBehaviour
     IEnumerator waitAndLoad(string sceneName)
     {   
         yield return new WaitForSeconds(waitTime);
-        key.SetActive(true);
+        //key.SetActive(true);
         Menu.fromRestart = false;
         SceneManager.LoadScene(sceneName);
         
@@ -364,7 +376,23 @@ public class PlayerControllerFour : MonoBehaviour
     
     IEnumerator WaitAndMove()
     {   
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3.5f);
         PortalON = true;
+    }
+    
+    IEnumerator WaitForRight()
+    {   
+        yield return new WaitForSeconds(0.7f);
+        PortalON = false;
+        portalAnim = false;
+        transform.position = PortalRight.position;
+    }
+    
+    IEnumerator WaitForLeft()
+    {
+        yield return new WaitForSeconds(0.7f);
+        PortalON = false;
+        portalAnim = false;
+        transform.position = PortalLeft.position;
     }
 }
