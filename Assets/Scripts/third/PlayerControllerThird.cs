@@ -194,7 +194,7 @@ public class PlayerControllerThird : MonoBehaviour
     {
         var doorPos = door.transform.position;
         var pos = gameObject.transform.position;
-        if (doorPos.x <= 0f && (doorPos.y > 0 || doorPos.y < 0 &&doorPos.x < doorPos.y) && WorldManagerThird.onLeft && _key
+        if (doorPos.x <=- 0.3f && (doorPos.y > 0 || doorPos.y < 0 &&doorPos.x < doorPos.y-1.7f) && WorldManagerThird.onLeft && _key
             &&  pos.x < doorPos.x + horRadDoor && pos.x > 
             doorPos.x - horRadDoor && pos.y < doorPos.y + verRadDoor && pos.y >doorPos.y - verRadDoor)
         {

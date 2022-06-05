@@ -236,7 +236,7 @@ public class PlayerController : MonoBehaviour
     {
         var pos = gameObject.transform.position;
         var doorPos = door.transform.position;
-        if (tutorial && WorldsManagerToturial.onRight && doorPos.x > 0 && pos.x < doorPos.x + horRadDoor && pos.x > 
+        if (tutorial && WorldsManagerToturial.onRight && doorPos.x >0.2f && pos.x < doorPos.x + horRadDoor && pos.x > 
             doorPos.x - horRadDoor && pos.y < doorPos.y + verRadDoor && pos.y >doorPos.y - verRadDoor)
         {
             front = false;
@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour
             }
             StartCoroutine(WaitAndLoad());
         }
-        else if (!tutorial && WorldsManagerToturial.onLeft && doorPos.x <= 0  && pos.x < doorPos.x + horRadDoor && pos.x > 
+        else if (!tutorial && WorldsManagerToturial.onLeft && doorPos.x <= -0.3f  && pos.x < doorPos.x + horRadDoor && pos.x > 
             doorPos.x - horRadDoor && pos.y < doorPos.y + verRadDoor && pos.y >doorPos.y - verRadDoor)
         {
             front = false;
