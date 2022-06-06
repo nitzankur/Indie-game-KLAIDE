@@ -18,8 +18,7 @@ public class PlayerControllerEight : MonoBehaviour
     [SerializeField] private bool front;
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
-    [SerializeField] private Sprite openDoorSprite;
-    [SerializeField] private GameObject door,key;
+    [SerializeField] private GameObject door,key, keyAppear;
     [SerializeField] private Transform portalInsideRight, portalTop;
     [SerializeField] private float portalRadiusHor,portalRadiusVer,portalDistanceParameter;
     #endregion
@@ -256,7 +255,14 @@ public class PlayerControllerEight : MonoBehaviour
             _key = true;
             FindObjectOfType<Camera>().GetComponent<AudioSource>().Play();
             other.gameObject.SetActive(false);
-            door.GetComponent<SpriteRenderer>().sprite = openDoorSprite;
+            door.GetComponent<Animator>().SetTrigger("Key");
+            keyAppear.SetActive(true);
+            keyAppear.GetComponentInChildren<Animator>().enabled = true;
+            foreach (var child in door.GetComponentsInChildren<Transform>())
+            {
+                child.GetComponent<SpriteRenderer>().enabled = true;
+                child.GetComponent<Animator>().enabled = true;
+            }
         }
     }
 
@@ -269,7 +275,14 @@ public class PlayerControllerEight : MonoBehaviour
             _key = true;
             FindObjectOfType<Camera>().GetComponent<AudioSource>().Play();
             other.gameObject.SetActive(false);
-            door.GetComponent<SpriteRenderer>().sprite = openDoorSprite;
+            door.GetComponent<Animator>().SetTrigger("Key");
+            keyAppear.SetActive(true);
+            keyAppear.GetComponentInChildren<Animator>().enabled = true;
+            foreach (var child in door.GetComponentsInChildren<Transform>())
+            {
+                child.GetComponent<SpriteRenderer>().enabled = true;
+                child.GetComponent<Animator>().enabled = true;
+            }
         }
     }
         private void Portal()
