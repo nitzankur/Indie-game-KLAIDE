@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Pathfinding;
+using UnityEditor.Animations;
 
 public class PlayerControllerThird : MonoBehaviour
 {
@@ -236,6 +237,13 @@ public class PlayerControllerThird : MonoBehaviour
                 door.GetComponent<Animator>().SetTrigger("Key");
                 key.SetActive(true);
                 key.GetComponentInChildren<Animator>().enabled = true;
+
+                foreach (var child in door.GetComponentsInChildren<Transform>())
+                {
+                    child.GetComponent<SpriteRenderer>().enabled = true;
+                    child.GetComponent<Animator>().enabled = true;
+                }
+
                 other.gameObject.SetActive(false);
             }
         }
