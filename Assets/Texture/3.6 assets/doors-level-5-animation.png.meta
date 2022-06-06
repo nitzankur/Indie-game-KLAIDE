@@ -1,7 +1,28 @@
 fileFormatVersion: 2
 guid: cd666d4184794334fb5c4ff668f8ed7c
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2224973422526386092
+    second: doors-level-5-animation_0
+  - first:
+      213: 2573408458473324930
+    second: doors-level-5-animation_1
+  - first:
+      213: -689649487369712723
+    second: doors-level-5-animation_2
+  - first:
+      213: -8083377230696060536
+    second: doors-level-5-animation_3
+  - first:
+      213: 7277412777646530037
+    second: doors-level-5-animation_4
+  - first:
+      213: 1071900493107480532
+    second: doors-level-5-animation_5
+  - first:
+      213: -1684792778118238768
+    second: doors-level-5-animation_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +62,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -75,9 +96,180 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: doors-level-5-animation_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 21
+        width: 72
+        height: 120
+      alignment: 9
+      pivot: {x: 0.5621345, y: 0.29288492}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cafce541a81b0ee10800000000000000
+      internalID: 2224973422526386092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doors-level-5-animation_1
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 22
+        width: 75
+        height: 119
+      alignment: 9
+      pivot: {x: 0.41384032, y: 0.27443594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 281c945cb5596b320800000000000000
+      internalID: 2573408458473324930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doors-level-5-animation_2
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 20
+        width: 63
+        height: 121
+      alignment: 9
+      pivot: {x: 0.46843973, y: 0.28638044}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dab4cc5f17fdd66f0800000000000000
+      internalID: -689649487369712723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doors-level-5-animation_3
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 20
+        width: 70
+        height: 121
+      alignment: 9
+      pivot: {x: 0.5142024, y: 0.29048854}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88961ea7c3312df80800000000000000
+      internalID: -8083377230696060536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doors-level-5-animation_4
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 20
+        width: 70
+        height: 121
+      alignment: 9
+      pivot: {x: 0.5071014, y: 0.29459658}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fd92872d509ef460800000000000000
+      internalID: 7277412777646530037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doors-level-5-animation_5
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 20
+        width: 70
+        height: 121
+      alignment: 9
+      pivot: {x: 0.507101, y: 0.29048854}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d7cc3eb1d720ee00800000000000000
+      internalID: 1071900493107480532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doors-level-5-animation_6
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 20
+        width: 70
+        height: 121
+      alignment: 9
+      pivot: {x: 0.5000009, y: 0.29048854}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0dd6e1c05e96e98e0800000000000000
+      internalID: -1684792778118238768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

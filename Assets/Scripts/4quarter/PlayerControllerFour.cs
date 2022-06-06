@@ -66,6 +66,7 @@ public class PlayerControllerFour : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
+        LevelManager.Level = 5;
         GetInDoor();
         if (LevelManager.Level == 5 && !findDoor)
         {
@@ -266,6 +267,11 @@ public class PlayerControllerFour : MonoBehaviour
         door.GetComponent<Animator>().SetTrigger("Key");
         keyAppear.SetActive(true);
         keyAppear.GetComponentInChildren<Animator>().enabled = true;
+        foreach (var child in door.GetComponentsInChildren<Transform>())
+        {
+            child.GetComponent<SpriteRenderer>().enabled = true;
+            child.GetComponent<Animator>().enabled = true;
+        }
         key.SetActive(false);
     }
     
