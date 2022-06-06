@@ -40,7 +40,6 @@ public class PlayerControllerEight : MonoBehaviour
    
     public void Start ()
     {
-        LevelManager.Level = 6;
         findDoor = false;
         _key = false;
         _seeker = GetComponent<Seeker>();
