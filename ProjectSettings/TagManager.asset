@@ -75,3 +75,6 @@ TagManager:
   - name: stam
     uniqueID: 3882519271
     locked: 0
+  - name: Door
+    uniqueID: 3822344701
+    locked: 0
