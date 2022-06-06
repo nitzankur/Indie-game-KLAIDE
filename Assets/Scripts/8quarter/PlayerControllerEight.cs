@@ -337,7 +337,7 @@ public class PlayerControllerEight : MonoBehaviour
                 break;
             case 8:
                 LevelManager.Level = 8; //todo: change to end scene
-                SceneManager.LoadScene("Level8");
+                SceneManager.LoadScene("final-scene");
                 break;
         }
     }
