@@ -70,7 +70,7 @@ public class ButtonLevel : MonoBehaviour
         yield return new WaitForSeconds(1.8f);
         GetComponent<AudioSource>().Play();
         image.sprite = openSprite;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.02f);
         int nextLevel;
         nextLevel = level + 1;
         LevelManager.Level = nextLevel switch
