@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -41,7 +39,7 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
         {
             if (PlayerController.EndOfPath && Time.time - _startTime > 0.3f)
             {
-                var ClockDrag = false;
+//                var ClockDrag = false;
                 Vector2 mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
                 var localpos = new Vector2(transform.position.x, transform.position.y);
                 Vector2 tempPos = mousePos - localpos;
