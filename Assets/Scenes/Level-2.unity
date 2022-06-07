@@ -18722,7 +18722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: SizeModule.enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: ColorModule.enabled
@@ -18757,12 +18757,24 @@ PrefabInstance:
       value: 0.0001
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
+      propertyPath: SizeModule.y.minMaxState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
+      propertyPath: SizeModule.z.minMaxState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: ColorBySpeedModule.enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: ShapeModule.radiusThickness
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
+      propertyPath: SizeModule.curve.minMaxState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -18782,7 +18794,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 10
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
@@ -18826,11 +18838,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981995, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.16
+      value: 20.83
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981995, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.5
+      value: -1.58
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981995, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -24084,11 +24096,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: lengthInSec
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: simulationSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
+      propertyPath: useUnscaledTime
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: ShapeModule.type
@@ -24148,7 +24164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
@@ -24164,7 +24180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 10
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981994, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
@@ -24204,11 +24220,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981995, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.71
+      value: 19.1
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981995, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.56
+      value: 2.77
       objectReference: {fileID: 0}
     - target: {fileID: 4439724682281981995, guid: 6b060c1ee12e49b44ad0d600efe170d8, type: 3}
       propertyPath: m_LocalPosition.z
