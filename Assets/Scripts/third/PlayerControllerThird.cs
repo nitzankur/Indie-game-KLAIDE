@@ -18,7 +18,7 @@ public class PlayerControllerThird : MonoBehaviour
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
     [SerializeField] private GameObject key;
-    [SerializeField] private GameObject door;
+    [SerializeField] private GameObject door, fade;
     private Animator playerAnimator;
 
     #endregion
@@ -202,6 +202,7 @@ public class PlayerControllerThird : MonoBehaviour
             side = 1;
             playerAnimator.SetInteger("Side", side);
             playerAnimator.SetBool("Front", front);
+            fade.GetComponent<Animator>().SetTrigger("fadeOut");
             door.GetComponent<AudioSource>().enabled = true;
             StartCoroutine(waitAndLoad("Level-4"));
             _key = false;
@@ -235,7 +236,7 @@ public class PlayerControllerThird : MonoBehaviour
                 _key = true;
                 door.GetComponent<Animator>().SetTrigger("Key");
                 key.SetActive(true);
-                key.GetComponentInChildren<Animator>().enabled = true;
+               // key.GetComponentInChildren<Animator>().enabled = true;
 
                 foreach (var child in door.GetComponentsInChildren<Transform>())
                 {
