@@ -22,7 +22,7 @@ public class PlayerControllerFour : MonoBehaviour
     [SerializeField] private Transform PortalRight, PortalLeft;
     [SerializeField] private GameObject key;
     [SerializeField] private GameObject keyAppear;
-    [SerializeField] private GameObject door;
+    [SerializeField] private GameObject door, fade;
     [SerializeField] private float portalRadiusHor,portalRadiusVer;
     [SerializeField] private float portalDistanceParameter;
     private Animator playerAnimator;
@@ -265,7 +265,7 @@ public class PlayerControllerFour : MonoBehaviour
         FindObjectOfType<Camera>().GetComponent<AudioSource>().Play();
         door.GetComponent<Animator>().SetTrigger("Key");
         keyAppear.SetActive(true);
-        keyAppear.GetComponentInChildren<Animator>().enabled = true;
+      //  keyAppear.GetComponentInChildren<Animator>().enabled = true;
         foreach (var child in door.GetComponentsInChildren<Transform>())
         {
             child.GetComponent<SpriteRenderer>().enabled = true;
@@ -290,6 +290,7 @@ public class PlayerControllerFour : MonoBehaviour
                 LevelManager.unlockedLevel++;
             }
             door.GetComponent<AudioSource>().enabled = true;
+            fade.GetComponent<Animator>().SetTrigger("fadeOut");
             StartCoroutine(waitAndLoad(sceneName: "Level-5"));
             LevelManager.Level = 5;
         }
@@ -301,6 +302,7 @@ public class PlayerControllerFour : MonoBehaviour
                 LevelManager.unlockedLevel++;
             }
             door.GetComponent<AudioSource>().enabled = true;
+            fade.GetComponent<Animator>().SetTrigger("fadeOut");
             StartCoroutine(waitAndLoad(sceneName: "Level6")); //todo: change to start of level 5
             LevelManager.Level = 6;
         }

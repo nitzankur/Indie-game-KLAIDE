@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float maxUp = 1;
+//    [SerializeField] private float maxUp = 1;
     private void FixedUpdate()
     { 
         Vector3 targ = Vector3.zero; 

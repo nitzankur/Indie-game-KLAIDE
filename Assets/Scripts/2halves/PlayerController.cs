@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool front;
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
-    [SerializeField] private GameObject door;
+    [SerializeField] private GameObject door, fade;
     private Animator playerAnimator;
     
     //TUTORIAL ADDITION
@@ -245,6 +245,7 @@ public class PlayerController : MonoBehaviour
             playerAnimator.SetBool("Front", front);
             findDoor = true;
             door.GetComponent<AudioSource>().enabled = true;
+            fade.GetComponent<Animator>().SetTrigger("fadeOut");
             if (!FinishLevel1)
             {
                 FinishLevel1 = true;
@@ -261,6 +262,7 @@ public class PlayerController : MonoBehaviour
             playerAnimator.SetBool("Front", front);
             findDoor = true;
             door.GetComponent<AudioSource>().enabled = true;
+            fade.GetComponent<Animator>().SetTrigger("fadeOut");
             if (!FinishLevel2)
             {
                 FinishLevel2 = true;

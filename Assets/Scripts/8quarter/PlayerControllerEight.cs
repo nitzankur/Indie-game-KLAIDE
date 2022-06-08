@@ -18,7 +18,7 @@ public class PlayerControllerEight : MonoBehaviour
     [SerializeField] private bool front;
     [SerializeField] private bool flip = true;
     [SerializeField] private bool findDoor;
-    [SerializeField] private GameObject door,key, keyAppear;
+    [SerializeField] private GameObject door,key, keyAppear, fade;
     [SerializeField] private Transform portalInsideRight, portalTop;
     [SerializeField] private float portalRadiusHor,portalRadiusVer,portalDistanceParameter;
     #endregion
@@ -228,13 +228,13 @@ public class PlayerControllerEight : MonoBehaviour
             playerAnimator.SetInteger("Side", side);
             playerAnimator.SetBool("Front", front);
             door.GetComponent<AudioSource>().enabled = true;
+            fade.GetComponent<Animator>().SetTrigger("fadeOut");
             StartCoroutine(waitAndLoad());
             _key = false;
         }
     }
     private void OnTriggerStay2D(Collider2D other)
     {
-        var pos = other.transform.position;
         switch (LevelManager.Level)
         {
             case 6:
@@ -257,7 +257,7 @@ public class PlayerControllerEight : MonoBehaviour
             other.gameObject.SetActive(false);
             door.GetComponent<Animator>().SetTrigger("Key");
             keyAppear.SetActive(true);
-            keyAppear.GetComponentInChildren<Animator>().enabled = true;
+         //   keyAppear.GetComponentInChildren<Animator>().enabled = true;
             foreach (var child in door.GetComponentsInChildren<Transform>())
             {
                 child.GetComponent<SpriteRenderer>().enabled = true;
