@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4994259359543158324}
   - component: {fileID: 4994259359543158326}
+  - component: {fileID: 5364799192441164186}
   - component: {fileID: 4994259359543158327}
   m_Layer: 0
   m_Name: sparkle_0
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: -2059823583270753353, guid: f36efa84b4460c34182c19d707df9708, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -83,6 +84,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5364799192441164186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4994259359543158325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e40fa267a781a14289593f043db71ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 4994259359543158327}
 --- !u!95 &4994259359543158327
 Animator:
   serializedVersion: 3
