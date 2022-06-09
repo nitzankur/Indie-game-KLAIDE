@@ -50064,7 +50064,7 @@ MonoBehaviour:
   nextWaypointDistance: 0.5
   verRadDoor: 0.4
   horRadDoor: 0.8
-  waitTime: 0.5
+  waitTime: 2
   side: 0
   move: 0
   front: 0

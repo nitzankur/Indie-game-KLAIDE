@@ -66,6 +66,7 @@ public class PlayerControllerFour : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
+        LevelManager.Level = 5;
         GetInDoor();
         if (LevelManager.Level == 5 && !findDoor)
         {
@@ -263,14 +264,13 @@ public class PlayerControllerFour : MonoBehaviour
         print("key") ;
         _key = true;
         FindObjectOfType<Camera>().GetComponent<AudioSource>().Play();
-        door.GetComponent<Animator>().SetTrigger("Key");
         keyAppear.SetActive(true);
       //  keyAppear.GetComponentInChildren<Animator>().enabled = true;
-        foreach (var child in door.GetComponentsInChildren<Transform>())
+        /*foreach (var child in door.GetComponentsInChildren<Transform>())
         {
             child.GetComponent<SpriteRenderer>().enabled = true;
             child.GetComponent<Animator>().enabled = true;
-        }
+        }*/
         key.SetActive(false);
     }
     
@@ -280,6 +280,7 @@ public class PlayerControllerFour : MonoBehaviour
         findDoor = true;
         front = false;
         side = 1;
+        door.GetComponent<Animator>().SetTrigger("Key");
         playerAnimator.SetInteger("Side", side);
         playerAnimator.SetBool("Front", front);
         if (LevelManager.Level == 4)

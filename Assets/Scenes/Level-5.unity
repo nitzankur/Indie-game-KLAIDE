@@ -39593,7 +39593,7 @@ MonoBehaviour:
   reachedEndOfPath: 0
   speed: 2
   nextWaypointDistance: 0.5
-  waitTime: 0.5
+  waitTime: 2
   horRadDoor: 0.3
   verRadDoor: 0.8
   side: 0
