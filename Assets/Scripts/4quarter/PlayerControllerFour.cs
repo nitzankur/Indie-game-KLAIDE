@@ -31,9 +31,9 @@ public class PlayerControllerFour : MonoBehaviour
 
     #region PrivateProperties
 
-    private bool portalAnim = false;
+   // private bool portalAnim = false;
     private bool firstPoint = true;
-    private bool _key;
+    private bool _key, PortalON;
     private Seeker _seeker;
     private Path _path;
     private int _currentWaypoint = 0;
@@ -44,7 +44,7 @@ public class PlayerControllerFour : MonoBehaviour
     public static bool FinishLevel4;
     public static bool FinishLevel5;
     public static bool EndOfPath;
-    public static bool Drag,PortalON;
+    public static bool Drag;
    
     public void Start ()
     {
@@ -53,6 +53,7 @@ public class PlayerControllerFour : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         reachedEndOfPath = true;
         key.SetActive(true);
+        PortalON = true;
     }
 
     public void OnPathComplete (Path p) {
@@ -231,11 +232,13 @@ public class PlayerControllerFour : MonoBehaviour
         if (LevelManager.Level == 5 && doorPos.y > 0 && doorPos.y >= Mathf.Abs(doorPos.x) && WorldsManager.onTop  && _key &&  pos.x < doorPos.x + horRadDoor && pos.x > 
             doorPos.x - horRadDoor && pos.y < doorPos.y + verRadDoor && pos.y >doorPos.y - verRadDoor)
         {
+            print("door");
             GetInDoorHalper();
         }
         if (LevelManager.Level == 4 && (doorPos.y < 0 &&  Mathf.Abs(doorPos.x) <= Mathf.Abs(doorPos.y) && WorldsManager.onButtom  && _key  &&  pos.x < doorPos.x + horRadDoor && pos.x > 
             doorPos.x - horRadDoor && pos.y < doorPos.y + verRadDoor && pos.y >doorPos.y - verRadDoor))
         {
+            print("door");
             GetInDoorHalper();
         }
     }
@@ -245,12 +248,14 @@ public class PlayerControllerFour : MonoBehaviour
 
         if (other.CompareTag("Key"))
         {
+            print("key0" + WorldsManager.onRight);
             if (LevelManager.Level == 5 && (pos.y > 0 && pos.y >= Mathf.Abs(pos.x)) && WorldsManager.onTop)
             {
                 turnOfKey(other);
             }
             else if (LevelManager.Level == 4 && (pos.x > 0 && pos.x > Mathf.Abs(pos.y)) && WorldsManager.onRight)
             {
+                print("key");
                 turnOfKey(other);
             }
         }
@@ -258,14 +263,22 @@ public class PlayerControllerFour : MonoBehaviour
 
     private void turnOfKey(Collider2D other)
     {
+        print("key") ;
         _key = true;
         FindObjectOfType<Camera>().GetComponent<AudioSource>().Play();
         keyAppear.SetActive(true);
+      //  keyAppear.GetComponentInChildren<Animator>().enabled = true;
+        /*foreach (var child in door.GetComponentsInChildren<Transform>())
+        {
+            child.GetComponent<SpriteRenderer>().enabled = true;
+            child.GetComponent<Animator>().enabled = true;
+        }*/
         key.SetActive(false);
     }
     
     private void GetInDoorHalper()
     {
+        print("door should open");
         findDoor = true;
         front = false;
         side = 1;
@@ -300,87 +313,62 @@ public class PlayerControllerFour : MonoBehaviour
     }
 
 
-
+    
     private void Portal()
     {
         var pos = gameObject.transform.position;
         var portalPosL = PortalLeft.transform.position;
         var portalPosR = PortalRight.transform.position;
-        if ((pos.x < (portalPosL.x + portalRadiusHor) && (pos.x > (portalPosL.x - portalRadiusHor)) &&
-             pos.y < portalPosL.y + portalRadiusVer && pos.y > portalPosL.y - portalRadiusVer && WorldsManager.onLeft))
-        {
-            PortalON = true;
-            if (PortalRight.position.x > 0 && PortalRight.position.x > Mathf.Abs(PortalRight.position.y) &&
-                reachedEndOfPath && _path == null)
-            {
-                if (!portalAnim)
+        if ((pos.x < (portalPosL.x+portalRadiusHor) && (pos.x > (portalPosL.x-portalRadiusHor))&& pos.y < portalPosL.y +portalRadiusVer && pos.y>portalPosL.y-portalRadiusVer &&WorldsManager.onLeft &&
+            PortalRight.position.x > 0 &&  PortalRight.position.x > Mathf.Abs( PortalRight.position.y))&& reachedEndOfPath && _path == null)//&&PortalON)
                 {
-                    portalAnim = true;
+                    print("portal left");
                     playerAnimator.SetTrigger("inPortal");
+                    if (_path != null)
+                    {
+                        _currentWaypoint = _path.vectorPath.Count - 1;
+                        _path.vectorPath[_currentWaypoint] = PortalRight.position;
+                        _path = null;
+                    }
+                    reachedEndOfPath = true;
+                    PortalON = true;
+                    GetComponent<AIPath>().constrainInsideGraph = true;
+                    PortalLeft.GetComponent<AudioSource>().Play();
+                    StartCoroutine(WaitForRight());
+                    firstPoint = true;
+                    //transform.position = PortalRight.position ;//+ Vector3.right * portalDistanceParameter;
+                    reachedEndOfPath = false;
+                    Drag = true;
+                    //StartCoroutine(WaitAndMove());
                 }
+        
 
-                if (_path != null)
+                else if ((pos.x < (portalPosR.x + portalRadiusHor) && (pos.x > (portalPosR.x-portalRadiusHor))&& pos.y < portalPosR.y +portalRadiusVer && pos.y>portalPosR.y-portalRadiusVer && WorldsManager.onRight && 
+                          (PortalLeft.position.x<0 && Mathf.Abs(PortalLeft.position.x) > Mathf.Abs(PortalLeft.position.y)&& reachedEndOfPath && _path == null)))/*&&PortalON*/
                 {
-                    _currentWaypoint = _path.vectorPath.Count - 1;
-                    _path.vectorPath[_currentWaypoint] = PortalRight.position;
-                    _path = null;
-                }
-
-                reachedEndOfPath = true;
-
-                GetComponent<AIPath>().constrainInsideGraph = true;
-                PortalLeft.GetComponent<AudioSource>().Play();
-                firstPoint = true;
-                transform.position = PortalRight.position;
-                reachedEndOfPath = false;
-                Drag = true;
-                PortalON = false;
-            }
-        }
-
-
-        else if ((pos.x < (portalPosR.x + portalRadiusHor) && (pos.x > (portalPosR.x - portalRadiusHor)) &&
-                  pos.y < portalPosR.y + portalRadiusVer && pos.y > portalPosR.y - portalRadiusVer &&
-                  WorldsManager.onRight))
-        {
-            PortalON = true;
-            if (
-                (PortalLeft.position.x < 0 && Mathf.Abs(PortalLeft.position.x) > Mathf.Abs(PortalLeft.position.y) &&
-                 reachedEndOfPath && _path == null)) /*&&PortalON*/
-            {
-
-                if (!portalAnim)
-                {
-                    portalAnim = true;
+                    print("portal right");
                     playerAnimator.SetTrigger("inPortal");
+
+                    if (_path != null)
+                    {
+                        _currentWaypoint = _path.vectorPath.Count - 1;
+                        _path.vectorPath[_currentWaypoint] = PortalLeft.position;
+                        _path = null;
+                    }
+                    reachedEndOfPath = true;
+                    PortalON = true;
+                    PortalRight.GetComponent<AudioSource>().Play();
+                    GetComponent<AIPath>().constrainInsideGraph = true;
+                    StartCoroutine(WaitForLeft());
+                    // transform.position = PortalLeft.position;//+ Vector3.left* portalDistanceParameter;
+                    firstPoint = true;
+                    reachedEndOfPath = false;
+                    Drag = true;
+                    //PortalON = false;
+                    //StartCoroutine(WaitAndMove());
                 }
-
-                if (_path != null)
-                {
-                    _currentWaypoint = _path.vectorPath.Count - 1;
-                    _path.vectorPath[_currentWaypoint] = PortalLeft.position;
-                    _path = null;
-                }
-
-                reachedEndOfPath = true;
-
-                PortalRight.GetComponent<AudioSource>().Play();
-                GetComponent<AIPath>().constrainInsideGraph = true;
-                transform.position = PortalLeft.position;
-                firstPoint = true;
-                reachedEndOfPath = false;
-                Drag = true;
-                PortalON = false;
-            }
-        }
-        else
-        {
-
-            PortalON = false;
-        }
     }
-
-
+    
     #endregion   
     
     IEnumerator waitAndLoad(string sceneName)
@@ -392,5 +380,21 @@ public class PlayerControllerFour : MonoBehaviour
         
     }
     
+    IEnumerator WaitAndMove()
+    {   
+        yield return new WaitForSeconds(3.5f);
+        PortalON = true;
+    }
     
+    IEnumerator WaitForRight()
+    {   
+        yield return new WaitForSeconds(0.7f);
+        transform.position = PortalRight.position;
+    }
+    
+    IEnumerator WaitForLeft()
+    {
+        yield return new WaitForSeconds(0.7f);
+        transform.position = PortalLeft.position;
+    }
 }
