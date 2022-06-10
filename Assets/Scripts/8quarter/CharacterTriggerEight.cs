@@ -11,7 +11,8 @@ public class CharacterTriggerEight : MonoBehaviour
     private void Update()
    {
        var pos = transform.position;
-
+       print(Vector3.Distance(pos, Vector3.zero));
+       print(pos.x > 0 && pos.x > Mathf.Abs(pos.y));
        if (pos.y > 0 && pos.y >= Mathf.Abs(pos.x) && Vector3.Distance(pos, Vector3.zero) >= Radius)
        {
            WorldsManagerEight.onTop = true;
@@ -49,7 +50,7 @@ public class CharacterTriggerEight : MonoBehaviour
            WorldsManagerEight.onInsideLeft = false;
            WorldsManagerEight.onInsideRight = false;
            WorldsManagerEight.onInsideBottom = false;
-         //  print("down");
+           print("down");
        }
         
        else if (pos.y < 0 &&  Mathf.Abs(pos.x) <= Mathf.Abs(pos.y) && Vector3.Distance(pos, Vector3.zero) < Radius)
@@ -63,7 +64,7 @@ public class CharacterTriggerEight : MonoBehaviour
            WorldsManagerEight.onInsideTop = false;
            WorldsManagerEight.onInsideLeft = false;
            WorldsManagerEight.onInsideRight = false;
-         //  print("down-inside");
+           print("down-inside");
        }
 
        
@@ -78,7 +79,7 @@ public class CharacterTriggerEight : MonoBehaviour
            WorldsManagerEight.onInsideTop = false;
            WorldsManagerEight.onInsideLeft = false;
            WorldsManagerEight.onInsideRight = false;
-        //   print("right");   
+           print("right");   
        }
        
        else if (pos.x > 0 && pos.x > Mathf.Abs(pos.y) && Vector3.Distance(pos, Vector3.zero) < Radius)
@@ -92,7 +93,7 @@ public class CharacterTriggerEight : MonoBehaviour
            WorldsManagerEight.onLeft = false;
            WorldsManagerEight.onInsideTop = false;
            WorldsManagerEight.onInsideLeft = false;
-         //  print("right-inside");   
+           print("right-inside");   
        }
        
        
@@ -107,7 +108,7 @@ public class CharacterTriggerEight : MonoBehaviour
            WorldsManagerEight.onTop = false;
            WorldsManagerEight.onInsideTop = false;
            WorldsManagerEight.onInsideLeft = false;
-        //   print("Left"); 
+           print("Left"); 
        }
        
        else if (pos.x < 0 && Mathf.Abs(pos.x) > Mathf.Abs(pos.y) && Vector3.Distance(pos, Vector3.zero) < Radius)
@@ -121,7 +122,7 @@ public class CharacterTriggerEight : MonoBehaviour
            WorldsManagerEight.onTop = false;
            WorldsManagerEight.onLeft = false;
            WorldsManagerEight.onInsideTop = false;
-         //  print("Left-inside"); 
+           print("Left-inside"); 
        }
 
 
