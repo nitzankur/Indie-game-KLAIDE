@@ -27,7 +27,7 @@ public class PlayerControllerEight : MonoBehaviour
     
     private Animator playerAnimator;
     private bool firstPoint = true;
-    private bool _key,PortalON;
+    private bool _key;
     private Seeker _seeker;
     private Path _path;
     private int _currentWaypoint = 0;
@@ -36,7 +36,7 @@ public class PlayerControllerEight : MonoBehaviour
     #endregion
 
     public static bool FinishLevel;
-    public static bool EndOfPath;
+    public static bool EndOfPath,PortalON;
    
     public void Start ()
     {
@@ -290,46 +290,64 @@ public class PlayerControllerEight : MonoBehaviour
         var pos = gameObject.transform.position;
         var portalPosT = portalTop.transform.position;
         var portalPosIR = portalInsideRight.transform.position;
-        if ((pos.x < (portalPosT.x+portalRadiusHor) && (pos.x > (portalPosT.x-portalRadiusHor))&& pos.y < portalPosT.y +portalRadiusVer && pos.y>portalPosT.y-portalRadiusVer &&WorldsManagerEight.onTop &&
-            (portalPosIR.x > 0 && portalPosIR.x > Mathf.Abs(portalPosIR.y)&& PortalON && Vector3.Distance(portalPosIR, Vector3.zero) < Radius)))
-                {
-                    
-                    print("portal top");
-                    if (_path != null)
-                    {
-                        _currentWaypoint = _path.vectorPath.Count - 1;
-                        _path.vectorPath[_currentWaypoint] = portalInsideRight.position;
-                        _path = null;
-                    }
-                    reachedEndOfPath = true;
-                    PortalON = true;
-                    GetComponent<AIPath>().constrainInsideGraph = true;
-                    portalInsideRight.GetComponent<AudioSource>().Play();
-                    transform.position = portalInsideRight.position;//+ Vector3.right* portalDistanceParameter;
-                    firstPoint = true;
-                    PortalON = false;
-                    StartCoroutine(WaitAndMove());
-                }
-
-                else if ((pos.x < (portalPosIR.x + portalRadiusHor) &&  PortalON &&(pos.x > (portalPosIR.x-portalRadiusHor))&& pos.y < portalPosIR.y +portalRadiusVer && pos.y>portalPosIR.y-portalRadiusVer && WorldsManagerEight.onInsideRight && 
-                          (portalPosT.y > 0 && portalPosT.y >= Mathf.Abs(portalPosT.x))))
+        if ((pos.x < (portalPosT.x + portalRadiusHor) && (pos.x > (portalPosT.x - portalRadiusHor)) && pos.y <
+            portalPosT.y
+            + portalRadiusVer && pos.y > portalPosT.y - portalRadiusVer && WorldsManagerEight.onTop))
         {
-                    print("portal right");
-                    if (_path != null)
-                    {
-                        _currentWaypoint = _path.vectorPath.Count - 1;
-                        _path.vectorPath[_currentWaypoint] = portalTop.position;
-                        _path = null;
-                    }
-                    reachedEndOfPath = true;
-                    PortalON = true;
-                    GetComponent<AIPath>().constrainInsideGraph = true;
-                    portalTop.GetComponent<AudioSource>().Play();
-                    transform.position = portalTop.position;//+ (Vector3.left + Vector3.up*2)* portalDistanceParameter;;
-                    firstPoint = true;
-                    PortalON = false;
-                    StartCoroutine(WaitAndMove());
+            PortalON = true;
+            if(portalPosIR.x > 0 && portalPosIR.x > Mathf.Abs(portalPosIR.y)&& reachedEndOfPath && _path == null && 
+               Vector3.Distance(portalPosIR, Vector3.zero) < Radius)
+            {
+                    
+                print("portal top");
+                if (_path != null)
+                {
+                    _currentWaypoint = _path.vectorPath.Count - 1;
+                    _path.vectorPath[_currentWaypoint] = portalInsideRight.position;
+                    _path = null;
+                }
+                reachedEndOfPath = true;
+                PortalON = true;
+                GetComponent<AIPath>().constrainInsideGraph = true;
+                portalInsideRight.GetComponent<AudioSource>().Play();
+                transform.position = portalInsideRight.position;//+ Vector3.right* portalDistanceParameter;
+                firstPoint = true;
+                PortalON = false;
+                reachedEndOfPath = false;
+            } 
         }
+           
+
+        else if ((pos.x < (portalPosIR.x + portalRadiusHor) && 
+                  (pos.x > (portalPosIR.x - portalRadiusHor)) &&
+                  pos.y < portalPosIR.y + portalRadiusVer && pos.y > portalPosIR.y - portalRadiusVer &&
+                  WorldsManagerEight.onInsideRight))
+        {
+            PortalON = true;
+            if(portalPosT.y > 0 && portalPosT.y >= Mathf.Abs(portalPosT.x)&& reachedEndOfPath && _path == null)
+            {
+                print("portal right");
+                if (_path != null)
+                {
+                    _currentWaypoint = _path.vectorPath.Count - 1;
+                    _path.vectorPath[_currentWaypoint] = portalTop.position;
+                    _path = null;
+                }
+                reachedEndOfPath = true;
+                PortalON = true;
+                GetComponent<AIPath>().constrainInsideGraph = true;
+                portalTop.GetComponent<AudioSource>().Play();
+                transform.position = portalTop.position;//+ (Vector3.left + Vector3.up*2)* portalDistanceParameter;;
+                firstPoint = true;
+                PortalON = false;
+                reachedEndOfPath = false;
+            }            
+        }
+        else
+        {
+            PortalON = false;
+        }
+        
     }
         #endregion   
     
@@ -354,11 +372,5 @@ public class PlayerControllerEight : MonoBehaviour
                 break;
         }
     }
-    IEnumerator WaitAndMove()
-    {   
-        yield return new WaitForSeconds(2);
-        PortalON = true;
-    }
-    
     
 }
