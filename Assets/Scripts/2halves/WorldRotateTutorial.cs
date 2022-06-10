@@ -13,10 +13,11 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
      [SerializeField] private float step =10;
      private Vector3 _pos;
      private Vector2 _mousePosStart;
-
+     private float timeForStart;
 
      private void Start()
-    {
+     { 
+         timeForStart = 0;
         RotateOnce = false;
         WorldsManagerToturial.CharacterMove = false;
         print("Pos" + _pos);
@@ -26,7 +27,11 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
     #region World rotate
     void Update()
     {
-        
+        if (timeForStart < 4.8)
+        {
+            timeForStart += Time.deltaTime;
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             _mousePosStart = Camera.main!.ScreenToWorldPoint(Input.mousePosition);

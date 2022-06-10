@@ -12,8 +12,10 @@ public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandl
      private Vector2 _mousePosStart;
      [SerializeField] private float step =10;
      [SerializeField] private GameObject left,button;
+     private float timeForStart;
      private void Start()
-    {
+     {
+         timeForStart = 0;
         WorldManagerThird.CharacterMove = false;
     }
     #endregion
@@ -21,7 +23,11 @@ public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandl
     #region World rotate
     void Update()
     {
-        
+        if (timeForStart < 4.8)
+        {
+            timeForStart += Time.deltaTime;
+            return;
+        }  
         if (Input.GetMouseButtonDown(0))
         {
             _mousePosStart = Camera.main!.ScreenToWorldPoint(Input.mousePosition);

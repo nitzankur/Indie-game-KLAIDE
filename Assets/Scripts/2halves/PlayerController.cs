@@ -40,15 +40,17 @@ public class PlayerController : MonoBehaviour
     private Seeker _seeker;
     private Path _path;
     private int _currentWaypoint = 0;
+    private float timeForStart;
     #endregion
 
     public static bool FinishLevel1;
     public static bool FinishLevel2;
     public static bool EndOfPath;
-   
-    
+
+
     public void Start ()
     {
+        timeForStart = 0;
         findDoor = false;
         _seeker = GetComponent<Seeker>();
         playerAnimator = GetComponent<Animator>();
@@ -68,6 +70,11 @@ public class PlayerController : MonoBehaviour
     
     public void Update ()
     {
+        if (timeForStart < 4.8)
+        {
+            timeForStart += Time.deltaTime;
+            return;
+        }
         GetInDoor();
         EndOfPath = reachedEndOfPath;
         if (tutorial && WorldRotateTutorial.RotateOnce && tutorialRotate.gameObject.activeSelf)
@@ -138,7 +145,7 @@ public class PlayerController : MonoBehaviour
         if (tutorial)
         {
             dot.SetActive(false);
-            tutorialMove.GetComponent<Animator>().SetBool("Click",true);
+            tutorialMove.GetComponent<Animator>().SetTrigger("Click");
           //  tutorialMove.SetActive(false);
         }
         move = true;
@@ -216,7 +223,7 @@ public class PlayerController : MonoBehaviour
             tutorialRotate.SetActive(true);
         }
         else if (tutorialRotate.activeSelf)
-            tutorialRotate.GetComponent<Animator>().SetBool("Rotate", true);
+            tutorialRotate.GetComponent<Animator>().SetTrigger("Rotate");
         
     }
     

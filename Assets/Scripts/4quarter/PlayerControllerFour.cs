@@ -38,6 +38,7 @@ public class PlayerControllerFour : MonoBehaviour
     private Path _path;
     private int _currentWaypoint = 0;
     private bool onRightPortal, onLeftPortal;
+    private float timeForStart;
     
     #endregion
 
@@ -48,6 +49,7 @@ public class PlayerControllerFour : MonoBehaviour
    
     public void Start ()
     {
+        timeForStart = 0;
         findDoor = false;
         _seeker = GetComponent<Seeker>();
         playerAnimator = GetComponent<Animator>();
@@ -66,6 +68,11 @@ public class PlayerControllerFour : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
+        if (timeForStart < 4.8)
+        {
+            timeForStart += Time.deltaTime;
+            return;
+        }
         GetInDoor();
         if (LevelManager.Level == 5 && !findDoor)
         {

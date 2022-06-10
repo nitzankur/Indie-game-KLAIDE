@@ -67,10 +67,10 @@ public class ButtonLevel : MonoBehaviour
     }
     IEnumerator WaitForLevel1()
     {   
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSeconds(1.5f);
         GetComponent<AudioSource>().Play();
         image.sprite = openSprite;
-        yield return new WaitForSeconds(0.02f);
+        yield return new WaitForSeconds(1f);
         int nextLevel;
         nextLevel = level + 1;
         LevelManager.Level = nextLevel switch

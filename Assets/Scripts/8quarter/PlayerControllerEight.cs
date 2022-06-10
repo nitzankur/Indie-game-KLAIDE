@@ -32,6 +32,7 @@ public class PlayerControllerEight : MonoBehaviour
     private Path _path;
     private int _currentWaypoint = 0;
     private const float Radius = 9.1f;
+    private float timeForStart;
     
     #endregion
 
@@ -41,6 +42,7 @@ public class PlayerControllerEight : MonoBehaviour
    
     public void Start ()
     {
+        timeForStart = 0;
         findDoor = false;
         _key = false;
         _seeker = GetComponent<Seeker>();
@@ -62,7 +64,11 @@ public class PlayerControllerEight : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
-        LevelManager.Level = 8;
+        if (timeForStart < 4.8)
+        {
+            timeForStart += Time.deltaTime;
+            return;
+        }
         GetInDoor();
         if (LevelManager.Level == 8)
         {
