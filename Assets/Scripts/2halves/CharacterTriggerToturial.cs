@@ -10,7 +10,7 @@ public class CharacterTriggerToturial : MonoBehaviour
     private void Update()
     {
         var pos = transform.position;
-        if (pos.x > 0f)
+        if (pos.x >= 0f)
         {
             WorldsManagerToturial.onRight = true;
             WorldsManagerToturial.onLeft = false;
