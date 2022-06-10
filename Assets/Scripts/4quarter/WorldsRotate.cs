@@ -36,7 +36,7 @@ public class WorldsRotate :  MonoBehaviour , IBeginDragHandler, IEndDragHandler,
 
         if (Input.GetMouseButton(0))
         {
-            if ((PlayerControllerFour.EndOfPath || PlayerControllerFour.Drag) && Time.time - _startTime > 0.3f)
+            if ((PlayerControllerFour.EndOfPath || PlayerControllerFour.Drag) && Time.time - _startTime > 0.3f && LevelManager.Level != 5 || !PlayerControllerFour.PortalON)
             {   
                 Vector2 mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
                 var localpos = new Vector2(transform.position.x, transform.position.y);
