@@ -38,6 +38,7 @@ public class PlayerControllerFour : MonoBehaviour
     private Path _path;
     private int _currentWaypoint = 0;
     private bool onRightPortal, onLeftPortal;
+    private float timeForStart;
     
     #endregion
 
@@ -48,6 +49,7 @@ public class PlayerControllerFour : MonoBehaviour
    
     public void Start ()
     {
+        timeForStart = 0;
         findDoor = false;
         _seeker = GetComponent<Seeker>();
         playerAnimator = GetComponent<Animator>();
@@ -66,6 +68,11 @@ public class PlayerControllerFour : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
+        if (timeForStart < 4.8)
+        {
+            timeForStart += Time.deltaTime;
+            return;
+        }
         GetInDoor();
         if (LevelManager.Level == 5 && !findDoor)
         {
@@ -92,10 +99,15 @@ public class PlayerControllerFour : MonoBehaviour
             GetComponent<AudioSource>().Stop();
             GetComponent<PlayAudio>().enabled = false;
         }
-            
-        
+
+
         if (_path == null)
+        {
+            GetComponent<AudioSource>().Stop();
+            GetComponent<PlayAudio>().enabled = false;
             return;
+        }
+           
         
         reachedEndOfPath = false;
         float distanceToWaypoint;
@@ -137,9 +149,10 @@ public class PlayerControllerFour : MonoBehaviour
 
     private void IndicateDirection(Vector3 target)
     {
+        if (PortalON)
+            return;
         move = true;
         playerAnimator.SetBool("Move", move);
-
         if (findDoor) return;
         var pos = transform.position;
         float angle = Mathf.Atan2
@@ -321,6 +334,7 @@ public class PlayerControllerFour : MonoBehaviour
             if(PortalRight.position.x > 0 &&  PortalRight.position.x > Mathf.Abs( PortalRight.position.y)&& reachedEndOfPath && _path == null)
             {
                 playerAnimator.SetTrigger("inPortal");
+                move = false;
                 if (_path != null)
                 {
                     _currentWaypoint = _path.vectorPath.Count - 1;
@@ -335,6 +349,8 @@ public class PlayerControllerFour : MonoBehaviour
                 firstPoint = true;
                 reachedEndOfPath = false;
                 Drag = true;
+                GetComponent<AudioSource>().Stop();
+                GetComponent<PlayAudio>().enabled = false;
             } 
         }
 
@@ -360,6 +376,8 @@ public class PlayerControllerFour : MonoBehaviour
                     firstPoint = true;
                     reachedEndOfPath = false;
                     Drag = true;
+                    GetComponent<AudioSource>().Stop();
+                    GetComponent<PlayAudio>().enabled = false;
             }  
         }
         else
@@ -384,11 +402,17 @@ public class PlayerControllerFour : MonoBehaviour
     {   
         yield return new WaitForSeconds(0.7f);
         transform.position = PortalRight.position;
+        AstarData.active.Scan();
+        move = false;
+        _path = null;
     }
     
     IEnumerator WaitForLeft()
     {
         yield return new WaitForSeconds(0.7f);
         transform.position = PortalLeft.position;
+        AstarData.active.Scan();
+        move = false;
+        _path = null;
     }
 }

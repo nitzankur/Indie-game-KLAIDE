@@ -30,6 +30,7 @@ public class PlayerControllerThird : MonoBehaviour
     private Seeker _seeker;
     private Path _path;
     private int _currentWaypoint = 0;
+    private float timeForStart;
     #endregion
 
     public static bool FinishLevel;
@@ -37,6 +38,7 @@ public class PlayerControllerThird : MonoBehaviour
    
     public void Start ()
     {
+        timeForStart = 0;
         findDoor = false;
         _seeker = GetComponent<Seeker>();
         playerAnimator = GetComponent<Animator>();
@@ -52,6 +54,11 @@ public class PlayerControllerThird : MonoBehaviour
     }
     public void Update ()
     {
+        if (timeForStart < 4.8)
+        {
+            timeForStart += Time.deltaTime;
+            return;
+        }
         GetInDoor();
         EndOfPath = reachedEndOfPath;
         if (WorldManagerThird.CharacterMove && reachedEndOfPath)

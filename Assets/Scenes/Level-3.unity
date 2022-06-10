@@ -3651,6 +3651,7 @@ GameObject:
   - component: {fileID: 218170585}
   - component: {fileID: 218170584}
   - component: {fileID: 218170583}
+  - component: {fileID: 218170586}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -3772,6 +3773,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218170581}
   m_CullTransparentMesh: 1
+--- !u!95 &218170586
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218170581}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0dd1645e8a403734aa5ce154d351ffb7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &219286830 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7654142152558554309, guid: 79cc39b16fd0d37449e7935161cdcea2, type: 3}
@@ -13470,6 +13490,7 @@ GameObject:
   - component: {fileID: 506959297}
   - component: {fileID: 506959296}
   - component: {fileID: 506959295}
+  - component: {fileID: 506959298}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -13591,6 +13612,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506959293}
   m_CullTransparentMesh: 1
+--- !u!95 &506959298
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506959293}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0dd1645e8a403734aa5ce154d351ffb7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &507954355
 PrefabInstance:
   m_ObjectHideFlags: 0
