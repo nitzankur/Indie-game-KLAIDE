@@ -189,7 +189,7 @@ TextureImporter:
         width: 149.16667
         height: 169
       alignment: 9
-      pivot: {x: 0.49999994, y: 0.27159667}
+      pivot: {x: 0.5087719, y: 0.13162215}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -210,7 +210,7 @@ TextureImporter:
         width: 149.16667
         height: 169
       alignment: 9
-      pivot: {x: 0.48684204, y: 0.22514178}
+      pivot: {x: 0.49999994, y: 0.120008424}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -231,7 +231,7 @@ TextureImporter:
         width: 149.16667
         height: 169
       alignment: 9
-      pivot: {x: 0.5043852, y: 0.22901267}
+      pivot: {x: 0.50877196, y: 0.14323588}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -247,12 +247,12 @@ TextureImporter:
       name: level3-door_3
       rect:
         serializedVersion: 2
-        x: 447
+        x: 446
         y: 0
-        width: 149.16667
+        width: 149
         height: 169
       alignment: 9
-      pivot: {x: 0.51315767, y: 0.24449776}
+      pivot: {x: 0.5, y: 0.13936451}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -273,7 +273,7 @@ TextureImporter:
         width: 149.16667
         height: 169
       alignment: 9
-      pivot: {x: 0.48684162, y: 0.26385418}
+      pivot: {x: 0.4956135, y: 0.1548496}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -291,10 +291,10 @@ TextureImporter:
         serializedVersion: 2
         x: 745
         y: 0
-        width: 149
+        width: 149.16667
         height: 169
       alignment: 9
-      pivot: {x: 0.5087817, y: 0.25224036}
+      pivot: {x: 0.49122757, y: 0.1548496}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

@@ -66,7 +66,6 @@ public class PlayerControllerFour : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
-        LevelManager.Level = 5;
         GetInDoor();
         if (LevelManager.Level == 5 && !findDoor)
         {
@@ -242,15 +241,18 @@ public class PlayerControllerFour : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         var pos = other.transform.position;
-
+       
         if (other.CompareTag("Key"))
         {
+            print(LevelManager.Level);
             if (LevelManager.Level == 5 && (pos.y > 0 && pos.y >= Mathf.Abs(pos.x)) && WorldsManager.onTop)
             {
+               
                 turnOfKey(other);
             }
             else if (LevelManager.Level == 4 && (pos.x > 0 && pos.x > Mathf.Abs(pos.y)) && WorldsManager.onRight)
             {
+                print("Turn Of Key");
                 turnOfKey(other);
             }
         }
