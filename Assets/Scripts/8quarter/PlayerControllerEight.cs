@@ -37,6 +37,7 @@ public class PlayerControllerEight : MonoBehaviour
 
     public static bool FinishLevel;
     public static bool EndOfPath,PortalON;
+    public static bool Drag;
    
     public void Start ()
     {
@@ -61,6 +62,7 @@ public class PlayerControllerEight : MonoBehaviour
     #region Calculate Path
     public void Update ()
     {
+        LevelManager.Level = 8;
         GetInDoor();
         if (LevelManager.Level == 8)
         {
@@ -86,10 +88,14 @@ public class PlayerControllerEight : MonoBehaviour
             GetComponent<AudioSource>().Stop();
             GetComponent<PlayAudio>().enabled = false;
         }
-            
-        
+
+
         if (_path == null)
+        {
+            GetComponent<AudioSource>().Stop();
+            GetComponent<PlayAudio>().enabled = false;
             return;
+        }
         
         reachedEndOfPath = false;
         float distanceToWaypoint;
@@ -223,6 +229,7 @@ public class PlayerControllerEight : MonoBehaviour
             doorPos.x - horRadDoor && pos.y < doorPos.y + verRadDoor && pos.y >doorPos.y - verRadDoor)
         {
             print("door");
+            door.GetComponent<Animator>().SetTrigger("Key");
             front = false;
             side = 1;
             playerAnimator.SetInteger("Side", side);
@@ -255,7 +262,6 @@ public class PlayerControllerEight : MonoBehaviour
             _key = true;
             FindObjectOfType<Camera>().GetComponent<AudioSource>().Play();
             other.gameObject.SetActive(false);
-            door.GetComponent<Animator>().SetTrigger("Key");
             keyAppear.SetActive(true);
          //   keyAppear.GetComponentInChildren<Animator>().enabled = true;
             foreach (var child in door.GetComponentsInChildren<Transform>())
@@ -275,9 +281,8 @@ public class PlayerControllerEight : MonoBehaviour
             _key = true;
             FindObjectOfType<Camera>().GetComponent<AudioSource>().Play();
             other.gameObject.SetActive(false);
-            door.GetComponent<Animator>().SetTrigger("Key");
             keyAppear.SetActive(true);
-            keyAppear.GetComponentInChildren<Animator>().enabled = true;
+//            keyAppear.GetComponentInChildren<Animator>().enabled = true;
             foreach (var child in door.GetComponentsInChildren<Transform>())
             {
                 child.GetComponent<SpriteRenderer>().enabled = true;
@@ -298,8 +303,8 @@ public class PlayerControllerEight : MonoBehaviour
             if(portalPosIR.x > 0 && portalPosIR.x > Mathf.Abs(portalPosIR.y)&& reachedEndOfPath && _path == null && 
                Vector3.Distance(portalPosIR, Vector3.zero) < Radius)
             {
-                    
                 print("portal top");
+                playerAnimator.SetTrigger("inPortal");
                 if (_path != null)
                 {
                     _currentWaypoint = _path.vectorPath.Count - 1;
@@ -308,12 +313,14 @@ public class PlayerControllerEight : MonoBehaviour
                 }
                 reachedEndOfPath = true;
                 PortalON = true;
-                GetComponent<AIPath>().constrainInsideGraph = true;
                 portalInsideRight.GetComponent<AudioSource>().Play();
-                transform.position = portalInsideRight.position;//+ Vector3.right* portalDistanceParameter;
+                GetComponent<AIPath>().constrainInsideGraph = true;
+                StartCoroutine(WaitForportalInsideRight());
                 firstPoint = true;
-                PortalON = false;
                 reachedEndOfPath = false;
+                Drag = true;
+                GetComponent<AudioSource>().Stop();
+                GetComponent<PlayAudio>().enabled = false;
             } 
         }
            
@@ -327,6 +334,7 @@ public class PlayerControllerEight : MonoBehaviour
             if(portalPosT.y > 0 && portalPosT.y >= Mathf.Abs(portalPosT.x)&& reachedEndOfPath && _path == null)
             {
                 print("portal right");
+                playerAnimator.SetTrigger("inPortal");
                 if (_path != null)
                 {
                     _currentWaypoint = _path.vectorPath.Count - 1;
@@ -335,12 +343,14 @@ public class PlayerControllerEight : MonoBehaviour
                 }
                 reachedEndOfPath = true;
                 PortalON = true;
-                GetComponent<AIPath>().constrainInsideGraph = true;
                 portalTop.GetComponent<AudioSource>().Play();
-                transform.position = portalTop.position;//+ (Vector3.left + Vector3.up*2)* portalDistanceParameter;;
+                GetComponent<AIPath>().constrainInsideGraph = true;
+                StartCoroutine(WaitForTop());
                 firstPoint = true;
-                PortalON = false;
                 reachedEndOfPath = false;
+                Drag = true;
+                GetComponent<AudioSource>().Stop();
+                GetComponent<PlayAudio>().enabled = false;
             }            
         }
         else
@@ -371,6 +381,24 @@ public class PlayerControllerEight : MonoBehaviour
                 SceneManager.LoadScene("final-scene");
                 break;
         }
+    }
+    
+    IEnumerator WaitForTop()
+    {   
+        yield return new WaitForSeconds(0.7f);
+        transform.position = portalTop.position;
+        AstarData.active.Scan();
+        move = false;
+        _path = null;
+    }
+    
+    IEnumerator WaitForportalInsideRight()
+    {
+        yield return new WaitForSeconds(0.7f);
+        transform.position = portalInsideRight.position;
+        AstarData.active.Scan();
+        move = false;
+        _path = null;
     }
     
 }
