@@ -31,7 +31,7 @@ public class PlayerControllerFour : MonoBehaviour
 
     #region PrivateProperties
 
-    private bool portalAnim = false;
+   // private bool portalAnim = false;
     private bool firstPoint = true;
     private bool _key, PortalON;
     private Seeker _seeker;
@@ -323,11 +323,7 @@ public class PlayerControllerFour : MonoBehaviour
             PortalRight.position.x > 0 &&  PortalRight.position.x > Mathf.Abs( PortalRight.position.y))&& reachedEndOfPath && _path == null)//&&PortalON)
                 {
                     print("portal left");
-                    if (!portalAnim)
-                    {
-                        portalAnim = true;
-                        playerAnimator.SetTrigger("inPortal");
-                    }
+                    playerAnimator.SetTrigger("inPortal");
                     if (_path != null)
                     {
                         _currentWaypoint = _path.vectorPath.Count - 1;
@@ -338,12 +334,12 @@ public class PlayerControllerFour : MonoBehaviour
                     PortalON = true;
                     GetComponent<AIPath>().constrainInsideGraph = true;
                     PortalLeft.GetComponent<AudioSource>().Play();
-                    // StartCoroutine(WaitForRight());
+                    StartCoroutine(WaitForRight());
                     firstPoint = true;
-                    transform.position = PortalRight.position ;//+ Vector3.right * portalDistanceParameter;
+                    //transform.position = PortalRight.position ;//+ Vector3.right * portalDistanceParameter;
                     reachedEndOfPath = false;
                     Drag = true;
-                    // StartCoroutine(WaitAndMove());
+                    //StartCoroutine(WaitAndMove());
                 }
         
 
@@ -351,12 +347,8 @@ public class PlayerControllerFour : MonoBehaviour
                           (PortalLeft.position.x<0 && Mathf.Abs(PortalLeft.position.x) > Mathf.Abs(PortalLeft.position.y)&& reachedEndOfPath && _path == null)))/*&&PortalON*/
                 {
                     print("portal right");
-                    if (!portalAnim)
-                    {
-                        portalAnim = true;
-                        playerAnimator.SetTrigger("inPortal");
-                    }
-                        
+                    playerAnimator.SetTrigger("inPortal");
+
                     if (_path != null)
                     {
                         _currentWaypoint = _path.vectorPath.Count - 1;
@@ -367,13 +359,13 @@ public class PlayerControllerFour : MonoBehaviour
                     PortalON = true;
                     PortalRight.GetComponent<AudioSource>().Play();
                     GetComponent<AIPath>().constrainInsideGraph = true;
-                    // StartCoroutine(WaitForLeft());
-                    transform.position = PortalLeft.position;//+ Vector3.left* portalDistanceParameter;
+                    StartCoroutine(WaitForLeft());
+                    // transform.position = PortalLeft.position;//+ Vector3.left* portalDistanceParameter;
                     firstPoint = true;
                     reachedEndOfPath = false;
                     Drag = true;
                     //PortalON = false;
-                    // StartCoroutine(WaitAndMove());
+                    //StartCoroutine(WaitAndMove());
                 }
     }
     
@@ -397,16 +389,12 @@ public class PlayerControllerFour : MonoBehaviour
     IEnumerator WaitForRight()
     {   
         yield return new WaitForSeconds(0.7f);
-        PortalON = false;
-        portalAnim = false;
         transform.position = PortalRight.position;
     }
     
     IEnumerator WaitForLeft()
     {
         yield return new WaitForSeconds(0.7f);
-        PortalON = false;
-        portalAnim = false;
         transform.position = PortalLeft.position;
     }
 }
