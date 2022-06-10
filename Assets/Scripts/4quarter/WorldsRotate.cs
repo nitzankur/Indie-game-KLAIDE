@@ -53,6 +53,7 @@ public class WorldsRotate :  MonoBehaviour , IBeginDragHandler, IEndDragHandler,
                 if (!WorldsManager.onTop) RotateWorld(top,tempPos);
 
                 _pos = tempPos;
+                GetComponent<AudioSource>().Stop();
             }
         }
     }
@@ -60,7 +61,6 @@ public class WorldsRotate :  MonoBehaviour , IBeginDragHandler, IEndDragHandler,
     {
         side.transform.rotation = Quaternion.RotateTowards(side.transform.rotation,   Quaternion.FromToRotation(_pos, tempPos) * side.transform.rotation, step);
     }
-
     
     #endregion
 

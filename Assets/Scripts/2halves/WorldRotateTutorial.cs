@@ -54,12 +54,12 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
                 if (!WorldsManagerToturial.onLeft) left.transform.rotation = Quaternion.RotateTowards
                     (left.transform.rotation,   Quaternion.FromToRotation(_pos, tempPos) * left.transform.rotation, step); // TODO: step really high, to not matter at all
                 if (!WorldsManagerToturial.onRight) transform.rotation = Quaternion.RotateTowards
-                    (transform.rotation,   Quaternion.FromToRotation(_pos, tempPos) * transform.rotation, step); 
-
+                    (transform.rotation,   Quaternion.FromToRotation(_pos, tempPos) * transform.rotation, step);
                 _pos = tempPos;
             }
             
         }
+        
     }
   
 
@@ -81,6 +81,7 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
     public void OnBeginDrag(PointerEventData eventData)
     {
         _drag = true;
+        GetComponent<AudioSource>().Play();
       //  print("begin drag");
     
     }
@@ -91,6 +92,7 @@ public class WorldRotateTutorial : MonoBehaviour , IBeginDragHandler, IEndDragHa
     public void OnEndDrag(PointerEventData eventData)
     {
         //print("end drag");
+        GetComponent<AudioSource>().Stop();
         RotateOnce = true;
         _drag = false;
         EndDrag = true;
