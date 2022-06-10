@@ -75,9 +75,7 @@ public class PlayerControllerFour : MonoBehaviour
         }
         GetInDoor();
         if (LevelManager.Level == 5 && !findDoor)
-        {
             Portal();
-        }
         
         EndOfPath = reachedEndOfPath;
         if (WorldsManager.CharacterMove)
