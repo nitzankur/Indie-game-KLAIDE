@@ -1059,7 +1059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308690, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: horRadDoor
-      value: 0.5
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 1836323175003308690, guid: 913572e6ef161794b800a95f60435f85, type: 3}
       propertyPath: verRadDoor
@@ -17356,11 +17356,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.1
+      value: 19.3
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.3
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17368,19 +17368,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.78928864
+      value: 0.7513049
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.08072978
+      value: 0.07684474
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.06193494
+      value: 0.06669423
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.60553306
+      value: -0.6520642
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -17392,7 +17392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775081, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -74.99
+      value: -81.91
       objectReference: {fileID: 0}
     - target: {fileID: 5217888882670775082, guid: b2e2134a5e71d594cb80830c3db52410, type: 3}
       propertyPath: m_Name
@@ -17547,7 +17547,7 @@ BoxCollider2D:
   m_Offset: {x: -0.010865003, y: 0.05316572}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.49140388, y: 0.26343906}
     oldSize: {x: 1.04, y: 0.88}
     newSize: {x: 0.96, y: 1.93}
     adaptiveTilingThreshold: 0.5
