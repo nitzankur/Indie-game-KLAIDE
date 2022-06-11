@@ -92,6 +92,7 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        GetComponent<AudioSource>().Play();
         _drag = true;
         StartDrag = true;
     }
@@ -103,6 +104,7 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        GetComponent<AudioSource>().Stop();
         _drag = false;
         StartDrag = false;
     }

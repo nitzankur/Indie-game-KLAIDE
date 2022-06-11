@@ -231,7 +231,7 @@ public class PlayerControllerEight : MonoBehaviour
     {
         var doorPos = door.transform.position;
         var pos = gameObject.transform.position;
-        if (doorPos.x < 0 && Mathf.Abs(doorPos.x) > Mathf.Abs(doorPos.y) && WorldsManagerEight.onLeft && _key && pos.x < doorPos.x + horRadDoor && pos.x > 
+        if (doorPos.x < 0 && Mathf.Abs(doorPos.x) > Mathf.Abs(doorPos.y) && WorldsManagerEight.onLeft &&_key && pos.x < doorPos.x + horRadDoor && pos.x > 
             doorPos.x - horRadDoor && pos.y < doorPos.y + verRadDoor && pos.y >doorPos.y - verRadDoor)
         {
             print("door");

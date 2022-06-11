@@ -16,7 +16,6 @@ public class Sparkle : MonoBehaviour
     IEnumerator WaitAndLoad()
     {
         var waitTime = Random.value*Random.value * 50;
-        print(waitTime);
         yield return new WaitForSeconds(waitTime);
         _animator.SetTrigger("Start");
         StartCoroutine(WaitAndLoad());

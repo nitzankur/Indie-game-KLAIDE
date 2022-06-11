@@ -75,9 +75,8 @@ public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandl
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        _drag = true;
-      //  print("begin drag");
-    
+        GetComponent<AudioSource>().Play();
+
     }
     public void OnDrag(PointerEventData eventData)
     {
@@ -85,7 +84,7 @@ public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandl
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        //print("end drag");
+        GetComponent<AudioSource>().Stop();
         _drag = false;
         EndDrag = true;
     }

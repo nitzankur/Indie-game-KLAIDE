@@ -10,28 +10,28 @@ public class CircleManagerEight : MonoBehaviour
     {
         if(WorldsManagerEight.onBottom || WorldsManagerEight.onInsideBottom)
         {
-            button.color = Color.black;
+            button.color = LevelManager.Level == 6? Color.black : Color.gray;
             right.color = Color.white;
             left.color = Color.white;
             top.color = Color.white;
         }
         else if(WorldsManagerEight.onLeft || WorldsManagerEight.onInsideLeft)
         {
-            left.color = Color.black;
+            left.color= LevelManager.Level == 6? Color.black : Color.gray;
             right.color = Color.white;
             button.color = Color.white;
             top.color = Color.white;
         }
         else if(WorldsManagerEight.onRight||WorldsManagerEight.onInsideRight)
         {
-            right.color = Color.black;
+            right.color = LevelManager.Level == 6? Color.black : Color.gray;
             left.color = Color.white;
             button.color = Color.white;
             top.color = Color.white;
         }
         else if(WorldsManagerEight.onTop || WorldsManagerEight.onInsideTop)
         {
-            top.color = Color.black;
+            top.color = LevelManager.Level == 6? Color.black : Color.gray;
             right.color = Color.white;
             left.color = Color.white;
             button.color = Color.white;
