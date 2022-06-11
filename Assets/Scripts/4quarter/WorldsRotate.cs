@@ -81,7 +81,7 @@ public class WorldsRotate :  MonoBehaviour , IBeginDragHandler, IEndDragHandler,
     {
         GetComponent<AudioSource>().Play();
         _drag = true;
-      //  print("begin drag");
+        print("begin drag");
     
     }
     public void OnDrag(PointerEventData eventData)
