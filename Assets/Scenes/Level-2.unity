@@ -15404,7 +15404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0ad0ce9e461c2438083a7c96ec20da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
+  level: 2
   background: {fileID: 1902381760}
 --- !u!82 &1255245764
 AudioSource:
@@ -23679,7 +23679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1902381761
 Animator:
   serializedVersion: 3

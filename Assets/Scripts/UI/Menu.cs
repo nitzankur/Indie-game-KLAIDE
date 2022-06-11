@@ -14,7 +14,7 @@ public class Menu : MonoBehaviour
 
     private void Awake()
     {
-        if (fromRestart && level == 0)
+        if (fromRestart)
             background.SetActive(false);
     }
     
