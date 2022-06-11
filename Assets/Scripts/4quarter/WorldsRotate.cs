@@ -53,7 +53,7 @@ public class WorldsRotate :  MonoBehaviour , IBeginDragHandler, IEndDragHandler,
                 if (!WorldsManager.onTop) RotateWorld(top,tempPos);
 
                 _pos = tempPos;
-                GetComponent<AudioSource>().Stop();
+                
             }
         }
     }

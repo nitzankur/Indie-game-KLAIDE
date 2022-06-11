@@ -255,7 +255,6 @@ public class PlayerControllerFour : MonoBehaviour
        
         if (other.CompareTag("Key"))
         {
-            print(LevelManager.Level);
             if (LevelManager.Level == 5 && (pos.y > 0 && pos.y >= Mathf.Abs(pos.x)) && WorldsManager.onTop)
             {
                

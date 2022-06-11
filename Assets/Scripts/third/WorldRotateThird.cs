@@ -40,6 +40,7 @@ public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandl
         {
             if (PlayerControllerThird.EndOfPath && Time.time - _startTime > 0.3f)
             {
+                GetComponent<AudioSource>().Play();
                 Vector2 mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
                 var localpos = new Vector2(transform.position.x, transform.position.y);
                 Vector2 tempPos = mousePos - localpos;
@@ -75,7 +76,8 @@ public class WorldRotateThird : MonoBehaviour , IBeginDragHandler, IEndDragHandl
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        GetComponent<AudioSource>().Play();
+        
+        _drag = true;
 
     }
     public void OnDrag(PointerEventData eventData)
