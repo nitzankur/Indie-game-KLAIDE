@@ -29,6 +29,8 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
     #region World rotate
     void Update()
     {
+        print(WorldsManagerEight.CharacterMove +" move");
+        print(_drag + " _drag");
         if (timeForStart < 4.8)
         {
             timeForStart += Time.deltaTime;
@@ -40,6 +42,12 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
             var localpos = new Vector2(transform.position.x, transform.position.y);
             _pos = _mousePosStart - localpos;
             startTime = Time.time;
+            if (!_drag)
+            {
+                EndDrag = true;
+                WorldsManagerEight.CharacterMove = true;
+            
+            }
         }
 
         if (Input.GetMouseButton(0))
@@ -83,15 +91,12 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
     
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!_drag)
-        {
-            EndDrag = true;
-            WorldsManagerEight.CharacterMove = true;
-        }
+       
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        print("onBeginDrag");
         GetComponent<AudioSource>().Play();
         _drag = true;
         StartDrag = true;
