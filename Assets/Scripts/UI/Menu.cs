@@ -59,14 +59,14 @@ public class Menu : MonoBehaviour
     {
         fromRestart = true;
         GetComponent<AudioSource>().Play();
-        StartCoroutine(WaitForOpen("Level6"));
+        StartCoroutine(WaitForOpen("Level-6"));
     }
     
-    public void RestartLevel8()
+    public void RestartLevel7()
     {
         fromRestart = true;
         GetComponent<AudioSource>().Play();
-        StartCoroutine(WaitForOpen("Level8"));
+        StartCoroutine(WaitForOpen("Level-7"));
     }
     public void MenuLevels()
     {

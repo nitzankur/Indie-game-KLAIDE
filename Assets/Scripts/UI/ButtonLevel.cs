@@ -77,6 +77,8 @@ public class ButtonLevel : MonoBehaviour
         {
             4 => 4,
             5 => 5,
+            6 => 6,
+            7 => 7,
             _ => LevelManager.Level
         };
         SceneManager.LoadScene("Level-" + nextLevel);

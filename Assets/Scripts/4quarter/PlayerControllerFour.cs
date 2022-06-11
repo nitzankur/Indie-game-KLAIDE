@@ -311,7 +311,7 @@ public class PlayerControllerFour : MonoBehaviour
             }
             door.GetComponent<AudioSource>().enabled = true;
             fade.GetComponent<Animator>().SetTrigger("fadeOut");
-            StartCoroutine(waitAndLoad(sceneName: "Level6")); //todo: change to start of level 5
+            StartCoroutine(waitAndLoad(sceneName: "Level-6")); //todo: change to start of level 5
             LevelManager.Level = 6;
         }
         _key = false;

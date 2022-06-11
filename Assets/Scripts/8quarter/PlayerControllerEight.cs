@@ -70,7 +70,7 @@ public class PlayerControllerEight : MonoBehaviour
             return;
         }
         GetInDoor();
-        if (LevelManager.Level == 8)
+        if (LevelManager.Level == 7)
         {
             Portal();
     
@@ -253,13 +253,13 @@ public class PlayerControllerEight : MonoBehaviour
             case 6:
                 TriggerLevel6(other);
                 break;
-            case 8:
-                TriggerLevel8(other);
+            case 7:
+                TriggerLevel7(other);
                 break;
         }
     }
 
-    private void TriggerLevel8(Collider2D other)
+    private void TriggerLevel7(Collider2D other)
     {
         var pos = other.transform.position;
         if (!other.CompareTag("Key")) return;
@@ -379,11 +379,11 @@ public class PlayerControllerEight : MonoBehaviour
         switch (LevelManager.Level)
         {
             case 6:
-                LevelManager.Level = 8; //todo: change to 7 
-                SceneManager.LoadScene("Level8");
+                LevelManager.Level = 7; //todo: change to 7 
+                SceneManager.LoadScene("Level-7");
                 break;
-            case 8:
-                LevelManager.Level = 8; //todo: change to end scene
+            case 7:
+                //  LevelManager.Level = 7; //todo: change to end scene
                 SceneManager.LoadScene("final-scene");
                 break;
         }

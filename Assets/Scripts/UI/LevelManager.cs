@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private int totalLevel = 3;
+    [SerializeField] private int totalLevel = 7;
     public static int unlockedLevel = 0;
     private ButtonLevel[] levelButtons;
-    public static int Level =6;
+    public static int Level = 1;
 
     private void Start()
     {
