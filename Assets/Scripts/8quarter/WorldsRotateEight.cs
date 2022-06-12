@@ -44,7 +44,8 @@ public class WorldsRotateEight :  MonoBehaviour , IBeginDragHandler, IEndDragHan
 
         if (Input.GetMouseButton(0))
         {
-            if (PlayerControllerEight.EndOfPath && Time.time - startTime > 0.3f && LevelManager.Level !=8|| !PlayerControllerEight.PortalON)
+            if (PlayerControllerEight.EndOfPath && Time.time - startTime > 0.3f && LevelManager.Level !=7 
+            || !PlayerControllerEight.PortalON)
             {
               
                 Vector2 mousePos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);

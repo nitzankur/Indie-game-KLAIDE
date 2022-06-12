@@ -14,13 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelsMenu.unity
     guid: 883a732c7e38f944b81c9ee130903b07
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OpenLevelsScenes/StartLevel1.unity
     guid: 2c6b84410414ce74dbe5cd9e19f9375d
   - enabled: 1
     path: Assets/Scenes/Level-1.unity
     guid: 9d8218f4df616774dbda16f10dafd160
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/2halvs.unity
     guid: 32c3b1e5e4acb934d8dd6553c5760504
   - enabled: 1
@@ -35,10 +35,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level-3.unity
     guid: 515ba844bc9c4cd49858234dc736b6ca
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OpenLevelsScenes/StartLevel2.unity
     guid: 8b403b48ebe9a9d438acb2e1d974b7d8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OpenLevelsScenes/StartLevel5.unity
     guid: 8cb8d9c8dd0343a479b14639fb3e4595
   - enabled: 0
@@ -53,10 +53,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level-4.unity
     guid: 78b686068f052fd419842e56e61a8157
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OpenLevelsScenes/StartLevel3.unity
     guid: 3529c242c662af4469c5056f4d2b91be
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OpenLevelsScenes/StartLevel4.unity
     guid: e61958a7231b7ed4dbef2bd3063f7980
   - enabled: 1
